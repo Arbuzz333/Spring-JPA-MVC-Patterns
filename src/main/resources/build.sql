@@ -96,3 +96,41 @@ ON c.last_name = a.last_name;
 SELECT * FROM actor a
 INNER JOIN customer c
 ON c.last_name = a.last_name;
+
+-- LEFT JOIN или LEFT OUTER JOIN это INNER JOIN + остальные строки с левой таблицы (customer)
+-- которые дополняются null в колонках таблицы справа (actor)
+SELECT * FROM customer c
+LEFT JOIN actor a
+ON c.last_name = a.last_name;
+
+SELECT * FROM customer c
+LEFT JOIN actor a
+ON c.first_name = a.first_name;
+
+-- аналогично LEFT JOIN или LEFT OUTER JOIN и с RIGHT JOIN это INNER JOIN + остальные строки с правой таблицы (actor)
+-- которые дополняются null в колонках таблицы слева (customer)
+SELECT * FROM customer c
+RIGHT JOIN actor a
+ON c.first_name = a.first_name;
+
+SELECT * FROM customer c
+RIGHT OUTER JOIN actor a
+ON c.last_name = a.last_name ORDER BY a.id_actor;
+
+-- FULL OUTER JOIN ИЛИ FULL JOIN это соеденение RIGHT JOIN и LEFT JOIN
+SELECT * FROM customer c
+FULL OUTER JOIN actor a
+ON c.first_name = a.first_name;
+
+-- в группированной таблице столбцы, не включённые в список GROUP BY, можно использовать только в агрегатных выражениях.
+-- найдем сколько раз у нас встречаются имена
+SELECT first_name, COUNT(last_name) as count_of_last_name  FROM customer GROUP BY first_name;
+-- или только считать по одному столбцу
+SELECT first_name, COUNT(first_name) as count_of_first_name  FROM customer GROUP BY first_name;
+
+-- Если таблица была сгруппирована с помощью GROUP BY, отфильтровать их можно с помощью предложения HAVING,
+-- действующего подобно WHERE. В предложении HAVING могут использоваться и группирующие выражения, и
+-- выражения, не участвующие в группировке (в этом случае это должны быть агрегирующие функции).
+-- найдем тех у кого имена не повторяются
+SELECT first_name  FROM customer
+GROUP BY first_name HAVING COUNT(last_name) = 1;
