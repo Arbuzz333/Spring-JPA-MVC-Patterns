@@ -24,11 +24,11 @@ public class CutletTest {
 
     @Test
     public void cutletTest() {
-        Cutlet porkCutlet = new PorkCutlet(
+        final Cutlet porkCutlet = new PorkCutlet(
                 new PorkMeat(FatMeat.MEDIUMFAT, new Pig())
                 , true
                 , 100.0);
-        Cutlet chickenCutlet = new ChickenCutlet(
+        final Cutlet chickenCutlet = new ChickenCutlet(
                 new ChickenMeat(FatMeat.DIETARY, new Chicken())
                 , true
                 , 120.0);
