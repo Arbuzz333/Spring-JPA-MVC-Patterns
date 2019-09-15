@@ -1,4 +1,4 @@
-package avakhidov.factories.entity;
+package avakhidov.factories.entity.flour;
 
 import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;

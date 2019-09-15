@@ -1,12 +1,13 @@
 package avakhidov.factories;
 
-import avakhidov.factories.entity.Sesame;
-import avakhidov.factories.entity.WheatFlour;
+import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.cutlet.*;
 import avakhidov.factories.entity.livestock.Chicken;
 import avakhidov.factories.entity.livestock.Pig;
+import avakhidov.factories.entity.meat.ChickenMeat;
+import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.enums.FatMeat;
-import avakhidov.factories.enums.GrindingFlour;
+import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.apache.log4j.Logger;
@@ -33,7 +34,7 @@ public class CutletTest {
                 , true
                 , 120.0);
 
-        Cutlet.SesameBun sesame = porkCutlet.createSesameBun(new WheatFlour(GrindingFlour.FINE)
+        Cutlet.SesameBun sesame = porkCutlet.createSesameBun(ParameterDoughEnum.WHEAT_FLOUR_FINE
                 , true
                 , new Sesame());
 

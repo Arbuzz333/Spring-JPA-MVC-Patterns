@@ -1,6 +1,6 @@
 package avakhidov.factories.service;
 
-import avakhidov.factories.entity.Bun;
+import avakhidov.factories.entity.bun.Bun;
 
 public interface RecipeBun {
 

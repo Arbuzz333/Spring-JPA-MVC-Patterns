@@ -1,9 +1,9 @@
 package avakhidov.factories;
 
-import avakhidov.factories.entity.BuckwheatBun;
+import avakhidov.factories.entity.bun.BuckwheatBun;
 import avakhidov.factories.entity.Product;
-import avakhidov.factories.entity.Bun;
-import avakhidov.factories.entity.WheatBun;
+import avakhidov.factories.entity.bun.Bun;
+import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.service.Oven;
 import avakhidov.factories.service.RecipeBun;
@@ -37,7 +37,7 @@ public class OvenBunTest {
         Bun bun = product.getPrepack();
 
         assertEquals(product.getFinished().getTitle(), 1);
-        assertEquals(bun.getFlour().getKind(), KindFlour.WHEAT);
+        assertEquals(bun.getPrepareDough().getFlour().getKind(), KindFlour.WHEAT);
         assertEquals(bun.getClass(), WheatBun.class);
     }
 
@@ -51,7 +51,7 @@ public class OvenBunTest {
         Bun bun = product.getPrepack();
 
         assertEquals(product.getFinished().getTitle(), 0);
-        assertEquals(bun.getFlour().getKind(), KindFlour.BUCKWHEAT);
+        assertEquals(bun.getPrepareDough().getFlour().getKind(), KindFlour.BUCKWHEAT);
         assertEquals(bun.getClass(), BuckwheatBun.class);
     }
 

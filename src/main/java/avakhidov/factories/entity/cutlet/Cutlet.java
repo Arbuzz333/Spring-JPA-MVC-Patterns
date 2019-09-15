@@ -1,8 +1,8 @@
 package avakhidov.factories.entity.cutlet;
 
-import avakhidov.factories.entity.Bun;
-import avakhidov.factories.entity.Flour;
-import avakhidov.factories.entity.Sesame;
+import avakhidov.factories.entity.bun.Bun;
+import avakhidov.factories.entity.ingredient.Sesame;
+import avakhidov.factories.service.BuildParameterPrepareDough;
 
 public abstract class Cutlet<T> {
 
@@ -52,8 +52,8 @@ public abstract class Cutlet<T> {
         return this.sesameBun.sesame;
     }
 
-    public SesameBun createSesameBun(Flour flour, boolean recipeReady, Sesame sesame) {
-        this.sesameBun = new SesameBun(flour, recipeReady, sesame);
+    public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame) {
+        this.sesameBun = new SesameBun(parameterDough, recipeReady, sesame);
         return sesameBun;
     }
 
@@ -61,9 +61,14 @@ public abstract class Cutlet<T> {
 
         private Sesame sesame;
 
-        private SesameBun(Flour flour, boolean recipeReady, Sesame sesame) {
-            super(flour, recipeReady);
+        private SesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame) {
+            super(parameterDough.toKneadTheDough(), recipeReady);
             this.sesame = sesame;
+        }
+
+        @Override
+        protected void setKindDough() {
+            //ToDo
         }
     }
 

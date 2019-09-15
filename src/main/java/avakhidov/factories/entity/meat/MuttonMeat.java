@@ -1,4 +1,4 @@
-package avakhidov.factories.entity.cutlet;
+package avakhidov.factories.entity.meat;
 
 import avakhidov.factories.entity.livestock.Sheep;
 import avakhidov.factories.enums.FatMeat;

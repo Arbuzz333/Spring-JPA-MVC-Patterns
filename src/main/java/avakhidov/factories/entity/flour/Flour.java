@@ -1,10 +1,11 @@
-package avakhidov.factories.entity;
+package avakhidov.factories.entity.flour;
 
 
+import avakhidov.factories.entity.ingredient.Ingredient;
 import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;
 
-public abstract class Flour {
+public abstract class Flour extends Ingredient {
 
     private KindFlour kind;
 
