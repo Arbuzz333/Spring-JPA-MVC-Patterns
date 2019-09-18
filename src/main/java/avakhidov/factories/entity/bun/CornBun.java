@@ -1,6 +1,7 @@
 package avakhidov.factories.entity.bun;
 
 
+import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
 public class CornBun extends Bun {
@@ -11,6 +12,9 @@ public class CornBun extends Bun {
 
     @Override
     protected void setKindDough() {
-        //ToDo
+        super.getPrepareDough().setKindDough(
+                DoughUtil.setParameterKindDoughFromFlour(super.getPrepareDough().getFlour().getKind())
+        );
+
     }
 }

@@ -32,4 +32,8 @@ public class ParameterPrepareDough<T extends Flour> {
     public KindDough getKindDough() {
         return kindDough;
     }
+
+    public LocalTime getTime() {
+        return time;
+    }
 }
