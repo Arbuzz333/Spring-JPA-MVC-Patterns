@@ -1,7 +1,9 @@
 package avakhidov.factories.enums.dough;
 
+import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;
+import avakhidov.factories.enums.KindMeat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,19 @@ public enum DoughUtil {
             return KindDough.PUFF_PASTRY;
         } else {
             return KindDough.YEAST_DOUGH;
+        }
+    }
+
+    public static KindDough setParameterKindDoughFromMeat(Meat meat) {
+
+        if (meat.equals(KindMeat.BEEF)) {
+            return KindDough.CHOUX_PASTRY;
+        } else {
+            if (meat.equals(KindMeat.CHICKEN)) {
+                return KindDough.SHORTCRUST_PASTRY;
+            } else {
+                return KindDough.YEAST_DOUGH;
+            }
         }
     }
 

@@ -2,9 +2,13 @@ package avakhidov.factories.entity.cutlet;
 
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.ingredient.Sesame;
+import avakhidov.factories.entity.meat.Meat;
+import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
-public abstract class Cutlet<T> {
+import java.time.LocalTime;
+
+public abstract class Cutlet<T extends Meat> {
 
     private T meat;
 
@@ -52,8 +56,9 @@ public abstract class Cutlet<T> {
         return this.sesameBun.sesame;
     }
 
-    public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame) {
-        this.sesameBun = new SesameBun(parameterDough, recipeReady, sesame);
+    public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
+                                     int temperature, LocalTime time) {
+        this.sesameBun = new SesameBun(parameterDough, recipeReady, sesame, temperature, time);
         return sesameBun;
     }
 
@@ -61,14 +66,15 @@ public abstract class Cutlet<T> {
 
         private Sesame sesame;
 
-        private SesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame) {
-            super(parameterDough.toKneadTheDough(), recipeReady);
+        private SesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
+                          int temperature, LocalTime time) {
+            super(parameterDough.toKneadTheDough(temperature, time), recipeReady);
             this.sesame = sesame;
         }
 
         @Override
         protected void setKindDough() {
-            //ToDo
+            DoughUtil.setParameterKindDoughFromMeat(meat);
         }
     }
 

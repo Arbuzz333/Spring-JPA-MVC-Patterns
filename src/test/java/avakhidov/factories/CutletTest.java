@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,11 @@ public class CutletTest {
                 , true
                 , 120.0);
 
-        Cutlet.SesameBun sesame = porkCutlet.createSesameBun(ParameterDoughEnum.WHEAT_FLOUR_FINE
+        Cutlet.SesameBun sesameBun = porkCutlet.createSesameBun(ParameterDoughEnum.WHEAT_FLOUR_FINE
                 , true
-                , new Sesame());
+                , new Sesame()
+                , 180
+                , LocalTime.of(9, 30));
 
         List<Cutlet> cutlets = new ArrayList<>();
         cutlets.add(porkCutlet);

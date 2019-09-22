@@ -13,18 +13,18 @@ import java.time.LocalTime;
 public enum ParameterDoughEnum implements BuildParameterPrepareDough {
 
     BUCKWHEAT_FLOUR_MEDIUM {
-        public ParameterPrepareDough toKneadTheDough() {
-            return new ParameterPrepareDough<>(new BuckwheatFlour(GrindingFlour.MEDIUM), 45, LocalTime.of(0, 15));
+        public ParameterPrepareDough toKneadTheDough(int temperature, LocalTime time) {
+            return new ParameterPrepareDough<>(new BuckwheatFlour(GrindingFlour.MEDIUM), temperature, time);
         }
     },
     CORN_FLOUR_COARSE {
-        public ParameterPrepareDough toKneadTheDough() {
-            return new ParameterPrepareDough<>(new CornFlour(GrindingFlour.COARSE), 40, LocalTime.of(0, 10));
+        public ParameterPrepareDough toKneadTheDough(int temperature, LocalTime time) {
+            return new ParameterPrepareDough<>(new CornFlour(GrindingFlour.COARSE), temperature, time);
         }
     },
     WHEAT_FLOUR_FINE {
-        public ParameterPrepareDough toKneadTheDough() {
-            return new ParameterPrepareDough<>(new WheatFlour(GrindingFlour.FINE), 18, LocalTime.of(0, 8));
+        public ParameterPrepareDough toKneadTheDough(int temperature, LocalTime time) {
+            return new ParameterPrepareDough<>(new WheatFlour(GrindingFlour.FINE), temperature, time);
         }
     }
 
