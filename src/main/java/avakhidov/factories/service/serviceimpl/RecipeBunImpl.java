@@ -5,11 +5,14 @@ import avakhidov.factories.service.Recipe;
 import avakhidov.factories.service.RecipeBun;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
+
 @Component
 public class RecipeBunImpl implements RecipeBun {
 
     @Override
     public Bun makingBun(Recipe<Bun> recipe) {
-        return recipe.cooked();
+        //Todo
+        return recipe.cooked(0,  LocalTime.of(0, 0));
     }
 }

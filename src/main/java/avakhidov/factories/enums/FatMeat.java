@@ -21,4 +21,15 @@ public enum FatMeat {
     public float getMin() {
         return min;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(name());
+        stringBuilder.append(" min:")
+                .append(this.min)
+                .append(" max:")
+                .append(this.max)
+                .append(";");
+        return String.valueOf(stringBuilder);
+    }
 }
