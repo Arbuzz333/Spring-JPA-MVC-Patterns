@@ -4,7 +4,9 @@ public enum KindMeat {
 
     PORK('p', 1),
     CHICKEN('c', 2),
-    BEEF('b', 3);
+    BEEF('b', 3),
+    MUTTON('m', 4),
+    VEAL('v', 5);
 
     private char code;
 

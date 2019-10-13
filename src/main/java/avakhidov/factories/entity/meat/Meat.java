@@ -14,4 +14,12 @@ public abstract class Meat {
         this.fatMeat = fatMeat;
     }
 
+    public KindMeat getKindMeat() {
+        return kindMeat;
+    }
+
+    public FatMeat getFatMeat() {
+        return fatMeat;
+    }
+
 }

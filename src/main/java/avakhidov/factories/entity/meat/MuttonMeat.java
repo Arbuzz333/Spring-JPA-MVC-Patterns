@@ -6,10 +6,10 @@ import avakhidov.factories.enums.KindMeat;
 
 public class MuttonMeat extends Meat {
 
-    Sheep partSheep;
+    private Sheep partSheep;
 
-    public MuttonMeat(KindMeat kindMeat, FatMeat fatMeat, Sheep partSheep) {
-        super(kindMeat, fatMeat);
+    public MuttonMeat(FatMeat fatMeat, Sheep partSheep) {
+        super(KindMeat.MUTTON, fatMeat);
         this.partSheep = partSheep;
     }
 

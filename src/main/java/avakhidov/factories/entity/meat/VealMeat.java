@@ -6,10 +6,11 @@ import avakhidov.factories.enums.KindMeat;
 
 public class VealMeat extends Meat {
 
-    private Calf partCaif;
+    private Calf partCalf;
 
-    protected VealMeat(KindMeat kindMeat, FatMeat fatMeat) {
-        super(kindMeat, fatMeat);
+    public VealMeat(FatMeat fatMeat, Calf calf) {
+        super(KindMeat.VEAL, fatMeat);
+        this.partCalf = calf;
     }
 
 }
