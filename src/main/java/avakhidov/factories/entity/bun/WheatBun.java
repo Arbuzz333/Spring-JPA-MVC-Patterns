@@ -14,8 +14,8 @@ public class WheatBun extends Bun {
 
     @Override
     protected void setKindDough() {
-        super.getPrepareDough().setKindDough(
-                DoughUtil.setParameterKindDoughFromAMPM(super.getPrepareDough().getTime())
+        super.getPrepack().setKindDough(
+                DoughUtil.setParameterKindDoughFromAMPM(super.getPrepack().getTime())
         );
     }
 }

@@ -37,7 +37,7 @@ public class OvenBunTest {
         Bun bun = product.getPrepack();
 
         assertEquals(product.getFinished().getTitle(), 1);
-        assertEquals(bun.getPrepareDough().getFlour().getKind(), KindFlour.WHEAT);
+        assertEquals(bun.getPrepack().getFlour().getKind(), KindFlour.WHEAT);
         assertEquals(bun.getClass(), WheatBun.class);
     }
 
@@ -51,7 +51,7 @@ public class OvenBunTest {
         Bun bun = product.getPrepack();
 
         assertEquals(product.getFinished().getTitle(), 0);
-        assertEquals(bun.getPrepareDough().getFlour().getKind(), KindFlour.BUCKWHEAT);
+        assertEquals(bun.getPrepack().getFlour().getKind(), KindFlour.BUCKWHEAT);
         assertEquals(bun.getClass(), BuckwheatBun.class);
     }
 

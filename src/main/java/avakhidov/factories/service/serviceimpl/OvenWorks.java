@@ -5,6 +5,8 @@ import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.service.Oven;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class OvenWorks implements Oven<Bun> {
 
@@ -13,6 +15,11 @@ public class OvenWorks implements Oven<Bun> {
     @Override
     public Product<Bun> toBake(Bun prepack) {
         return this.oven.toBake(prepack);
+    }
+
+    @Override
+    public Map<OvenSituation, Integer> getParams() {
+        return oven.getParams();
     }
 
     public void setOven(Oven<Bun> oven) {

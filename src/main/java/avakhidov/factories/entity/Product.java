@@ -8,6 +8,10 @@ public class Product<T> {
 
     private Finished finished;
 
+    public Product(T prepack) {
+        this.prepack = prepack;
+    }
+
     public Product(T prepack, Finished finished) {
         this.prepack = prepack;
         this.finished = finished;
@@ -24,7 +28,7 @@ public class Product<T> {
         return finished;
     }
 
-    public Product<T> setPrepack(T prepack) {
+    protected Product<T> setPrepack(T prepack) {
         this.prepack = prepack;
         return this;
     }

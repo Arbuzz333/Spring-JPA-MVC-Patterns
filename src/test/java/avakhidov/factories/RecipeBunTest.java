@@ -34,8 +34,8 @@ public class RecipeBunTest {
                 recipeBun.makingBun(new CornBunRecipe()),
                 recipeBun.makingBun(new BuckwheatBunRecipe()));
 
-        buns.forEach(r -> {logger.info(r.getPrepareDough().getKindDough());
-        logger.info(r.getPrepareDough().getFlour().getGrinding());
+        buns.forEach(r -> {logger.info(r.getPrepack().getKindDough());
+        logger.info(r.getPrepack().getFlour().getGrinding());
         });
         assertEquals(buns.size(), 3);
 
