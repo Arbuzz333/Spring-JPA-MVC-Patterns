@@ -14,7 +14,7 @@ public class BunShop implements Market<Bun> {
 
     @Override
     public int orderQuantity() {
-        return quantity;
+        return quantity > MAX_QUANTITY ? MAX_QUANTITY : (MAX_QUANTITY - quantity);
     }
 
     public void setQuantity(int quantity) {

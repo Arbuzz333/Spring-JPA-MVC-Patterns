@@ -4,7 +4,7 @@ import avakhidov.factories.entity.Product;
 
 import java.util.Map;
 
-public interface Oven<T> {
+public interface Oven<T extends Product> {
 
     Product<T> toBake(T prepack);
 

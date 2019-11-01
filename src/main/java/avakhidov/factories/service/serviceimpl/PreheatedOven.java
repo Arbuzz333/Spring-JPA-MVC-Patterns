@@ -6,7 +6,7 @@ import avakhidov.factories.service.Oven;
 
 import java.util.Map;
 
-public class PreheatedOven<T> implements Oven<T> {
+public class PreheatedOven<T extends Product> implements Oven<T> {
 
     private static final int DEFAULT_TEMPERATURE = 180;
     private Map<OvenSituation, Integer> params;

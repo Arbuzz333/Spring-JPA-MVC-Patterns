@@ -1,4 +1,4 @@
-package avakhidov.factories.enums;
+package avakhidov.factories.enums.bakery;
 
 public enum BakeryConditionEnum {
 

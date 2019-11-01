@@ -6,12 +6,12 @@ import avakhidov.factories.service.Oven;
 
 import java.util.Map;
 
-public class HoldOven<T> implements Oven<T> {
+public class HoldOven<T extends Product> implements Oven<T> {
 
     private static final int DEFAULT_TEMPERATURE = 22;
     private Map<OvenSituation, Integer> params;
 
-    private OvenSituation situation = OvenSituation.HOLD;
+    private static final OvenSituation situation = OvenSituation.HOLD;
 
     @Override
     public Product<T> toBake(T prepack) {
