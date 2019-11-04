@@ -4,9 +4,11 @@ import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.service.Recipe;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 
+@Service
 public class WheatBunRecipe implements Recipe<Bun> {
 
     @Override

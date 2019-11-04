@@ -13,7 +13,7 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
         this.recipeReady = recipeReady;
     }
 
-    protected abstract void setKindDough();
+    public abstract void setKindDough();
 
     public boolean getRecipeReady() {
         return recipeReady;

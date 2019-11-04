@@ -11,6 +11,7 @@ import avakhidov.factories.entity.meat.MuttonMeat;
 import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.entity.meat.VealMeat;
 import avakhidov.factories.enums.FatMeat;
+import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.service.meat.meatimpl.MeatServiceImpl;
 import org.junit.Test;
@@ -52,30 +53,36 @@ public class CutletTest {
                 , 180
                 , LocalTime.of(9, 30));
 
+        sesameBun.setKindDough();
+
         List<Cutlet> cutlets = new ArrayList<>();
         cutlets.add(porkCutlet);
         cutlets.add(chickenCutlet);
 
-        Cutlet porkCutletFat = new PorkCutlet(
+        final Cutlet porkCutletFat = new PorkCutlet(
                 new PorkMeat(meatService.getMoreFatInMeat(porkCutlet.getMeat().getFatMeat()), new Pig())
                 , true
                 , 120);
 
-        Cutlet muttomCutlet = new MuttonCutlet(
+        final Cutlet muttomCutlet = new MuttonCutlet(
                 new MuttonMeat(meatService.getLessFatInMeat(porkCutlet.getMeat().getFatMeat()), new Sheep())
                 , true
                 , 110);
-        Cutlet vealCutlet = new VealCutlet(
+        final Cutlet vealCutlet = new VealCutlet(
                 new VealMeat(meatService.getLessFatInMeat(chickenCutlet.getMeat().getFatMeat()), new Calf())
                 , true
                 , 90);
 
         cutlets.add(porkCutletFat);
         cutlets.add(muttomCutlet);
+        cutlets.add(vealCutlet);
 
         assertEquals(porkCutletFat.getMeat().getFatMeat(), FatMeat.SPECK);
         assertEquals(muttomCutlet.getMeat().getFatMeat(), FatMeat.LOWFAT);
         assertEquals(vealCutlet.getMeat().getFatMeat(), FatMeat.DIETARY);
+        assertEquals(5, cutlets.size());
+        assertEquals(KindDough.YEAST_DOUGH, porkCutlet.getParameterPrepareDoughBun().getKindDough());
+
     }
 
 }

@@ -1,6 +1,7 @@
 package avakhidov.factories.entity.cutlet;
 
 import avakhidov.factories.entity.bun.Bun;
+import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.dough.DoughUtil;
@@ -49,11 +50,15 @@ public abstract class Cutlet<T extends Meat> {
     }
 
     public SesameBun getSesameBun() {
-        return sesameBun;
+        return this.sesameBun;
     }
 
     public Sesame getSesame() {
         return this.sesameBun.sesame;
+    }
+
+    public ParameterPrepareDough getParameterPrepareDoughBun() {
+        return this.sesameBun.getPrepack();
     }
 
     public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
@@ -73,8 +78,9 @@ public abstract class Cutlet<T extends Meat> {
         }
 
         @Override
-        protected void setKindDough() {
-            DoughUtil.setParameterKindDoughFromMeat(meat);
+        public void setKindDough() {
+            super.getPrepack().setKindDough(
+            DoughUtil.setParameterKindDoughFromMeat(meat));
         }
     }
 

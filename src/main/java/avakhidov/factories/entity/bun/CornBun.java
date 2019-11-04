@@ -13,7 +13,7 @@ public class CornBun extends Bun {
     }
 
     @Override
-    protected void setKindDough() {
+    public void setKindDough() {
         super.getPrepack().setKindDough(
                 DoughUtil.setParameterKindDoughFromFlour(super.getPrepack().getFlour().getKind())
         );

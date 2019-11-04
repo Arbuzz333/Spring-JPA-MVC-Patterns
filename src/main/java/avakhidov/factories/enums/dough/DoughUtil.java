@@ -5,9 +5,8 @@ import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public enum DoughUtil {
     ;
@@ -38,10 +37,10 @@ public enum DoughUtil {
     }
 
     public static KindDough setParameterKindDoughFromAMPM(LocalTime time) {
-        DateFormat formatter = new SimpleDateFormat("a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         String ampm = formatter.format(time);
 
-        if (ampm.equals("AM")) {
+        if (ampm.contains("AM")) {
             return KindDough.PUFF_PASTRY;
         } else {
             return KindDough.YEAST_DOUGH;
@@ -50,10 +49,10 @@ public enum DoughUtil {
 
     public static KindDough setParameterKindDoughFromMeat(Meat meat) {
 
-        if (meat.equals(KindMeat.BEEF)) {
+        if (meat.getKindMeat().equals(KindMeat.BEEF)) {
             return KindDough.CHOUX_PASTRY;
         } else {
-            if (meat.equals(KindMeat.CHICKEN)) {
+            if (meat.getKindMeat().equals(KindMeat.CHICKEN)) {
                 return KindDough.SHORTCRUST_PASTRY;
             } else {
                 return KindDough.YEAST_DOUGH;

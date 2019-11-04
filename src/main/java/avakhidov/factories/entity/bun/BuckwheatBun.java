@@ -13,7 +13,7 @@ public class BuckwheatBun extends Bun {
     }
 
     @Override
-    protected void setKindDough() {
+    public void setKindDough() {
         super.getPrepack().setKindDough(
         DoughUtil.setParameterKindDough(super.getPrepack().getFlour().getGrinding()));
     }

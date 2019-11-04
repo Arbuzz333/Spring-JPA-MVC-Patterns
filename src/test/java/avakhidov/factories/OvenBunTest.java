@@ -6,13 +6,14 @@ import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.service.Oven;
-import avakhidov.factories.service.RecipeBun;
 import avakhidov.factories.service.serviceimpl.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalTime;
 
 import static org.junit.Assert.*;
 
@@ -25,15 +26,18 @@ public class OvenBunTest {
     private OvenWorks ovenWorks;
 
     @Autowired
-    private RecipeBun recipeBun;
+    private WheatBunRecipe wheatBunRecipe;
+
+    @Autowired
+    private BuckwheatBunRecipe buckwheatBunRecipe;
 
     @Test
     public void toBakeTestPreheated() {
 
         Oven<Bun> oven = new PreheatedOven<>();
-        ovenWorks.setOven(oven);
+        ovenWorks.setOven(oven).setBun(wheatBunRecipe.cooked(180, LocalTime.of(0, 40)));
 
-        Product<Bun> product = ovenWorks.toBake(recipeBun.makingBun(new WheatBunRecipe()));
+        Product<Bun> product = ovenWorks.toBake();
         Bun bun = product.getPrepack();
 
         assertEquals(product.getFinished().getTitle(), 1);
@@ -45,9 +49,9 @@ public class OvenBunTest {
     public void toBakeTestHold() {
 
         Oven<Bun> oven = new HoldOven<>();
-        ovenWorks.setOven(oven);
+        ovenWorks.setOven(oven).setBun(buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40)));
 
-        Product<Bun> product = ovenWorks.toBake(recipeBun.makingBun(new BuckwheatBunRecipe()));
+        Product<Bun> product = ovenWorks.toBake();
         Bun bun = product.getPrepack();
 
         assertEquals(product.getFinished().getTitle(), 0);
