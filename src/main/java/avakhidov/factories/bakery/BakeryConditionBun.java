@@ -40,14 +40,12 @@ public class BakeryConditionBun<T extends Product, S extends Ingredient> impleme
     @Override
     public BakeryConditionEnum getCondition() {
 
-        if (market.orderQuantity() != market.getMaxQuantity() &&
-                market.orderQuantity() > oven.getMinPartyBun() &&
+        if (market.orderQuantity() > oven.getMinPartyBun() &&
                 oven.getMinPartyFlour().setScale(3, RoundingMode.HALF_UP)
                         .compareTo(storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP)) < 0 &&
                 oven.getParams().getOvenSituation().equals(Oven.OvenSituation.HOLD)) {
             return BakeryConditionEnum.PREPARATION_FOR_WORK;
-        } else if (market.orderQuantity() != market.getMaxQuantity() &&
-                market.orderQuantity() > oven.getMinPartyBun() &&
+        } else if (market.orderQuantity() > oven.getMinPartyBun() &&
                 oven.getMinPartyFlour().setScale(3, RoundingMode.HALF_UP)
                         .compareTo(storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP)) < 0 &&
                 oven.getParams().getOvenSituation().equals(Oven.OvenSituation.HOT)) {
