@@ -1,6 +1,5 @@
 package avakhidov.factories.service.serviceimpl;
 
-import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.service.Oven;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class OvenWorks {
     private Oven<Bun> oven;
     private Bun bun;
 
-    public Product<Bun> toBake() {
+    public Bun toBake() {
         return this.oven.toBake(bun);
     }
 
@@ -30,14 +29,14 @@ public class OvenWorks {
     public BigDecimal getMinPartyFlour() {
         if (this.bun == null)
             return BigDecimal.valueOf(DEFAULT_MIN_PARTY_FLOUR);
-        Oven.MinPartyBun find = Oven.MinPartyBun.getMinParty(bun.getPrepack().getFlour().getKind());
-        return find.getMinParty();
+        Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(bun.getPrepack().getFlour().getKind());
+        return BigDecimal.valueOf(find.getCoefficientParty() * bun.getWeight() * find.getMinPartyBun());
     }
 
     public double getMinPartyBun() {
         if (this.bun == null)
             return DEFAULT_MIN_PARTY_FLOUR;
-        Oven.MinPartyBun find = Oven.MinPartyBun.getMinParty(bun.getPrepack().getFlour().getKind());
+        Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(bun.getPrepack().getFlour().getKind());
         return find.getMinPartyBun();
     }
 

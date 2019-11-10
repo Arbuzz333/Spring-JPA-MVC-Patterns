@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class WheatBunRecipe implements Recipe<Bun> {
 
     @Override
-    public Bun cooked(int temperature, LocalTime time) {
-        return new WheatBun(ParameterDoughEnum.WHEAT_FLOUR_FINE, true, temperature, time);
+    public Bun cooked(int temperature, LocalTime time, double weight) {
+        return new WheatBun(ParameterDoughEnum.WHEAT_FLOUR_FINE, true, temperature, time, weight);
     }
 }

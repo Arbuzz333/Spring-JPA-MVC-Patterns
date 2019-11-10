@@ -62,8 +62,8 @@ public abstract class Cutlet<T extends Meat> {
     }
 
     public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
-                                     int temperature, LocalTime time) {
-        this.sesameBun = new SesameBun(parameterDough, recipeReady, sesame, temperature, time);
+                                     int temperature, LocalTime time, double weight) {
+        this.sesameBun = new SesameBun(parameterDough, recipeReady, sesame, temperature, time, weight);
         return sesameBun;
     }
 
@@ -72,8 +72,8 @@ public abstract class Cutlet<T extends Meat> {
         private Sesame sesame;
 
         private SesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
-                          int temperature, LocalTime time) {
-            super(parameterDough.toKneadTheDough(temperature, time), recipeReady);
+                          int temperature, LocalTime time, double weight) {
+            super(parameterDough.toKneadTheDough(temperature, time), recipeReady, weight);
             this.sesame = sesame;
         }
 

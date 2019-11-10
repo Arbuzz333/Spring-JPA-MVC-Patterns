@@ -51,7 +51,8 @@ public class CutletTest {
                 , true
                 , new Sesame()
                 , 180
-                , LocalTime.of(9, 30));
+                , LocalTime.of(9, 30)
+                , 80.0);
 
         sesameBun.setKindDough();
 

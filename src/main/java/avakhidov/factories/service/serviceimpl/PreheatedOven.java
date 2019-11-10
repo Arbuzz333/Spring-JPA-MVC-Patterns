@@ -5,10 +5,9 @@ import avakhidov.factories.enums.Finished;
 import avakhidov.factories.service.Oven;
 
 
-public class PreheatedOven<T extends Product> implements Oven<T> {
+public class PreheatedOven<T extends Product<?>> implements Oven<T> {
 
     private static final int DEFAULT_TEMPERATURE = 180;
-    private static final Integer DEFAULT_MIN_PARTY = 24;
 
     private ParamsOven params;
 
@@ -17,9 +16,9 @@ public class PreheatedOven<T extends Product> implements Oven<T> {
     }
 
     @Override
-    public Product<T> toBake(T prepack) {
-        return new Product<>(prepack).setFinished(Finished.FINISHED
-        );
+    public T toBake(T prepack) {
+        prepack.setFinished(Finished.FINISHED);
+        return prepack;
     }
 
     @Override

@@ -1,14 +1,11 @@
 package avakhidov.factories.service;
 
-import avakhidov.factories.entity.Product;
 import avakhidov.factories.enums.KindFlour;
 
-import java.math.BigDecimal;
 
+public interface Oven<T> {
 
-public interface Oven<T extends Product> {
-
-    Product<T> toBake(T prepack);
+    T toBake(T prepack);
 
     ParamsOven getParams();
 
@@ -19,33 +16,33 @@ public interface Oven<T extends Product> {
     }
 
     enum MinPartyBun {
-        MIN_PARTY_WHEAT(KindFlour.WHEAT, BigDecimal.valueOf(55.0), 35),
-        MIN_PARTY_CORN(KindFlour.CORN, BigDecimal.valueOf(45.0), 30),
-        MIN_PARTY_BUCKWHEAT(KindFlour.BUCKWHEAT, BigDecimal.valueOf(35.0), 25);
+        MIN_PARTY_WHEAT(KindFlour.WHEAT, 0.75, 35),
+        MIN_PARTY_CORN(KindFlour.CORN, 0.80, 30),
+        MIN_PARTY_BUCKWHEAT(KindFlour.BUCKWHEAT, 0.85, 25);
 
         private KindFlour flour;
-        private BigDecimal minPartyFlour;
+        private double coefficientFlour;
         private Integer minPartyBun;
 
-        private MinPartyBun(KindFlour flour, BigDecimal minPartyFlour, Integer minPartyBun) {
+        private MinPartyBun(KindFlour flour, double coefficientFlour, Integer minPartyBun) {
             this.flour = flour;
-            this.minPartyFlour = minPartyFlour;
+            this.coefficientFlour = coefficientFlour;
             this.minPartyBun = minPartyBun;
         }
 
-        public KindFlour getFlour() {
+        public KindFlour getKindFlour() {
             return flour;
         }
 
-        public BigDecimal getMinParty() {
-            return minPartyFlour;
+        public double getCoefficientParty() {
+            return minPartyBun / coefficientFlour;
         }
 
         public double getMinPartyBun() {
             return minPartyBun;
         }
 
-        public static MinPartyBun getMinParty(KindFlour flour) {
+        public static MinPartyBun getCoefficientParty(KindFlour flour) {
             MinPartyBun find = MinPartyBun.MIN_PARTY_WHEAT;
             MinPartyBun[] flourMinParties = MinPartyBun.values();
             for (MinPartyBun party : flourMinParties) {

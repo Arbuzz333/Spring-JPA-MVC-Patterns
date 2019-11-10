@@ -8,8 +8,8 @@ import java.time.LocalTime;
 
 public class WheatBun extends Bun {
 
-    public WheatBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, int temperature, LocalTime time) {
-        super(parameterDough.toKneadTheDough(temperature, time), recipeReady);
+    public WheatBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, int temperature, LocalTime time, double weight) {
+        super(parameterDough.toKneadTheDough(temperature, time), recipeReady, weight);
     }
 
     @Override

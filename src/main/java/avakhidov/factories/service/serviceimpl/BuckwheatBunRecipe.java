@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class BuckwheatBunRecipe implements Recipe<Bun> {
 
     @Override
-    public Bun cooked(int temperature, LocalTime time) {
-        return new BuckwheatBun(ParameterDoughEnum.BUCKWHEAT_FLOUR_MEDIUM, true, temperature, time);
+    public Bun cooked(int temperature, LocalTime time, double weight) {
+        return new BuckwheatBun(ParameterDoughEnum.BUCKWHEAT_FLOUR_MEDIUM, true, temperature, time, weight);
     }
 }

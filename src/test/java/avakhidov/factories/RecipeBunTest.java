@@ -40,9 +40,9 @@ public class RecipeBunTest {
     public void cookedBunTest() {
 
         List<Bun> buns = Arrays.asList(
-                cornBunRecipe.cooked(33, LocalTime.of(0, 23)),
-                wheatBunRecipe.cooked(35, LocalTime.of(14, 25)),
-                buckwheatBunRecipe.cooked(37, LocalTime.of(0, 27)));
+                cornBunRecipe.cooked(33, LocalTime.of(0, 23), 75.0),
+                wheatBunRecipe.cooked(35, LocalTime.of(14, 25), 120),
+                buckwheatBunRecipe.cooked(37, LocalTime.of(0, 27), 95));
 
         assertEquals(buns.size(), 3);
         assertEquals(buns.get(0).getPrepack().getFlour().getKind(), KindFlour.CORN);

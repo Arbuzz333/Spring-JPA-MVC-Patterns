@@ -4,7 +4,7 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.service.Oven;
 
-public class HoldOven<T extends Product> implements Oven<T> {
+public class HoldOven<T extends Product<?>> implements Oven<T> {
 
     private static final int DEFAULT_TEMPERATURE = 22;
 
@@ -15,8 +15,9 @@ public class HoldOven<T extends Product> implements Oven<T> {
     }
 
     @Override
-    public Product<T> toBake(T prepack) {
-        return new Product<>(prepack).setFinished(Finished.RAW);
+    public T toBake(T prepack) {
+        prepack.setFinished(Finished.RAW);
+        return prepack;
     }
 
     @Override

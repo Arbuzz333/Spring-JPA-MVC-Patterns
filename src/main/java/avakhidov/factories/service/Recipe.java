@@ -5,5 +5,5 @@ import java.time.LocalTime;
 
 public interface Recipe<T> {
 
-    T cooked(int temperature, LocalTime time);
+    T cooked(int temperature, LocalTime time, double weight);
 }

@@ -9,7 +9,7 @@ import avakhidov.factories.service.serviceimpl.OvenWorks;
 
 import java.math.RoundingMode;
 
-public class BakeryConditionBun<T extends Product, S extends Ingredient> implements BakeryCondition {
+public class BakeryConditionBun<T extends Product<?>, S extends Ingredient> implements BakeryCondition {
 
     private OvenWorks oven;
 
@@ -34,8 +34,6 @@ public class BakeryConditionBun<T extends Product, S extends Ingredient> impleme
     public void updateStorageBakery(StorageBakery<S> storageBakery) {
         this.storageBakery = storageBakery;
     }
-
-    
 
     @Override
     public BakeryConditionEnum getCondition() {
