@@ -41,8 +41,9 @@ public class StorageBakeryFlour implements StorageBakery<Flour> {
         return this.flour.getKind();
     }
 
-    public void setWeight(BigDecimal weight) {
+    public StorageBakeryFlour setWeight(BigDecimal weight) {
         this.weight = weight;
+        return this;
     }
 
 }

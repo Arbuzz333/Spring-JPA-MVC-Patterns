@@ -8,12 +8,9 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
 
-    private double weight;
-
     public Bun(ParameterPrepareDough prepareDough, boolean recipeReady, double weight) {
-        super(prepareDough);
+        super(prepareDough, weight);
         this.recipeReady = recipeReady;
-        this.weight = weight;
     }
 
     public abstract void setKindDough();
@@ -26,7 +23,4 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
         this.recipeReady = recipeReady;
     }
 
-    public double getWeight() {
-        return weight;
-    }
 }

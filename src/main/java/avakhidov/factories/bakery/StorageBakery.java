@@ -10,4 +10,6 @@ public interface StorageBakery<T extends Ingredient> {
     BigDecimal stockValue();
 
     KindFlour getKindFlour();
+
+    StorageBakery<T> setWeight(BigDecimal weight);
 }

@@ -6,14 +6,22 @@ public class Product<T> {
 
     private T prepack;
 
-    private Finished finished;
-
-    public Product(T prepack) {
-        this.prepack = prepack;
+    public double getWeight() {
+        return weight;
     }
 
-    public Product(T prepack, Finished finished) {
+    private double weight;
+
+    private Finished finished;
+
+    public Product(T prepack, double weight) {
         this.prepack = prepack;
+        this.weight = weight;
+    }
+
+    public Product(T prepack, double weight, Finished finished) {
+        this.prepack = prepack;
+        this.weight = weight;
         this.finished = finished;
     }
 

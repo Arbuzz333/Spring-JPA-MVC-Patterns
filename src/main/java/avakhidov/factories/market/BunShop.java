@@ -4,7 +4,7 @@ import avakhidov.factories.entity.bun.Bun;
 
 public class BunShop implements Market<Bun> {
 
-    private static final int MAX_QUANTITY = 25;
+    private static final int MAX_QUANTITY = 55;
 
     private int quantity;
 
@@ -22,8 +22,10 @@ public class BunShop implements Market<Bun> {
         return MAX_QUANTITY;
     }
 
-    public void setQuantity(int quantity) {
+    @Override
+    public BunShop setQuantity(int quantity) {
         this.quantity = quantity;
+        return this;
     }
 
 }

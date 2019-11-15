@@ -7,4 +7,7 @@ public interface Market<T extends Product> {
     int orderQuantity();
 
     int getMaxQuantity();
+
+    Market<T> setQuantity(int quantity);
+
 }

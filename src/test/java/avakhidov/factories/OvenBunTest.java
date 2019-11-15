@@ -22,9 +22,6 @@ import static org.junit.Assert.*;
 public class OvenBunTest {
 
     @Autowired
-    private OvenWorks ovenWorks;
-
-    @Autowired
     private WheatBunRecipe wheatBunRecipe;
 
     @Autowired
@@ -34,9 +31,10 @@ public class OvenBunTest {
     public void toBakeTestPreheated() {
 
         Oven<Bun> oven = new PreheatedOven<>();
-        ovenWorks.setOven(oven).setBun(wheatBunRecipe.cooked(180, LocalTime.of(0, 40), 95));
+        OvenWorksImpl<Bun> ovenWorksImpl = new OvenWorksImpl<>(oven,
+                wheatBunRecipe.cooked(180, LocalTime.of(0, 40), 95));
 
-        Bun bun = ovenWorks.toBake();
+        Bun bun = ovenWorksImpl.toBake();
 
         assertEquals(bun.getFinished().getTitle(), 1);
         assertEquals(bun.getPrepack().getFlour().getKind(), KindFlour.WHEAT);
@@ -47,14 +45,14 @@ public class OvenBunTest {
     public void toBakeTestHold() {
 
         Oven<Bun> oven = new HoldOven<>();
-        ovenWorks.setOven(oven).setBun(buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40), 115.0));
+        OvenWorksImpl<Bun> ovenWorksImpl = new OvenWorksImpl<>(oven,
+                buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40), 115.0));
 
-        Bun bun = ovenWorks.toBake();
+        Bun bun = ovenWorksImpl.toBake();
 
         assertEquals(bun.getFinished().getTitle(), 0);
         assertEquals(bun.getPrepack().getFlour().getKind(), KindFlour.BUCKWHEAT);
         assertEquals(bun.getClass(), BuckwheatBun.class);
     }
-
 
 }
