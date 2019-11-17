@@ -74,7 +74,7 @@ public class BakeryConditionBun<T extends Product<ParameterPrepareDough>, S exte
         } else if (market.orderQuantity() > oven.getMinPartyProduct() &&
                 oven.getMinPartyIngredient().setScale(3, RoundingMode.HALF_UP)
                         .compareTo(storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP)) < 0 &&
-                oven.getParams().getOvenSituation().equals(Oven.OvenSituation.HOT)) {
+                oven.getParams().getOvenSituation() == Oven.OvenSituation.HOT) {
 
             this.bakeryCondition = BakeryConditionEnum.WORKS;
             return bakeryCondition;
