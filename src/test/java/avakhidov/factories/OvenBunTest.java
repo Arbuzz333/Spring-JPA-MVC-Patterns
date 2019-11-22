@@ -44,7 +44,7 @@ public class OvenBunTest {
     @Test
     public void toBakeTestHold() {
 
-        Oven<Bun> oven = new HoldOven<>();
+        Oven<Bun> oven = HoldOvenBunSingleton.getInstance();
         OvenWorksImpl<Bun> ovenWorksImpl = new OvenWorksImpl<>(oven,
                 buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40), 115.0));
 

@@ -1,5 +1,7 @@
 package avakhidov.factories.service;
 
+import avakhidov.factories.service.serviceimpl.OvenWorksImpl;
+
 import java.math.BigDecimal;
 
 public interface OvenWorks<T> {
@@ -8,8 +10,10 @@ public interface OvenWorks<T> {
 
     Oven.ParamsOven getParams();
 
-    BigDecimal getMinPartyIngredient();
+    BigDecimal getMinPartyIngredient(int quantity);
 
     double getMinPartyProduct();
+
+    OvenWorksImpl setOven(Oven<T> oven);
 
 }

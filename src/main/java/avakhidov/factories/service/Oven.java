@@ -5,6 +5,8 @@ import avakhidov.factories.enums.KindFlour;
 
 public interface Oven<T> {
 
+    int MAX_OUTPUT = 25;
+
     T toBake(T prepack);
 
     ParamsOven getParams();
@@ -56,13 +58,16 @@ public interface Oven<T> {
     }
     class ParamsOven {
 
-        OvenSituation ovenSituation;
+        private final int maxOutput;
 
-        Integer temperature;
+        private OvenSituation ovenSituation;
 
-        public ParamsOven(OvenSituation ovenSituation, Integer temperature) {
+        private Integer temperature;
+
+        public ParamsOven(OvenSituation ovenSituation, Integer temperature, int maxOutput) {
             this.ovenSituation = ovenSituation;
             this.temperature = temperature;
+            this.maxOutput = maxOutput;
         }
 
         public OvenSituation getOvenSituation() {
@@ -73,5 +78,8 @@ public interface Oven<T> {
             return temperature;
         }
 
+        public int getMaxOutput() {
+            return maxOutput;
+        }
     }
 }

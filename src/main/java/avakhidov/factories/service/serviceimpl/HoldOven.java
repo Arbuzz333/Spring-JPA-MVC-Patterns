@@ -11,7 +11,7 @@ public class HoldOven<T extends Product<?>> implements Oven<T> {
     private ParamsOven params;
 
     {
-        params = new ParamsOven(OvenSituation.HOLD, DEFAULT_TEMPERATURE);
+        params = new ParamsOven(OvenSituation.HOLD, DEFAULT_TEMPERATURE, MAX_OUTPUT);
     }
 
     @Override
@@ -22,13 +22,11 @@ public class HoldOven<T extends Product<?>> implements Oven<T> {
 
     @Override
     public ParamsOven getParams() {
-        if (params == null || params.getTemperature() == null)
-            this.params = new ParamsOven(OvenSituation.HOLD, DEFAULT_TEMPERATURE);
         return this.params;
     }
 
-    public void setParams(Integer temperature) {
-        this.params = new ParamsOven(OvenSituation.HOLD, temperature);
+    public void setParams(Integer temperature, int maxOutput) {
+        this.params = new ParamsOven(OvenSituation.HOLD, temperature, maxOutput);
     }
 
 }

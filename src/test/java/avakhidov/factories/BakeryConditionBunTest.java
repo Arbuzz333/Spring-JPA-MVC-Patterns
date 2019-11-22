@@ -16,7 +16,7 @@ import avakhidov.factories.service.OvenWorks;
 import avakhidov.factories.service.serviceimpl.BuckwheatBunRecipe;
 import avakhidov.factories.service.serviceimpl.HoldOven;
 import avakhidov.factories.service.serviceimpl.OvenWorksImpl;
-import avakhidov.factories.service.serviceimpl.PreheatedOven;
+import avakhidov.factories.service.serviceimpl.PreheatedOvenBunSingleton;
 import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +47,7 @@ public class BakeryConditionBunTest {
     @Test
     public void getConditionTest() {
 
-        Oven<Bun> oven = new PreheatedOven<>();
+        Oven<Bun> oven = PreheatedOvenBunSingleton.getInstance();
         OvenWorks<Bun> ovenWorks = new OvenWorksImpl<>(oven,
                 buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40), 0.115));
 
@@ -64,19 +64,20 @@ public class BakeryConditionBunTest {
         assertEquals(conditionEnum, BakeryConditionEnum.DOWNTIME);
 
         bakeryCondition.updateMarket(market.setQuantity(15));
-        logger.info("conditionEnum {}", conditionEnum);
+        logger.info("condition {}", bakeryCondition.getCondition());
         assertEquals(bakeryCondition.getCondition(), BakeryConditionEnum.DOWNTIME);
 
-        bakeryCondition.updateStorageBakery(storageBakery.setWeight(new BigDecimal(275)));
-        logger.info("conditionEnum {}", conditionEnum);
+        bakeryCondition.updateStorageBakery(storageBakery.setWeight(new BigDecimal(325)));
+        logger.info("condition {}", bakeryCondition.getCondition());
         assertEquals(bakeryCondition.getCondition(), BakeryConditionEnum.WORKS);
 
         Oven<Bun> ovenHold = new HoldOven<>();
         OvenWorks<Bun> ovenWorksHold = new OvenWorksImpl<>(ovenHold,
                 wheatBunRecipe.cooked(175, LocalTime.of(0, 35), 0.15));
         bakeryCondition.updateOven(ovenWorksHold);
-        bakeryCondition.updateStorageBakery(storageBakery.setWeight(new BigDecimal(375)));
-        logger.info("conditionEnum {}", conditionEnum);
+        bakeryCondition.updateMarket(market);
+        bakeryCondition.updateStorageBakery(storageBakery.setWeight(new BigDecimal(425)));
+        logger.info("condition {}", bakeryCondition.getCondition());
         assertEquals(bakeryCondition.getCondition(), BakeryConditionEnum.PREPARATION_FOR_WORK);
     }
 }

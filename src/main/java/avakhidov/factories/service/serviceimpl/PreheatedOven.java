@@ -12,7 +12,7 @@ public class PreheatedOven<T extends Product<?>> implements Oven<T> {
     private ParamsOven params;
 
     {
-        params = new ParamsOven(OvenSituation.HOT, DEFAULT_TEMPERATURE);
+        params = new ParamsOven(OvenSituation.HOT, DEFAULT_TEMPERATURE, Oven.MAX_OUTPUT);
     }
 
     @Override
@@ -23,12 +23,10 @@ public class PreheatedOven<T extends Product<?>> implements Oven<T> {
 
     @Override
     public ParamsOven getParams() {
-        if (params.getTemperature() == null)
-            this.params = new ParamsOven(OvenSituation.HOT, DEFAULT_TEMPERATURE);
         return this.params;
     }
 
-    public void setParams(Integer temperature) {
-        this.params = new ParamsOven(OvenSituation.HOT, temperature);
+    public void setParams(Integer temperature, int max_output) {
+        this.params = new ParamsOven(OvenSituation.HOT, temperature, max_output);
     }
 }

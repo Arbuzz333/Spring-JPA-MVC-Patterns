@@ -1,6 +1,8 @@
 package avakhidov.factories.entity.bun;
 
 
+import avakhidov.factories.entity.dough.ParameterPrepareDough;
+import avakhidov.factories.entity.flour.BuckwheatFlour;
 import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
@@ -8,8 +10,8 @@ import java.time.LocalTime;
 
 public class BuckwheatBun extends Bun {
 
-    public BuckwheatBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, int temperature, LocalTime time, double weight) {
-        super(parameterDough.toKneadTheDough(temperature, time), recipeReady, weight);
+    public BuckwheatBun(ParameterPrepareDough<BuckwheatFlour> parameterDough, boolean recipeReady, double weight) {
+        super(parameterDough, recipeReady, weight);
     }
 
     @Override

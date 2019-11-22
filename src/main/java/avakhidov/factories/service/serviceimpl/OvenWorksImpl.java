@@ -29,16 +29,16 @@ import java.math.BigDecimal;
     @Override
     public Oven.ParamsOven getParams() {
         if (oven == null)
-            return new Oven.ParamsOven(Oven.OvenSituation.INDEFINITE, INDEFINITE_DEFAULT_TEMPERATURE);
+            return new Oven.ParamsOven(Oven.OvenSituation.INDEFINITE, INDEFINITE_DEFAULT_TEMPERATURE, Oven.MAX_OUTPUT);
         return oven.getParams();
     }
 
     @Override
-    public BigDecimal getMinPartyIngredient() {
+    public BigDecimal getMinPartyIngredient(int quantity) {
         if (this.product == null)
             return BigDecimal.valueOf(DEFAULT_MIN_PARTY_FLOUR);
         Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(product.getPrepack().getFlour().getKind());
-        return BigDecimal.valueOf(find.getCoefficientParty() * product.getWeight() * find.getMinPartyBun());
+        return BigDecimal.valueOf(find.getCoefficientParty() * product.getWeight() * quantity);
     }
 
     @Override
@@ -49,6 +49,7 @@ import java.math.BigDecimal;
         return find.getMinPartyBun();
     }
 
+    @Override
     public OvenWorksImpl setOven(Oven<T> oven) {
         this.oven = oven;
         return this;
