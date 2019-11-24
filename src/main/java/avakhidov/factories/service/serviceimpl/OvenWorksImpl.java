@@ -37,7 +37,7 @@ import java.math.BigDecimal;
     public BigDecimal getMinPartyIngredient(int quantity) {
         if (this.product == null)
             return BigDecimal.valueOf(DEFAULT_MIN_PARTY_FLOUR);
-        Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(product.getPrepack().getFlour().getKind());
+        Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(product.getMainIngredient().getFlour().getKind());
         return BigDecimal.valueOf(find.getCoefficientParty() * product.getWeight() * quantity);
     }
 
@@ -45,7 +45,7 @@ import java.math.BigDecimal;
     public double getMinPartyProduct() {
         if (this.product == null)
             return DEFAULT_MIN_PARTY_FLOUR;
-        Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(product.getPrepack().getFlour().getKind());
+        Oven.MinPartyBun find = Oven.MinPartyBun.getCoefficientParty(product.getMainIngredient().getFlour().getKind());
         return find.getMinPartyBun();
     }
 

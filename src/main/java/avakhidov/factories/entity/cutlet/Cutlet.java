@@ -1,5 +1,6 @@
 package avakhidov.factories.entity.cutlet;
 
+import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.ingredient.Sesame;
@@ -9,44 +10,31 @@ import avakhidov.factories.service.BuildParameterPrepareDough;
 
 import java.time.LocalTime;
 
-public abstract class Cutlet<T extends Meat> {
-
-    private T meat;
+public abstract class Cutlet<T extends Meat> extends Product<T> {
 
     private boolean recipeReady = false;
-
-    private double weight;
 
     private SesameBun sesameBun;
 
     public Cutlet(T meat, boolean recipeReady, double weight) {
-        this.meat = meat;
+        super(meat, weight);
         this.recipeReady = recipeReady;
-        this.weight = weight;
     }
 
     public void setMeat(T meat) {
-        this.meat = meat;
+        super.setMainIngredient(meat);
+    }
+
+    private T getMeate() {
+        return super.getMainIngredient();
     }
 
     public void setRecipeReady(boolean recipeReady) {
         this.recipeReady = recipeReady;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public T getMeat() {
-        return meat;
-    }
-
     public boolean isRecipeReady() {
         return recipeReady;
-    }
-
-    public double getWeight() {
-        return weight;
     }
 
     public SesameBun getSesameBun() {
@@ -58,7 +46,7 @@ public abstract class Cutlet<T extends Meat> {
     }
 
     public ParameterPrepareDough getParameterPrepareDoughBun() {
-        return this.sesameBun.getPrepack();
+        return this.sesameBun.getMainIngredient();
     }
 
     public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
@@ -79,8 +67,8 @@ public abstract class Cutlet<T extends Meat> {
 
         @Override
         public void setKindDough() {
-            super.getPrepack().setKindDough(
-            DoughUtil.setParameterKindDoughFromMeat(meat));
+            super.getMainIngredient().setKindDough(
+            DoughUtil.setParameterKindDoughFromMeat(getMeate()));
         }
     }
 

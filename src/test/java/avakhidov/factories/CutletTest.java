@@ -6,8 +6,10 @@ import avakhidov.factories.entity.livestock.Chicken;
 import avakhidov.factories.entity.livestock.Pig;
 import avakhidov.factories.entity.livestock.Sheep;
 import avakhidov.factories.entity.meat.ChickenMeat;
+import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.entity.meat.MuttonMeat;
 import avakhidov.factories.entity.meat.PorkMeat;
+import avakhidov.factories.entity.meat.VealMeat;
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
@@ -49,7 +51,7 @@ public class CutletTest {
 
     @Test
     public void cutletTest() {
-        final Cutlet porkCutlet = porkCutletRecipe.cooked(185, LocalTime.of(0, 55), 100);
+        final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(185, LocalTime.of(0, 55), 100);
 
         final Cutlet chickenCutlet = new ChickenCutlet(
                 new ChickenMeat(FatMeat.DIETARY, new Chicken())
@@ -69,24 +71,24 @@ public class CutletTest {
         cutlets.add(porkCutlet);
         cutlets.add(chickenCutlet);
 
-        final Cutlet porkCutletFat = new PorkCutlet(
-                new PorkMeat(meatService.getMoreFatInMeat(porkCutlet.getMeat().getFatMeat()), new Pig())
+        final Cutlet<? extends Meat> porkCutletFat = new PorkCutlet(
+                new PorkMeat(meatService.getMoreFatInMeat(porkCutlet.getMainIngredient().getFatMeat()), new Pig())
                 , true
                 , 120);
 
-        final Cutlet muttomCutlet = new MuttonCutlet(
-                new MuttonMeat(meatService.getLessFatInMeat(porkCutlet.getMeat().getFatMeat()), new Sheep())
+        final Cutlet<? extends Meat> muttonCutlet = new MuttonCutlet(
+                new MuttonMeat(meatService.getLessFatInMeat(porkCutlet.getMainIngredient().getFatMeat()), new Sheep())
                 , true
                 , 110);
-        final Cutlet vealCutlet = vealCutletRecipe.cooked(175, LocalTime.of(0, 40), 90);
+        final Cutlet<? extends Meat> vealCutlet = vealCutletRecipe.cooked(175, LocalTime.of(0, 40), 90);
 
         cutlets.add(porkCutletFat);
-        cutlets.add(muttomCutlet);
+        cutlets.add(muttonCutlet);
         cutlets.add(vealCutlet);
 
-        assertEquals(porkCutletFat.getMeat().getFatMeat(), FatMeat.SPECK);
-        assertEquals(muttomCutlet.getMeat().getFatMeat(), FatMeat.LOWFAT);
-        assertEquals(vealCutlet.getMeat().getFatMeat(), FatMeat.DIETARY);
+        assertEquals(porkCutletFat.getMainIngredient().getFatMeat(), FatMeat.SPECK);
+        assertEquals(muttonCutlet.getMainIngredient().getFatMeat(), FatMeat.LOWFAT);
+        assertEquals(vealCutlet.getMainIngredient().getFatMeat(), FatMeat.DIETARY);
         assertEquals(5, cutlets.size());
         assertEquals(KindDough.YEAST_DOUGH, porkCutlet.getParameterPrepareDoughBun().getKindDough());
 
@@ -95,8 +97,8 @@ public class CutletTest {
     @Test
     public void cutletServiceTest() {
 
-        final Cutlet vealCutlet = vealCutletRecipe.cooked(175, LocalTime.of(0, 40), 90);
-        final Cutlet porkCutlet = porkCutletRecipe.cooked(185, LocalTime.of(0, 55), 100);
+        final Cutlet<VealMeat> vealCutlet = vealCutletRecipe.cooked(175, LocalTime.of(0, 40), 90);
+        final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(185, LocalTime.of(0, 55), 100);
 
         Cutlet cutlet = cutletService.getMoreFatCutlet(vealCutlet, porkCutlet);
 

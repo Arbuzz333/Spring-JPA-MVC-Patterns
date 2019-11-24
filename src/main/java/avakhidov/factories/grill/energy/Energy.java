@@ -21,8 +21,18 @@ public interface Energy {
 
      enum StateOfAggregation {
 
-         GASEOUS,
-         LIQUID,
-         SOLID
+         GASEOUS(47.2),
+         LIQUID(42.7),
+         SOLID(15.0);
+
+         private double calorificValue;
+
+         StateOfAggregation(double v) {
+             calorificValue = v;
+         }
+
+         public double getCalorificValue() {
+             return calorificValue;
+         }
      }
 }

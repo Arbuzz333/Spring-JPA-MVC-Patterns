@@ -45,22 +45,22 @@ public class RecipeBunTest {
                 buckwheatBunRecipe.cooked(37, LocalTime.of(0, 27), 95));
 
         assertEquals(buns.size(), 3);
-        assertEquals(buns.get(0).getPrepack().getFlour().getKind(), KindFlour.CORN);
-        assertEquals(buns.get(1).getPrepack().getFlour().getKind(), KindFlour.WHEAT);
-        assertEquals(buns.get(2).getPrepack().getFlour().getKind(), KindFlour.BUCKWHEAT);
+        assertEquals(buns.get(0).getMainIngredient().getFlour().getKind(), KindFlour.CORN);
+        assertEquals(buns.get(1).getMainIngredient().getFlour().getKind(), KindFlour.WHEAT);
+        assertEquals(buns.get(2).getMainIngredient().getFlour().getKind(), KindFlour.BUCKWHEAT);
 
-        assertEquals(buns.get(0).getPrepack().getFlour().getGrinding(), GrindingFlour.COARSE);
-        assertEquals(buns.get(1).getPrepack().getFlour().getGrinding(), GrindingFlour.FINE);
-        assertEquals(buns.get(2).getPrepack().getFlour().getGrinding(), GrindingFlour.MEDIUM);
+        assertEquals(buns.get(0).getMainIngredient().getFlour().getGrinding(), GrindingFlour.COARSE);
+        assertEquals(buns.get(1).getMainIngredient().getFlour().getGrinding(), GrindingFlour.FINE);
+        assertEquals(buns.get(2).getMainIngredient().getFlour().getGrinding(), GrindingFlour.MEDIUM);
 
         buns.forEach(Bun::setKindDough);
 
-        assertEquals(buns.get(0).getPrepack().getKindDough(), KindDough.SHORTCRUST_PASTRY);
-        assertEquals(buns.get(1).getPrepack().getKindDough(), KindDough.YEAST_DOUGH);
-        assertEquals(buns.get(2).getPrepack().getKindDough(), KindDough.PUFF_PASTRY);
+        assertEquals(buns.get(0).getMainIngredient().getKindDough(), KindDough.SHORTCRUST_PASTRY);
+        assertEquals(buns.get(1).getMainIngredient().getKindDough(), KindDough.YEAST_DOUGH);
+        assertEquals(buns.get(2).getMainIngredient().getKindDough(), KindDough.PUFF_PASTRY);
 
-        buns.forEach(r -> {logger.info(r.getPrepack().getKindDough());
-            logger.info(r.getPrepack().getFlour().getGrinding());
+        buns.forEach(r -> {logger.info(r.getMainIngredient().getKindDough());
+            logger.info(r.getMainIngredient().getFlour().getGrinding());
         });
 
     }
