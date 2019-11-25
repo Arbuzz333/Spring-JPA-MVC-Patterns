@@ -4,28 +4,40 @@ import avakhidov.factories.enums.Finished;
 
 public class Product<T> {
 
-    private T prepack;
+    private T mainIngredient;
+
+    private double weight;
 
     private Finished finished;
 
-    public Product(T prepack, Finished finished) {
-        this.prepack = prepack;
+    public Product(T mainIngredient, double weight) {
+        this.mainIngredient = mainIngredient;
+        this.weight = weight;
+    }
+
+    public Product(T mainIngredient, double weight, Finished finished) {
+        this.mainIngredient = mainIngredient;
+        this.weight = weight;
         this.finished = finished;
     }
 
     public Product() {
     }
 
-    public T getPrepack() {
-        return prepack;
+    public double getWeight() {
+        return weight;
+    }
+
+    public T getMainIngredient() {
+        return mainIngredient;
     }
 
     public Finished getFinished() {
         return finished;
     }
 
-    public Product<T> setPrepack(T prepack) {
-        this.prepack = prepack;
+    protected Product<T> setMainIngredient(T mainIngredient) {
+        this.mainIngredient = mainIngredient;
         return this;
     }
 

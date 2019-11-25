@@ -1,21 +1,20 @@
 package avakhidov.factories.entity.bun;
 
 
+import avakhidov.factories.entity.dough.ParameterPrepareDough;
+import avakhidov.factories.entity.flour.WheatFlour;
 import avakhidov.factories.enums.dough.DoughUtil;
-import avakhidov.factories.service.BuildParameterPrepareDough;
-
-import java.time.LocalTime;
 
 public class WheatBun extends Bun {
 
-    public WheatBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, int temperature, LocalTime time) {
-        super(parameterDough.toKneadTheDough(temperature, time), recipeReady);
+    public WheatBun(ParameterPrepareDough<WheatFlour> prepareDough, boolean recipeReady, double weight) {
+        super(prepareDough, recipeReady, weight);
     }
 
     @Override
-    protected void setKindDough() {
-        super.getPrepareDough().setKindDough(
-                DoughUtil.setParameterKindDoughFromAMPM(super.getPrepareDough().getTime())
+    public void setKindDough() {
+        super.getMainIngredient().setKindDough(
+                DoughUtil.setParameterKindDoughFromAMPM(super.getMainIngredient().getTime())
         );
     }
 }
