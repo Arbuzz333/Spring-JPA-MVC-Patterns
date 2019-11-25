@@ -6,6 +6,7 @@ import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.livestock.Pig;
 import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.enums.FatMeat;
+import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.service.Recipe;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class PorkCutletRecipe implements Recipe<Cutlet<PorkMeat>> {
     public Cutlet<PorkMeat> cooked(int temperature, LocalTime time, double weight) {
 
         PorkCutlet porkCutlet = new PorkCutlet(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()), true, weight);
+        porkCutlet.setFinished(Finished.RAW);
 
         porkCutlet.createSesameBun(ParameterDoughEnum.CORN_FLOUR_COARSE
                 , true, new Sesame()
