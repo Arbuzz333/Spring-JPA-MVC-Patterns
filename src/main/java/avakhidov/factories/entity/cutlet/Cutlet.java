@@ -58,11 +58,21 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
     public class SesameBun extends Bun {
 
         private Sesame sesame;
+        boolean recipeReady;
+        int temperature;
+        LocalTime time;
+        double weight;
+        BuildParameterPrepareDough parameterDough;
 
         private SesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
                           int temperature, LocalTime time, double weight) {
             super(parameterDough.toKneadTheDough(temperature, time), recipeReady, weight);
             this.sesame = sesame;
+            this.recipeReady = recipeReady;
+            this.temperature = temperature;
+            this.time = time;
+            this.weight = weight;
+            this.parameterDough = parameterDough;
         }
 
         @Override

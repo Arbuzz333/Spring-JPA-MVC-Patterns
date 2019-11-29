@@ -6,3 +6,4 @@
 * BakeryHouseFSMSingletonEnum - SingleTone Enum
 * PreheatedBunOvenSingleton - Thread-safe Singleton class. The instance is lazily initialized.
 * HoldOvenBunSingleton - Double check locking Singleton.
+* OvenToGrill - adapter
