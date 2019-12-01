@@ -18,8 +18,6 @@ public class ChickenCutlet extends Cutlet<ChickenMeat> {
                 chickenCutlet.getSesameBun().parameterDough
                 , chickenCutlet.getSesameBun().recipeReady
                 , new Sesame()
-                , chickenCutlet.getSesameBun().temperature
-                , chickenCutlet.getSesameBun().time
                 , chickenCutlet.getSesameBun().weight);
 
     }

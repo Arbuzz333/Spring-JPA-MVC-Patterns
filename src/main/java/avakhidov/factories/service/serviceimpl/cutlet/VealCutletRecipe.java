@@ -10,7 +10,6 @@ import avakhidov.factories.enums.Finished;
 import avakhidov.factories.service.Recipe;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 
 import static avakhidov.factories.enums.dough.ParameterDoughEnum.WHEAT_FLOUR_FINE;
 
@@ -18,12 +17,12 @@ import static avakhidov.factories.enums.dough.ParameterDoughEnum.WHEAT_FLOUR_FIN
 public class VealCutletRecipe implements Recipe<Cutlet<VealMeat>> {
 
     @Override
-    public Cutlet<VealMeat> cooked(int temperature, LocalTime time, double weight) {
+    public Cutlet<VealMeat> cooked(double weight) {
 
         VealCutlet vealCutlet = new VealCutlet(new VealMeat(FatMeat.DIETARY, new Calf()), true, weight);
         vealCutlet.setFinished(Finished.RAW);
 
-        vealCutlet.createSesameBun(WHEAT_FLOUR_FINE, true, new Sesame(), temperature, time, weight * 0.8);
+        vealCutlet.createSesameBun(WHEAT_FLOUR_FINE, true, new Sesame(), weight * 0.8);
 
         return vealCutlet;
     }

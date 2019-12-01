@@ -1,6 +1,7 @@
 package avakhidov.factories;
 
 import avakhidov.factories.entity.bun.Bun;
+import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.dough.KindDough;
@@ -40,9 +41,9 @@ public class RecipeBunTest {
     public void cookedBunTest() {
 
         List<Bun> buns = Arrays.asList(
-                cornBunRecipe.cooked(33, LocalTime.of(0, 23), 75.0),
-                wheatBunRecipe.cooked(35, LocalTime.of(14, 25), 120),
-                buckwheatBunRecipe.cooked(37, LocalTime.of(0, 27), 95));
+                cornBunRecipe.cooked(0.75),
+                wheatBunRecipe.cooked(0.120),
+                buckwheatBunRecipe.cooked(0.95));
 
         assertEquals(buns.size(), 3);
         assertEquals(buns.get(0).getMainIngredient().getFlour().getKind(), KindFlour.CORN);
@@ -53,6 +54,8 @@ public class RecipeBunTest {
         assertEquals(buns.get(1).getMainIngredient().getFlour().getGrinding(), GrindingFlour.FINE);
         assertEquals(buns.get(2).getMainIngredient().getFlour().getGrinding(), GrindingFlour.MEDIUM);
 
+        WheatBun wheatBun = (WheatBun) buns.get(1);
+        wheatBun.setLocalTime(LocalTime.of(15, 5));
         buns.forEach(Bun::setKindDough);
 
         assertEquals(buns.get(0).getMainIngredient().getKindDough(), KindDough.SHORTCRUST_PASTRY);

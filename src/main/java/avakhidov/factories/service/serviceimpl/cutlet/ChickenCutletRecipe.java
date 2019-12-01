@@ -18,7 +18,7 @@ import java.time.LocalTime;
 public class ChickenCutletRecipe implements Recipe<Cutlet<ChickenMeat>> {
 
     @Override
-    public Cutlet<ChickenMeat> cooked(int temperature, LocalTime time, double weight) {
+    public Cutlet<ChickenMeat> cooked(double weight) {
 
         ChickenCutlet chickenCutlet = new ChickenCutlet(new ChickenMeat(FatMeat.DIETARY, new Chicken()), true, weight);
         chickenCutlet.setFinished(Finished.RAW);
@@ -27,8 +27,6 @@ public class ChickenCutletRecipe implements Recipe<Cutlet<ChickenMeat>> {
                 ParameterDoughEnum.BUCKWHEAT_FLOUR_MEDIUM
                 , true
                 , new Sesame()
-                , temperature
-                , time
                 , weight * 0.75);
 
         return chickenCutlet;

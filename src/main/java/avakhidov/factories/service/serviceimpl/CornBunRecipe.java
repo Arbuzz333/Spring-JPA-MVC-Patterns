@@ -14,9 +14,9 @@ import java.time.LocalTime;
 public class CornBunRecipe implements Recipe<Bun> {
 
     @Override
-    public Bun cooked(int temperature, LocalTime time, double weight) {
+    public Bun cooked(double weight) {
         ParameterPrepareDough parameterPrepareDough =
-                ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough(temperature, time);
+                ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough();
 
             return new CornBun(parameterPrepareDough, true, weight);
     }

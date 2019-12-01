@@ -18,15 +18,13 @@ import java.time.LocalTime;
 public class PorkCutletRecipe implements Recipe<Cutlet<PorkMeat>> {
 
     @Override
-    public Cutlet<PorkMeat> cooked(int temperature, LocalTime time, double weight) {
+    public Cutlet<PorkMeat> cooked(double weight) {
 
         PorkCutlet porkCutlet = new PorkCutlet(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()), true, weight);
         porkCutlet.setFinished(Finished.RAW);
 
         porkCutlet.createSesameBun(ParameterDoughEnum.CORN_FLOUR_COARSE
                 , true, new Sesame()
-                , temperature
-                , time
                 , weight * 0.75);
 
         return porkCutlet;

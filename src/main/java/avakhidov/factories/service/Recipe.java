@@ -1,9 +1,7 @@
 package avakhidov.factories.service;
 
 
-import java.time.LocalTime;
-
 public interface Recipe<T> {
 
-    T cooked(int temperature, LocalTime time, double weight);
+    T cooked(double weight);
 }

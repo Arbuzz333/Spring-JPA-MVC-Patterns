@@ -49,7 +49,7 @@ public class BakeryConditionBunTest {
 
         Oven<Bun> oven = PreheatedOvenBunSingleton.getInstance();
         OvenWorks<Bun> ovenWorks = new OvenWorksImpl<>(oven,
-                buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40), 0.115));
+                buckwheatBunRecipe.cooked(0.115));
 
         Market<Bun> market = new BunShop(30);
 
@@ -73,7 +73,7 @@ public class BakeryConditionBunTest {
 
         Oven<Bun> ovenHold = new HoldOven<>();
         OvenWorks<Bun> ovenWorksHold = new OvenWorksImpl<>(ovenHold,
-                wheatBunRecipe.cooked(175, LocalTime.of(0, 35), 0.15));
+                wheatBunRecipe.cooked( 0.15));
         bakeryCondition.updateOven(ovenWorksHold);
         bakeryCondition.updateMarket(market);
         bakeryCondition.updateStorageBakery(storageBakery.setWeight(new BigDecimal(425)));

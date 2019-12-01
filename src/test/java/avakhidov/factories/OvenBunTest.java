@@ -32,7 +32,7 @@ public class OvenBunTest {
 
         Oven<Bun> oven = new PreheatedOven<>();
         OvenWorksImpl<Bun> ovenWorksImpl = new OvenWorksImpl<>(oven,
-                wheatBunRecipe.cooked(180, LocalTime.of(0, 40), 95));
+                wheatBunRecipe.cooked(0.95));
 
         Bun bun = ovenWorksImpl.toBake();
 
@@ -46,7 +46,7 @@ public class OvenBunTest {
 
         Oven<Bun> oven = HoldOvenBunSingleton.getInstance();
         OvenWorksImpl<Bun> ovenWorksImpl = new OvenWorksImpl<>(oven,
-                buckwheatBunRecipe.cooked(180, LocalTime.of(0, 40), 115.0));
+                buckwheatBunRecipe.cooked(0.115));
 
         Bun bun = ovenWorksImpl.toBake();
 
