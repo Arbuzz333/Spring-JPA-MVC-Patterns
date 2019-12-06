@@ -8,7 +8,6 @@ import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
-import java.time.LocalTime;
 
 public abstract class Cutlet<T extends Meat> extends Product<T> {
 
@@ -27,10 +26,6 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
 
     private T getMeate() {
         return super.getMainIngredient();
-    }
-
-    public void setRecipeReady(boolean recipeReady) {
-        this.recipeReady = recipeReady;
     }
 
     public boolean isRecipeReady() {

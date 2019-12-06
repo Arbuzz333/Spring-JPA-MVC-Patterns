@@ -46,4 +46,32 @@ public class Product<T> {
         return this;
     }
 
+    public static class Builder<T> {
+
+        protected T mainIngredient;
+
+        protected double weight;
+
+        protected Finished finished;
+
+        public Builder<T> withMainIngredient(T mainIngredient) {
+            this.mainIngredient = mainIngredient;
+            return this;
+        }
+
+        public Builder<T> withWeight(double weight) {
+            this.weight = weight;
+            return this;
+        }
+
+        public Builder<T> withFinished(Finished finished) {
+            this.finished = finished;
+            return this;
+        }
+
+        public Product<T> build() {
+            return new Product<>(mainIngredient, weight, finished);
+        }
+    }
+
 }
