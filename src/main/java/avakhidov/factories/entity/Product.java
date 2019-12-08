@@ -28,6 +28,10 @@ public class Product<T> {
         return weight;
     }
 
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
     public T getMainIngredient() {
         return mainIngredient;
     }
@@ -46,7 +50,7 @@ public class Product<T> {
         return this;
     }
 
-    public static class Builder<T> {
+    public class BuilderProduct<P extends Product<T>, R extends BuilderProduct<? extends P, ?>> extends BuilderBase<P, R> {
 
         protected T mainIngredient;
 
@@ -54,24 +58,37 @@ public class Product<T> {
 
         protected Finished finished;
 
-        public Builder<T> withMainIngredient(T mainIngredient) {
-            this.mainIngredient = mainIngredient;
-            return this;
+        protected BuilderProduct(P child) {
+            super(child);
         }
 
-        public Builder<T> withWeight(double weight) {
-            this.weight = weight;
-            return this;
+        public R withMainIngredient(T mainIngredient) {
+            getNested().setMainIngredient(mainIngredient);
+            return self();
         }
 
-        public Builder<T> withFinished(Finished finished) {
-            this.finished = finished;
-            return this;
+        public R withWeight(double weight) {
+            getNested().setWeight(weight);
+            return self();
         }
 
-        public Product<T> build() {
-            return new Product<>(mainIngredient, weight, finished);
+        public R withFinished(Finished finished) {
+            getNested().setFinished(finished);
+            return self();
         }
+
+    }
+
+    private class FinalBuilderProduct extends BuilderProduct<Product<T>, FinalBuilderProduct> {
+
+        private FinalBuilderProduct() {
+            super(new Product<>());
+            injectReturnBuilder(this);
+        }
+    }
+
+    public BuilderProduct<? extends Product<T>, ?> builder() {
+        return new FinalBuilderProduct();
     }
 
 }

@@ -20,16 +20,24 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
         this.recipeReady = recipeReady;
     }
 
+    protected Cutlet() {
+
+    }
+
     public void setMeat(T meat) {
         super.setMainIngredient(meat);
     }
 
-    private T getMeate() {
+    private T getMeat() {
         return super.getMainIngredient();
     }
 
     public boolean isRecipeReady() {
         return recipeReady;
+    }
+
+    public void setRecipeReady(boolean recipeReady) {
+        this.recipeReady = recipeReady;
     }
 
     public SesameBun getSesameBun() {
@@ -69,7 +77,7 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
         @Override
         public void setKindDough() {
             super.getMainIngredient().setKindDough(
-            DoughUtil.setParameterKindDoughFromMeat(getMeate()));
+            DoughUtil.setParameterKindDoughFromMeat(getMeat()));
         }
     }
 
