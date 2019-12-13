@@ -25,5 +25,6 @@ gradle/
 /nbdist/
 /.nb-gradle/
 
+*.log
 gradlew
 gradlew.bat

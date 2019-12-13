@@ -8,6 +8,8 @@ public enum FatMeat {
     DIETARY(0.0f, 10.9f);
 
     FatMeat(float min, float max) {
+        this.min = min;
+        this.max = max;
     }
 
     private float min;

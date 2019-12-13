@@ -1,6 +1,8 @@
 package avakhidov.factories;
 
 
+import avakhidov.factories.entity.cutlet.BuilderPorkCutlet2;
+import avakhidov.factories.entity.cutlet.FinalBuilderPorkCutlet2;
 import avakhidov.factories.entity.cutlet.PorkCutlet;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.livestock.Pig;
@@ -22,8 +24,8 @@ public class PorkCutletBuilderTest {
 
     @Test
     public void buildPorkCutletTest() {
-        PorkCutlet porkCutlet = new PorkCutlet();
-                porkCutlet.builder()
+//        PorkCutlet.BuilderPorkCutlet
+        PorkCutlet porkCutlet = PorkCutlet.builderCutlet()
                 .withMainIngredient(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()))
                 .withWeight(0.12)
                 .withFinished(Finished.RAW)
@@ -31,10 +33,25 @@ public class PorkCutletBuilderTest {
                 .withSesameBun(ParameterDoughEnum.CORN_FLOUR_COARSE, new Sesame(), 0.075)
                 .build();
 
+//        porkCutlet.getSesameBun().setKindDough();
+
+//        assertEquals(porkCutlet.getSesameBun().getMainIngredient().getKindDough(), KindDough.SHORTCRUST_PASTRY);
+        assertEquals(porkCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUMFAT);
+    }
+
+    @Test
+    public void buildPorkCutletTest2() {
+        PorkCutlet porkCutlet = PorkCutlet.builderCutlet2()
+                .withRecipeReady(true)
+                .withMainIngredient(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()))
+                .withFinished(Finished.RAW)
+                .withWeight(0.135)
+                .withSesameBun(ParameterDoughEnum.CORN_FLOUR_COARSE, new Sesame())
+                .build();
+
         porkCutlet.getSesameBun().setKindDough();
 
-        assertEquals(porkCutlet.getSesameBun().getMainIngredient().getKindDough(), KindDough.SHORTCRUST_PASTRY);
-
-
+        assertEquals(porkCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUMFAT);
+        assertEquals(porkCutlet.getSesameBun().getFinished(), Finished.RAW);
     }
 }

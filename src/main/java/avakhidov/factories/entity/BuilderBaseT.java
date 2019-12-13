@@ -1,12 +1,12 @@
 package avakhidov.factories.entity;
 
 
-public class BuilderBase<P, R, T>  {
+public class BuilderBaseT<P, R, T>  {
 
     private P nested;
     private R returnBuilder;
 
-    protected BuilderBase(P child) {
+    protected BuilderBaseT(P child) {
         nested = child;
     }
 

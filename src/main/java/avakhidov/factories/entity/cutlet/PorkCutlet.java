@@ -14,7 +14,8 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         super();
     }
 
-    public class BuilderPorkCutlet<P extends PorkCutlet, R extends BuilderPorkCutlet<? extends P, ?>> extends BuilderProduct<P, R> {
+    public static class BuilderPorkCutlet<P extends PorkCutlet, R extends BuilderPorkCutlet<? extends P, ?>>
+            extends BuilderProduct<P, R, PorkMeat> {
 
         boolean recipeReady = false;
 
@@ -29,13 +30,14 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         }
 
         public R withSesameBun(BuildParameterPrepareDough prepareDough, Sesame sesame, double weightBun) {
-            createSesameBun(prepareDough, recipeReady, sesame, weightBun);
+            SesameBun sesameBun = createSesameBun(prepareDough, recipeReady, sesame, weightBun);
+            getNested().setSesameBun(sesameBun);
             return self();
         }
 
     }
 
-    private class FinalBuilderPorkCutlet extends BuilderPorkCutlet<PorkCutlet, FinalBuilderPorkCutlet> {
+    private static class FinalBuilderPorkCutlet extends BuilderPorkCutlet<PorkCutlet, FinalBuilderPorkCutlet> {
 
         private FinalBuilderPorkCutlet() {
             super(new PorkCutlet());
@@ -43,7 +45,11 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         }
     }
 
-    public BuilderPorkCutlet<? extends PorkCutlet, ?> builder() {
+    public static BuilderPorkCutlet<? extends PorkCutlet, ?> builderCutlet() {
         return new FinalBuilderPorkCutlet();
+    }
+
+    public static BuilderPorkCutlet2<? extends PorkCutlet, ?> builderCutlet2() {
+        return new FinalBuilderPorkCutlet2();
     }
 }

@@ -52,6 +52,10 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
         return this.sesameBun.getMainIngredient();
     }
 
+    void setSesameBun(SesameBun sesameBun) {
+        this.sesameBun = sesameBun;
+    }
+
     public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
                                      double weight) {
         this.sesameBun = new SesameBun(parameterDough, recipeReady, sesame, weight);

@@ -9,6 +9,9 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
 
+    Bun() {
+    }
+
     public Bun(ParameterPrepareDough<? extends Flour> prepareDough, boolean recipeReady, double weight) {
         super(prepareDough, weight);
         this.recipeReady = recipeReady;

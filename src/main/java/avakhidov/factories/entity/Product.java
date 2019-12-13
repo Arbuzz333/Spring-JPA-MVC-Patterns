@@ -1,5 +1,7 @@
 package avakhidov.factories.entity;
 
+import avakhidov.factories.entity.meat.Meat;
+import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.enums.Finished;
 
 public class Product<T> {
@@ -50,13 +52,7 @@ public class Product<T> {
         return this;
     }
 
-    public class BuilderProduct<P extends Product<T>, R extends BuilderProduct<? extends P, ?>> extends BuilderBase<P, R> {
-
-        protected T mainIngredient;
-
-        protected double weight;
-
-        protected Finished finished;
+    public static class BuilderProduct<P extends Product<T>, R extends BuilderProduct<? extends P, ?, T>, T> extends BuilderBase<P, R, T> {
 
         protected BuilderProduct(P child) {
             super(child);
@@ -79,7 +75,7 @@ public class Product<T> {
 
     }
 
-    private class FinalBuilderProduct extends BuilderProduct<Product<T>, FinalBuilderProduct> {
+    private static class FinalBuilderProduct<T> extends BuilderProduct<Product<T>, FinalBuilderProduct<T>, T> {
 
         private FinalBuilderProduct() {
             super(new Product<>());
@@ -87,8 +83,12 @@ public class Product<T> {
         }
     }
 
-    public BuilderProduct<? extends Product<T>, ?> builder() {
-        return new FinalBuilderProduct();
+    public static BuilderProduct<? extends Product, ?, ?> builder() {
+        return new FinalBuilderProduct<>();
+    }
+
+    public BuilderProduct2<? extends Product<T>, ?, T> builder2() {
+        return new FinalBuilderProduct2<>();
     }
 
 }
