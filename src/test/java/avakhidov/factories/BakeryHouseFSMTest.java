@@ -24,7 +24,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
 
 import static org.junit.Assert.assertEquals;
 
@@ -43,7 +42,7 @@ public class BakeryHouseFSMTest {
 
         Oven<Bun> oven = new PreheatedOven<>();
         OvenWorks<Bun> ovenWorks = new OvenWorksImpl<>(oven,
-                cornBunRecipe.cooked(175, LocalTime.of(0, 35), 0.15));
+                cornBunRecipe.cooked(0.15));
         Market<Bun> market = new BunShop(7);
         StorageBakery<Flour> storageBakery = new StorageBakeryFlour(
                 new BigDecimal(525), new BuckwheatFlour(GrindingFlour.MEDIUM));

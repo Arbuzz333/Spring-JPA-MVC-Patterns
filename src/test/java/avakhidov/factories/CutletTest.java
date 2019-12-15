@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class CutletTest {
 
     @Test
     public void cutletTest() {
-        final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(185, LocalTime.of(0, 55), 100);
+        final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(0.100);
 
         final Cutlet chickenCutlet = new ChickenCutlet(
                 new ChickenMeat(FatMeat.DIETARY, new Chicken())
@@ -61,8 +60,6 @@ public class CutletTest {
         Cutlet.SesameBun sesameBun = porkCutlet.createSesameBun(ParameterDoughEnum.WHEAT_FLOUR_FINE
                 , true
                 , new Sesame()
-                , 180
-                , LocalTime.of(9, 30)
                 , 80.0);
 
         sesameBun.setKindDough();
@@ -80,7 +77,7 @@ public class CutletTest {
                 new MuttonMeat(meatService.getLessFatInMeat(porkCutlet.getMainIngredient().getFatMeat()), new Sheep())
                 , true
                 , 110);
-        final Cutlet<? extends Meat> vealCutlet = vealCutletRecipe.cooked(175, LocalTime.of(0, 40), 90);
+        final Cutlet<? extends Meat> vealCutlet = vealCutletRecipe.cooked(90);
 
         cutlets.add(porkCutletFat);
         cutlets.add(muttonCutlet);
@@ -97,8 +94,8 @@ public class CutletTest {
     @Test
     public void cutletServiceTest() {
 
-        final Cutlet<VealMeat> vealCutlet = vealCutletRecipe.cooked(175, LocalTime.of(0, 40), 90);
-        final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(185, LocalTime.of(0, 55), 100);
+        final Cutlet<VealMeat> vealCutlet = vealCutletRecipe.cooked(0.90);
+        final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(0.100);
 
         Cutlet cutlet = cutletService.getMoreFatCutlet(vealCutlet, porkCutlet);
 

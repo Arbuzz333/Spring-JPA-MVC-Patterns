@@ -31,4 +31,14 @@ public abstract class Flour extends Ingredient {
     public void setGrinding(GrindingFlour grinding) {
         this.grinding = grinding;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Flour)) return false;
+        Flour flour = (Flour) o;
+        return getKind() == flour.getKind() &&
+                getGrinding() == flour.getGrinding();
+    }
+
 }

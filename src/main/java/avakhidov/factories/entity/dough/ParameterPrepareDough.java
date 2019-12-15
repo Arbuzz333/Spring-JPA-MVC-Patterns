@@ -36,4 +36,16 @@ public class ParameterPrepareDough<T extends Flour> {
     public LocalTime getTime() {
         return time;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ParameterPrepareDough)) return false;
+        ParameterPrepareDough<?> that = (ParameterPrepareDough<?>) o;
+        return temperature == that.temperature &&
+                getTime().equals(that.getTime()) &&
+                getFlour().equals(that.getFlour()) &&
+                getKindDough() == that.getKindDough();
+    }
+
 }

@@ -1,6 +1,14 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.1.RELEASE")
+    }
+}
+
 plugins {
     id 'java'
-//    id 'war'
     id 'idea'
 }
 
@@ -8,6 +16,7 @@ group 'avakhidov'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.9
+targetCompatibility = 1.9
 
 repositories {
     mavenCentral()

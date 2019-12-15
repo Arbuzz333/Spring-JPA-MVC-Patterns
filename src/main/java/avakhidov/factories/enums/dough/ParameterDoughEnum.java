@@ -13,19 +13,28 @@ import java.time.LocalTime;
 public enum ParameterDoughEnum implements BuildParameterPrepareDough {
 
     BUCKWHEAT_FLOUR_MEDIUM {
-        public ParameterPrepareDough toKneadTheDough(int temperature, LocalTime time) {
-            return new ParameterPrepareDough<>(new BuckwheatFlour(GrindingFlour.MEDIUM), temperature, time);
+        public ParameterPrepareDough toKneadTheDough() {
+            return new ParameterPrepareDough<>(new BuckwheatFlour(GrindingFlour.MEDIUM), temperatureBuckwheatDough, timeBuckwheatDough);
         }
     },
     CORN_FLOUR_COARSE {
-        public ParameterPrepareDough toKneadTheDough(int temperature, LocalTime time) {
-            return new ParameterPrepareDough<>(new CornFlour(GrindingFlour.COARSE), temperature, time);
+        public ParameterPrepareDough toKneadTheDough() {
+            return new ParameterPrepareDough<>(new CornFlour(GrindingFlour.COARSE), temperatureCornDough, timeCornDough);
         }
     },
     WHEAT_FLOUR_FINE {
-        public ParameterPrepareDough toKneadTheDough(int temperature, LocalTime time) {
-            return new ParameterPrepareDough<>(new WheatFlour(GrindingFlour.FINE), temperature, time);
+        public ParameterPrepareDough toKneadTheDough() {
+            return new ParameterPrepareDough<>(new WheatFlour(GrindingFlour.FINE), temperatureWheatDough, timeWheat);
         }
-    }
+    };
+
+    private static int temperatureBuckwheatDough = 30;
+    private static LocalTime timeBuckwheatDough = LocalTime.of(1, 0);
+
+    private static int temperatureCornDough = 28;
+    private static LocalTime timeCornDough = LocalTime.of(0, 40);
+
+    private static int temperatureWheatDough = 32;
+    private static LocalTime timeWheat = LocalTime.of(2, 30);
 
 }

@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalTime;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,7 +40,7 @@ public class OvenToGrillTest {
     public void toBakeOnGrillTest() {
 
         Grill grill = new GrillGas(new Gas(new Energy.Calorific(Energy.StateOfAggregation.GASEOUS.getCalorificValue())));
-        Cutlet<VealMeat> vealMeatCutlet = vealCutletRecipe.cooked(45, LocalTime.of(0, 55), 0.125);
+        Cutlet<VealMeat> vealMeatCutlet = vealCutletRecipe.cooked(0.125);
         assertEquals(vealMeatCutlet.getFinished(), Finished.RAW);
 
         ovenToGrill.setGrill(grill);
@@ -52,8 +51,8 @@ public class OvenToGrillTest {
     @Test
     public void barbecueTest() {
         Grill grill = new GrillCharCoal(new CharCoal(new Energy.Calorific(Energy.StateOfAggregation.SOLID.getCalorificValue())));
-        Cutlet<PorkMeat> porkMeatCutlet = porkCutletRecipe.cooked(39, LocalTime.of(1, 05), 0.14);
-        Cutlet<PorkMeat> porkMeatCutletClone = porkCutletRecipe.cooked(39, LocalTime.of(1, 05), 0.14);
+        Cutlet<PorkMeat> porkMeatCutlet = porkCutletRecipe.cooked(0.14);
+        Cutlet<PorkMeat> porkMeatCutletClone = porkCutletRecipe.cooked( 0.14);
         assertEquals(porkMeatCutlet.getFinished(), Finished.RAW);
         assertEquals(porkMeatCutletClone.getFinished(), Finished.RAW);
 

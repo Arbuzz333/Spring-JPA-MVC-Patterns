@@ -7,15 +7,14 @@ import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.service.Recipe;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 
 @Service
 public class WheatBunRecipe implements Recipe<Bun> {
 
     @Override
-    public Bun cooked(int temperature, LocalTime time, double weight) {
+    public Bun cooked(double weight) {
         ParameterPrepareDough prepareDough =
-                ParameterDoughEnum.WHEAT_FLOUR_FINE.toKneadTheDough(temperature, time);
+                ParameterDoughEnum.WHEAT_FLOUR_FINE.toKneadTheDough();
 
         return new WheatBun(prepareDough, true, weight);
     }
