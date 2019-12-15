@@ -9,7 +9,7 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
 
-    Bun() {
+    protected Bun() {
     }
 
     public Bun(ParameterPrepareDough<? extends Flour> prepareDough, boolean recipeReady, double weight) {
@@ -25,6 +25,17 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
 
     public void setRecipeReady(boolean recipeReady) {
         this.recipeReady = recipeReady;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bun)) return false;
+        Bun bun = (Bun) o;
+        return getRecipeReady() == bun.getRecipeReady()
+                && getWeight() == bun.getWeight()
+                &&  getMainIngredient().equals(bun.getMainIngredient())
+                && getFinished().equals(bun.getFinished());
     }
 
 }

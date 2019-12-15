@@ -25,7 +25,7 @@ public class CornBun extends Bun {
     public static class BuilderCornBun<P extends CornBun, R extends BuilderCornBun<? extends P, ?>>
             extends BuilderProduct<P, R, ParameterPrepareDough> {
 
-        protected BuilderCornBun(P child) {
+        BuilderCornBun(P child) {
             super(child);
         }
 
@@ -33,11 +33,6 @@ public class CornBun extends Bun {
             getNested().setRecipeReady(recipeReady);
             return self();
         }
-
-//        public R withParameterDougt(ParameterPrepareDough<CornFlour> parameterDough) {
-//            getNested().setMainIngredient(parameterDough);
-//            return self();
-//        }
 
     }
 
@@ -47,5 +42,9 @@ public class CornBun extends Bun {
             super(new CornBun());
             injectReturnBuilder(this);
         }
+    }
+
+    public static BuilderCornBun<? extends CornBun, ?> builderCornBun() {
+        return new FinalBuilderCornBun();
     }
 }

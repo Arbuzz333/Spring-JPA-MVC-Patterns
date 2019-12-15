@@ -6,6 +6,7 @@ import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.dough.DoughUtil;
+import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
 
@@ -15,17 +16,13 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
 
     private SesameBun sesameBun;
 
-    public Cutlet(T meat, boolean recipeReady, double weight) {
+    protected Cutlet(T meat, boolean recipeReady, double weight) {
         super(meat, weight);
         this.recipeReady = recipeReady;
     }
 
     protected Cutlet() {
 
-    }
-
-    public void setMeat(T meat) {
-        super.setMainIngredient(meat);
     }
 
     private T getMeat() {
@@ -52,8 +49,9 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
         return this.sesameBun.getMainIngredient();
     }
 
-    void setSesameBun(SesameBun sesameBun) {
-        this.sesameBun = sesameBun;
+    private SesameBun setNewSesameBun() {
+        this.sesameBun = new SesameBun();
+        return this.sesameBun;
     }
 
     public SesameBun createSesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
@@ -69,6 +67,10 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
         double weight;
         BuildParameterPrepareDough parameterDough;
 
+        SesameBun() {
+            super();
+        }
+
         private SesameBun(BuildParameterPrepareDough parameterDough, boolean recipeReady, Sesame sesame,
                           double weight) {
             super(parameterDough.toKneadTheDough(), recipeReady, weight);
@@ -83,6 +85,37 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
             super.getMainIngredient().setKindDough(
             DoughUtil.setParameterKindDoughFromMeat(getMeat()));
         }
+    }
+
+    public class BuilderSesameBun<P extends SesameBun, R extends BuilderSesameBun<? extends P, ?>>
+            extends BuilderProduct<P, R, ParameterPrepareDough> {
+
+        BuilderSesameBun(P child) {
+            super(child);
+        }
+
+        public R withRecipeReady(boolean recipeReady) {
+            getNested().setRecipeReady(recipeReady);
+            return self();
+        }
+
+        public R withKindDough(KindDough kindDough) {
+            getNested().getMainIngredient().setKindDough(kindDough);
+            return self();
+        }
+
+    }
+
+    private class FinalBuilderSesameBun extends BuilderSesameBun<SesameBun, FinalBuilderSesameBun> {
+
+        private FinalBuilderSesameBun() {
+            super(setNewSesameBun());
+            injectReturnBuilder(this);
+        }
+    }
+
+    public BuilderSesameBun<? extends SesameBun, ?> builderSesameBun() {
+       return new FinalBuilderSesameBun();
     }
 
 }

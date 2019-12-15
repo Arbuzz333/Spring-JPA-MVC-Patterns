@@ -4,6 +4,7 @@ import avakhidov.factories.entity.BuilderProduct2;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.enums.Finished;
+import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
 public class BuilderPorkCutlet2<P extends PorkCutlet, R extends BuilderPorkCutlet2<? extends P, ?>>
@@ -24,6 +25,11 @@ public class BuilderPorkCutlet2<P extends PorkCutlet, R extends BuilderPorkCutle
     public R withSesameBun(BuildParameterPrepareDough prepareDough, Sesame sesame) {
             getNested().createSesameBun(prepareDough, recipeReady, sesame, getNested().getWeight() * 0.5);
             getNested().getSesameBun().setFinished(Finished.RAW);
+        return self();
+    }
+
+    public R withKindDough(KindDough kindDough) {
+        getNested().getSesameBun().getMainIngredient().setKindDough(kindDough);
         return self();
     }
 

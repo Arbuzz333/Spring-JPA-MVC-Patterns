@@ -1,8 +1,6 @@
 package avakhidov.factories.entity.cutlet;
 
-import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.PorkMeat;
-import avakhidov.factories.service.BuildParameterPrepareDough;
 
 public class PorkCutlet extends Cutlet<PorkMeat> {
 
@@ -10,7 +8,7 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         super(meat, recipeReady, weight);
     }
 
-    public PorkCutlet() {
+    PorkCutlet() {
         super();
     }
 
@@ -29,12 +27,6 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
             return self();
         }
 
-        public R withSesameBun(BuildParameterPrepareDough prepareDough, Sesame sesame, double weightBun) {
-            SesameBun sesameBun = createSesameBun(prepareDough, recipeReady, sesame, weightBun);
-            getNested().setSesameBun(sesameBun);
-            return self();
-        }
-
     }
 
     private static class FinalBuilderPorkCutlet extends BuilderPorkCutlet<PorkCutlet, FinalBuilderPorkCutlet> {
@@ -45,11 +37,11 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         }
     }
 
-    public static BuilderPorkCutlet<? extends PorkCutlet, ?> builderCutlet() {
+    public static BuilderPorkCutlet<? extends PorkCutlet, ?> builderPorkCutlet() {
         return new FinalBuilderPorkCutlet();
     }
 
-    public static BuilderPorkCutlet2<? extends PorkCutlet, ?> builderCutlet2() {
+    public static BuilderPorkCutlet2<? extends PorkCutlet, ?> builderPorkCutlet2() {
         return new FinalBuilderPorkCutlet2();
     }
 }

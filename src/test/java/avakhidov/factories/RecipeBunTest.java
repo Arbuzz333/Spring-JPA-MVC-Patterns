@@ -1,10 +1,13 @@
 package avakhidov.factories;
 
 import avakhidov.factories.entity.bun.Bun;
+import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
+import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.dough.KindDough;
+import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.service.serviceimpl.BuckwheatBunRecipe;
 import avakhidov.factories.service.serviceimpl.CornBunRecipe;
 import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
@@ -66,5 +69,19 @@ public class RecipeBunTest {
             logger.info(r.getMainIngredient().getFlour().getGrinding());
         });
 
+    }
+
+    @Test
+    public void buildAndCookedCornBunTest() {
+        Bun cornBun = cornBunRecipe.cooked(0.75);
+
+        CornBun cornBunBuild = CornBun.builderCornBun()
+                .withRecipeReady(true)
+                .withFinished(Finished.RAW)
+                .withMainIngredient(ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough())
+                .withWeight(0.75)
+                .build();
+
+        assertEquals(cornBun, cornBunBuild);
     }
 }

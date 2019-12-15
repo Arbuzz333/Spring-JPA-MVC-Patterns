@@ -1,8 +1,6 @@
 package avakhidov.factories;
 
 
-import avakhidov.factories.entity.cutlet.BuilderPorkCutlet2;
-import avakhidov.factories.entity.cutlet.FinalBuilderPorkCutlet2;
 import avakhidov.factories.entity.cutlet.PorkCutlet;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.livestock.Pig;
@@ -24,29 +22,34 @@ public class PorkCutletBuilderTest {
 
     @Test
     public void buildPorkCutletTest() {
-//        PorkCutlet.BuilderPorkCutlet
-        PorkCutlet porkCutlet = PorkCutlet.builderCutlet()
+        PorkCutlet porkCutlet = PorkCutlet.builderPorkCutlet()
                 .withMainIngredient(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()))
                 .withWeight(0.12)
                 .withFinished(Finished.RAW)
                 .withRecipeReady(true)
-                .withSesameBun(ParameterDoughEnum.CORN_FLOUR_COARSE, new Sesame(), 0.075)
                 .build();
 
-//        porkCutlet.getSesameBun().setKindDough();
+        porkCutlet.builderSesameBun()
+                .withRecipeReady(true)
+                .withFinished(Finished.RAW)
+                .withMainIngredient(ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough())
+                .withKindDough(KindDough.SHORTCRUST_PASTRY)
+                .withWeight(0.075)
+                .build();
 
-//        assertEquals(porkCutlet.getSesameBun().getMainIngredient().getKindDough(), KindDough.SHORTCRUST_PASTRY);
+        assertEquals(porkCutlet.getSesameBun().getMainIngredient().getKindDough(), KindDough.SHORTCRUST_PASTRY);
         assertEquals(porkCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUMFAT);
     }
 
     @Test
     public void buildPorkCutletTest2() {
-        PorkCutlet porkCutlet = PorkCutlet.builderCutlet2()
+        PorkCutlet porkCutlet = PorkCutlet.builderPorkCutlet2()
                 .withRecipeReady(true)
                 .withMainIngredient(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()))
                 .withFinished(Finished.RAW)
                 .withWeight(0.135)
                 .withSesameBun(ParameterDoughEnum.CORN_FLOUR_COARSE, new Sesame())
+                .withKindDough(KindDough.CHOUX_PASTRY)
                 .build();
 
         porkCutlet.getSesameBun().setKindDough();

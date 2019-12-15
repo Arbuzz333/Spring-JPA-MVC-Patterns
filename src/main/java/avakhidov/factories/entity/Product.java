@@ -1,7 +1,5 @@
 package avakhidov.factories.entity;
 
-import avakhidov.factories.entity.meat.Meat;
-import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.enums.Finished;
 
 public class Product<T> {
@@ -12,18 +10,12 @@ public class Product<T> {
 
     private Finished finished;
 
-    public Product(T mainIngredient, double weight) {
+    protected Product(T mainIngredient, double weight) {
         this.mainIngredient = mainIngredient;
         this.weight = weight;
     }
 
-    public Product(T mainIngredient, double weight, Finished finished) {
-        this.mainIngredient = mainIngredient;
-        this.weight = weight;
-        this.finished = finished;
-    }
-
-    public Product() {
+    protected Product() {
     }
 
     public double getWeight() {
@@ -42,7 +34,7 @@ public class Product<T> {
         return finished;
     }
 
-    protected Product<T> setMainIngredient(T mainIngredient) {
+    Product<T> setMainIngredient(T mainIngredient) {
         this.mainIngredient = mainIngredient;
         return this;
     }
