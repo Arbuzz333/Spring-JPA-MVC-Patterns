@@ -80,6 +80,10 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
             this.parameterDough = parameterDough;
         }
 
+        void setKindDough(KindDough kindDough) {
+            super.getMainIngredient().setKindDough(kindDough);
+        }
+
         @Override
         public void setKindDough() {
             super.getMainIngredient().setKindDough(

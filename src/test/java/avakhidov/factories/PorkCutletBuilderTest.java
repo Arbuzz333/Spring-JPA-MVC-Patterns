@@ -42,8 +42,8 @@ public class PorkCutletBuilderTest {
     }
 
     @Test
-    public void buildPorkCutletTest2() {
-        PorkCutlet porkCutlet = PorkCutlet.builderPorkCutlet2()
+    public void OuterBuildPorkCutletTest() {
+        PorkCutlet porkCutlet = PorkCutlet.outerBuilderPorkCutlet()
                 .withRecipeReady(true)
                 .withMainIngredient(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()))
                 .withFinished(Finished.RAW)
@@ -52,9 +52,11 @@ public class PorkCutletBuilderTest {
                 .withKindDough(KindDough.CHOUX_PASTRY)
                 .build();
 
-        porkCutlet.getSesameBun().setKindDough();
-
         assertEquals(porkCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUMFAT);
         assertEquals(porkCutlet.getSesameBun().getFinished(), Finished.RAW);
+        assertEquals(porkCutlet.getSesameBun().getMainIngredient().getKindDough(), KindDough.CHOUX_PASTRY);
+
+        porkCutlet.getSesameBun().setKindDough();
+        assertEquals(porkCutlet.getSesameBun().getMainIngredient().getKindDough(), KindDough.YEAST_DOUGH);
     }
 }

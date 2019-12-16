@@ -79,6 +79,7 @@ public class RecipeBunTest {
                 .withRecipeReady(true)
                 .withFinished(Finished.RAW)
                 .withMainIngredient(ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough())
+                .withKindDough(KindDough.PUFF_PASTRY)
                 .withWeight(0.75)
                 .build();
 

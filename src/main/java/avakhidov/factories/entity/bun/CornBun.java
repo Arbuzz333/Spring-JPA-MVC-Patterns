@@ -4,6 +4,7 @@ package avakhidov.factories.entity.bun;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.CornFlour;
 import avakhidov.factories.enums.dough.DoughUtil;
+import avakhidov.factories.enums.dough.KindDough;
 
 public class CornBun extends Bun {
 
@@ -31,6 +32,11 @@ public class CornBun extends Bun {
 
         public R withRecipeReady(boolean recipeReady) {
             getNested().setRecipeReady(recipeReady);
+            return self();
+        }
+
+        public R withKindDough(KindDough kindDough) {
+            getNested().getMainIngredient().setKindDough(kindDough);
             return self();
         }
 

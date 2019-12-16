@@ -79,8 +79,8 @@ public class Product<T> {
         return new FinalBuilderProduct<>();
     }
 
-    public BuilderProduct2<? extends Product<T>, ?, T> builder2() {
-        return new FinalBuilderProduct2<>();
+    public OuterBuilderProduct<? extends Product<T>, ?, T> outerBuilder() {
+        return new FinalOuterBuilderProduct<>();
     }
 
 }

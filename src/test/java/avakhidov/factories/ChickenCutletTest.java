@@ -33,7 +33,7 @@ public class ChickenCutletTest {
         Sesame sesameClone = clone.getSesame();
         Sesame sesame = chickenMeatCutlet.getSesame();
 
-        assertNotSame(sesameClone, sesame);
+        assertSame(sesameClone, sesame);
         assertNotSame(chickenMeatCutlet, clone);
         assertNotSame(chickenMeatCutlet.getParameterPrepareDoughBun(), clone.getParameterPrepareDoughBun());
         assertNotSame(chickenMeatCutlet.getSesameBun(), clone.getSesameBun());
