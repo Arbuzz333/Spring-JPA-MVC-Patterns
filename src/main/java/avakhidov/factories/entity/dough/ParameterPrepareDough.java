@@ -13,6 +13,7 @@ public class ParameterPrepareDough<T extends Flour> {
 
     private T flour;
 
+    /*Todo replace to Dough*/
     private KindDough kindDough;
 
     public ParameterPrepareDough(T flour, int temperature, LocalTime time) {

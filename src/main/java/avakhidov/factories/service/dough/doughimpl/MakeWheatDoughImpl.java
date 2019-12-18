@@ -8,7 +8,7 @@ import avakhidov.factories.service.dough.MakeDough;
 
 public class MakeWheatDoughImpl implements MakeDough<WheatFlour> {
     @Override
-    public Dough baseMakerDough(ParameterPrepareDough<WheatFlour> prepare) {
-        return new WheatDough();
+    public Dough baseMakerDough(ParameterPrepareDough<WheatFlour> prepare, double fat) {
+        return new WheatDough(prepare.getFlour(), prepare.getKindDough(), fat);
     }
 }

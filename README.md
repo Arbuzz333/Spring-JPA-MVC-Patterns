@@ -7,5 +7,5 @@
 * PreheatedBunOvenSingleton - Thread-safe Singleton class. The instance is lazily initialized.
 * HoldOvenBunSingleton - Double check locking Singleton.
 * OvenToGrill - adapter
-* BuilderPorkCutlet - inner extended builder
+* BuilderPorkCutlet and BuilderBuckwheatDough - inner extended builder
 * OuterBuilderPorkCutlet outer extended builder
