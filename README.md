@@ -9,3 +9,4 @@
 * OvenToGrill - adapter
 * BuilderPorkCutlet and BuilderBuckwheatDough - inner extended builder
 * OuterBuilderPorkCutlet outer extended builder
+* HyperMarket - Компоновщик
