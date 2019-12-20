@@ -29,6 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -111,6 +113,14 @@ public class HyperMarketTest {
         assertEquals(market2.getQuantity().intValue(), 5);
 
         assertEquals(hyperMarket.getQuantity().intValue(), 410);
+
+        GroceryStore<WheatBun> wheatBunGroceryStore =
+                new GroceryStore<>((WheatBun) wheatBunRecipe.cooked(0.05), 200);
+
+        List<Market> markets = hyperMarket.setMarket(wheatBunGroceryStore);
+        assertEquals(markets.size(), 7);
+        assertEquals(hyperMarket.getSuperMarkets().get(1).getMarketList().size(), 4);
+        assertEquals(hyperMarket.orderQuantity(), 3543);
     }
 }
 
