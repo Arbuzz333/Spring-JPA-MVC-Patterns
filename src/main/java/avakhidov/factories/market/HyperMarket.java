@@ -27,8 +27,11 @@ public class HyperMarket<T extends Product> implements Market<T>, BigMarket<T> {
     @Override
     public Map<Product, Integer> orderQuantities() {
         Map<Product, Integer> result = new HashMap<>();
-        superMarkets.forEach(market -> result.merge(market.getProduct(), market.orderQuantity(),
+        superMarkets.forEach(superMarket -> result.merge(superMarket.getProduct(), superMarket.getQuantity().intValue(),
                 Integer::sum));
+        superMarkets.forEach(superMarket -> superMarket.getMarketList()
+                .forEach(market -> result.merge(((Market) market).getProduct(), ((Market) market).getQuantity().intValue(), Integer::sum)));
+        result.merge(product, quantity.intValue(), Integer:: sum);
 
         return result;
     }

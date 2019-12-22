@@ -1,5 +1,6 @@
 package avakhidov.factories;
 
+import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.BuckwheatBun;
 import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
@@ -7,10 +8,12 @@ import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.cutlet.MuttonCutlet;
 import avakhidov.factories.entity.cutlet.VealCutlet;
+import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.livestock.Sheep;
 import avakhidov.factories.entity.meat.MuttonMeat;
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.Finished;
+import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.market.BunShop;
 import avakhidov.factories.market.GroceryStore;
@@ -30,8 +33,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -83,13 +89,13 @@ public class HyperMarketTest {
                 .build());
         superMarketCornBun.setQuantity(555);
 
-        BunShop wheatBunShop = new BunShop(25, wheatBunRecipe.cooked(0.09));
+        WheatBun wheatBun = (WheatBun) wheatBunRecipe.cooked(0.075);
+        BunShop wheatBunShop = new BunShop(25, wheatBun);
         GroceryStore<BuckwheatBun> buckwheatBunGroceryStore =
                 new GroceryStore<>((BuckwheatBun) buckwheatBunRecipe.cooked(0.11), 75);
         GroceryStore<CornBun> cornBunGroceryStore = new GroceryStore<>((CornBun) cornBunRecipe.cooked(0.085), 285);
         superMarketWheatBun.setMarket(wheatBunShop, buckwheatBunGroceryStore, cornBunGroceryStore);
 
-        WheatBun wheatBun = (WheatBun) wheatBunRecipe.cooked(0.075);
         superMarketWheatBun.setProduct(wheatBun);
         superMarketWheatBun.setQuantity(500);
 
@@ -121,6 +127,24 @@ public class HyperMarketTest {
         assertEquals(markets.size(), 7);
         assertEquals(hyperMarket.getSuperMarkets().get(1).getMarketList().size(), 4);
         assertEquals(hyperMarket.orderQuantity(), 3543);
+    }
+
+    @Test
+    public void orderQuantitiesTest() {
+        Map<Product, Integer> productIntegerMap = hyperMarket.orderQuantities();
+        assertTrue(productIntegerMap.containsKey(hyperMarket.getProduct()));
+
+        Product product = getKeyByValue(productIntegerMap, 525);
+        assertEquals(((ParameterPrepareDough) product.getMainIngredient()).getFlour().getKind(), KindFlour.WHEAT);
+    }
+
+    public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
+        for (Map.Entry<T, E> entry : map.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }
 
