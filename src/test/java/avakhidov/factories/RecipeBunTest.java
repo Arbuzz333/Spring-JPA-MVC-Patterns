@@ -30,7 +30,6 @@ public class RecipeBunTest {
 
     private static final Logger logger = Logger.getLogger(RecipeBunTest.class);
 
-
     @Autowired
     private CornBunRecipe cornBunRecipe;
 
