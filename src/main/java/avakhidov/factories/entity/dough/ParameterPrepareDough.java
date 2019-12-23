@@ -11,27 +11,41 @@ public class ParameterPrepareDough<T extends Flour> {
 
     private LocalTime time;
 
-    private T flour;
+    private T flourDough;
 
-    /*Todo replace to Dough*/
-    private KindDough kindDough;
+    private Dough<T> dough;
 
-    public ParameterPrepareDough(T flour, int temperature, LocalTime time) {
-        this.flour = flour;
+    public ParameterPrepareDough(T flourDough, KindDough kindDoughParameter,
+                                 int temperature, LocalTime time, double fatParameter) {
+        this.flourDough = flourDough;
         this.temperature = temperature;
         this.time = time;
+        this.dough = new Dough.BuilderDough<T>() {{
+            withFlour(flourDough);
+            withKindDough(kindDoughParameter);
+            withFat(fatParameter);
+        }}.buildDough();
     }
 
     public T getFlour() {
-        return flour;
+        return flourDough;
     }
 
     public void setKindDough(KindDough kindDough) {
-        this.kindDough = kindDough;
+        this.dough = new Dough<>(flourDough, kindDough, 0.0);
+    }
+
+    public void setKindDoughAndFat(KindDough kindDoughBuild, double fatBuild) {
+        Dough<T> dough = new Dough.BuilderDough<T>() {{
+            withFlour(flourDough);
+            withKindDough(kindDoughBuild);
+            withFat(fatBuild);
+        }}.buildDough();
+        this.dough = dough;
     }
 
     public KindDough getKindDough() {
-        return kindDough;
+        return dough.getKindDough();
     }
 
     public LocalTime getTime() {

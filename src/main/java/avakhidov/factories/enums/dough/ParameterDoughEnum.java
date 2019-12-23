@@ -14,27 +14,36 @@ public enum ParameterDoughEnum implements BuildParameterPrepareDough {
 
     BUCKWHEAT_FLOUR_MEDIUM {
         public ParameterPrepareDough toKneadTheDough() {
-            return new ParameterPrepareDough<>(new BuckwheatFlour(GrindingFlour.MEDIUM), temperatureBuckwheatDough, timeBuckwheatDough);
+            return new ParameterPrepareDough<>(
+                    new BuckwheatFlour(GrindingFlour.MEDIUM), KindDough.CHOUX_PASTRY,
+                    temperatureBuckwheatDough, timeBuckwheatDough, fatBuckwheat);
         }
     },
     CORN_FLOUR_COARSE {
         public ParameterPrepareDough toKneadTheDough() {
-            return new ParameterPrepareDough<>(new CornFlour(GrindingFlour.COARSE), temperatureCornDough, timeCornDough);
+            return new ParameterPrepareDough<>(
+                    new CornFlour(GrindingFlour.COARSE), KindDough.YEAST_DOUGH,
+                    temperatureCornDough, timeCornDough, fatCorn);
         }
     },
     WHEAT_FLOUR_FINE {
         public ParameterPrepareDough toKneadTheDough() {
-            return new ParameterPrepareDough<>(new WheatFlour(GrindingFlour.FINE), temperatureWheatDough, timeWheat);
+            return new ParameterPrepareDough<>(
+                    new WheatFlour(GrindingFlour.FINE), KindDough.SHORTCRUST_PASTRY,
+                    temperatureWheatDough, timeWheat, fatWheat);
         }
     };
 
     private static int temperatureBuckwheatDough = 30;
     private static LocalTime timeBuckwheatDough = LocalTime.of(1, 0);
+    private static double fatBuckwheat = 7.5;
 
     private static int temperatureCornDough = 28;
     private static LocalTime timeCornDough = LocalTime.of(0, 40);
+    private static double fatCorn = 5.2;
 
     private static int temperatureWheatDough = 32;
     private static LocalTime timeWheat = LocalTime.of(2, 30);
+    private static double fatWheat = 4.5;
 
 }

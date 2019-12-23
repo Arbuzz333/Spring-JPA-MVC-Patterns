@@ -18,7 +18,7 @@ public class CornBunRecipe implements Recipe<Bun> {
     public Bun cooked(double weight) {
         ParameterPrepareDough<CornFlour> parameterPrepareDough =
                 ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough();
-        parameterPrepareDough.setKindDough(KindDough.PUFF_PASTRY);
+        parameterPrepareDough.setKindDoughAndFat(KindDough.PUFF_PASTRY, 3.5);
 
         CornBun cornBun = new CornBun(parameterPrepareDough, true, weight);
         cornBun.setFinished(Finished.RAW);

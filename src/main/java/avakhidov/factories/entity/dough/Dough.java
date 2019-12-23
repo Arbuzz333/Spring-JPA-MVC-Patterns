@@ -47,8 +47,8 @@ public class Dough<T extends Flour> {
             this.fat = fat;
         }
 
-        public Dough buildDough() {
-            return new Dough(flour, kindDough, fat);
+        public Dough<T> buildDough() {
+            return new Dough<>(flour, kindDough, fat);
         }
 
     }
