@@ -3,6 +3,7 @@ package avakhidov.factories.market;
 import avakhidov.factories.entity.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Scope("prototype")
 public class HyperMarket<T extends Product> implements Market<T>, BigMarket<T> {
 
     private final Logger logger = LoggerFactory.getLogger(HyperMarket.class);
