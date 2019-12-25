@@ -8,4 +8,9 @@ public class WheatFlour extends Flour {
     public WheatFlour(GrindingFlour grinding) {
         super(KindFlour.WHEAT, grinding);
     }
+
+    @Override
+    public String getName() {
+        return KindFlour.WHEAT.getTitle();
+    }
 }

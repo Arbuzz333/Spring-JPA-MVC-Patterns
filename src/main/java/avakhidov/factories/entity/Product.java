@@ -2,6 +2,8 @@ package avakhidov.factories.entity;
 
 import avakhidov.factories.enums.Finished;
 
+import java.util.Objects;
+
 public class Product<T> {
 
     private T mainIngredient;
@@ -15,7 +17,7 @@ public class Product<T> {
         this.weight = weight;
     }
 
-    protected Product() {
+    public Product() {
     }
 
     public double getWeight() {
@@ -66,16 +68,15 @@ public class Product<T> {
         }
 
     }
-
     private static class FinalBuilderProduct<T> extends BuilderProduct<Product<T>, FinalBuilderProduct<T>, T> {
 
         private FinalBuilderProduct() {
             super(new Product<>());
             injectReturnBuilder(this);
         }
-    }
 
-    public static BuilderProduct<? extends Product, ?, ?> builder() {
+    }
+    public static BuilderProduct<? extends Product, ?, ?> builderProduct() {
         return new FinalBuilderProduct<>();
     }
 
@@ -83,4 +84,13 @@ public class Product<T> {
         return new FinalOuterBuilderProduct<>();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product<?> product = (Product<?>) o;
+        return Double.compare(product.getWeight(), getWeight()) == 0 &&
+                Objects.equals(getMainIngredient(), product.getMainIngredient()) &&
+                getFinished() == product.getFinished();
+    }
 }

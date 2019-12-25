@@ -11,6 +11,7 @@ public class ParameterPrepareDough<T extends Flour> {
 
     private LocalTime time;
 
+    /*TODO remove*/
     private T flourDough;
 
     private Dough<T> dough;

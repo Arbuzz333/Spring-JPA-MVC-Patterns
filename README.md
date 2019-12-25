@@ -11,3 +11,4 @@
 * OuterBuilderPorkCutlet outer extended builder
 * HyperMarket - Компоновщик
 * SupplementIngredientDecorator - Decorator
+* BunLiteFactory - Flyweight
