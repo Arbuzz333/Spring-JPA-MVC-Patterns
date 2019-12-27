@@ -18,7 +18,7 @@ import java.time.LocalTime;
 public class PorkCutletRecipe implements Recipe<Cutlet<PorkMeat>> {
 
     @Override
-    public Cutlet<PorkMeat> cooked(double weight) {
+    public PorkCutlet cooked(double weight) {
 
         PorkCutlet porkCutlet = new PorkCutlet(new PorkMeat(FatMeat.MEDIUMFAT, new Pig()), true, weight);
         porkCutlet.setFinished(Finished.RAW);
