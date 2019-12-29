@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Cook {
 
-    List<Product> createProductList(int count);
+    List<Product> createCutletWithBunList(int count);
 
 }

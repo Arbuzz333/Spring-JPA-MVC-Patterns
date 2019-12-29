@@ -1,6 +1,8 @@
 package avakhidov.factories.entity;
 
-public class FinalOuterBuilderProduct<T> extends OuterBuilderProduct<Product<T>, FinalOuterBuilderProduct<T>, T> {
+import avakhidov.factories.service.MainIngredient;
+
+public class FinalOuterBuilderProduct<T extends MainIngredient> extends OuterBuilderProduct<Product<T>, FinalOuterBuilderProduct<T>, T> {
 
     FinalOuterBuilderProduct() {
         super(new Product<>());

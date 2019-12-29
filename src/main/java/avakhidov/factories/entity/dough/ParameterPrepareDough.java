@@ -1,11 +1,15 @@
 package avakhidov.factories.entity.dough;
 
 import avakhidov.factories.entity.flour.Flour;
+import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.enums.dough.KindDough;
+import avakhidov.factories.service.MainIngredient;
 
 import java.time.LocalTime;
 
-public class ParameterPrepareDough<T extends Flour> {
+public class ParameterPrepareDough<T extends Flour> implements MainIngredient {
+
+    public static final MainIngredientEnum mainIngredientEnum = MainIngredientEnum.PARAMETER_PREPARE_DOUGH;
 
     private int temperature;
 
@@ -64,4 +68,8 @@ public class ParameterPrepareDough<T extends Flour> {
                 getKindDough() == that.getKindDough();
     }
 
+    @Override
+    public MainIngredientEnum getMainIngredient() {
+        return MainIngredientEnum.PARAMETER_PREPARE_DOUGH;
+    }
 }

@@ -24,7 +24,7 @@ public class Kitchen implements Cook {
     }
 
     @Override
-    public List<Product> createProductList(int count) {
+    public List<Product> createCutletWithBunList(int count) {
         List<Product> productList = new ArrayList<>();
         if (recipeListBun.isEmpty() || recipeListCutlet.isEmpty()) {
             return productList;
