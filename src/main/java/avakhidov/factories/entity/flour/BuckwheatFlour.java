@@ -8,4 +8,8 @@ public class BuckwheatFlour extends Flour {
     public BuckwheatFlour(GrindingFlour grinding) {
         super(KindFlour.BUCKWHEAT, grinding);
     }
+
+    public String getName() {
+        return KindFlour.BUCKWHEAT.getTitle();
+    }
 }

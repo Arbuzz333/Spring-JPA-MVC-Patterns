@@ -41,7 +41,7 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         return new FinalBuilderPorkCutlet();
     }
 
-    public static BuilderPorkCutlet2<? extends PorkCutlet, ?> builderPorkCutlet2() {
-        return new FinalBuilderPorkCutlet2();
+    public static OuterBuilderPorkCutlet<? extends PorkCutlet, ?> outerBuilderPorkCutlet() {
+        return new FinalOuterBuilderPorkCutlet();
     }
 }

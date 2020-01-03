@@ -1,10 +1,11 @@
 package avakhidov.factories.entity;
 
 import avakhidov.factories.enums.Finished;
+import avakhidov.factories.service.MainIngredient;
 
-public class BuilderProduct2<P extends Product<T>, R extends BuilderProduct2<? extends P, ?, T>, T> extends BuilderBaseT<P, R, T> {
+public class OuterBuilderProduct<P extends Product<T>, R extends OuterBuilderProduct<? extends P, ?, T>, T extends MainIngredient> extends BuilderBaseT<P, R, T> {
 
-    protected BuilderProduct2(P child) {
+    protected OuterBuilderProduct(P child) {
         super(child);
     }
 

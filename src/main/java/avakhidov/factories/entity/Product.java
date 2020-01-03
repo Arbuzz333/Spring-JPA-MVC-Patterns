@@ -1,8 +1,11 @@
 package avakhidov.factories.entity;
 
 import avakhidov.factories.enums.Finished;
+import avakhidov.factories.service.MainIngredient;
 
-public class Product<T> {
+import java.util.Objects;
+
+public class Product<T extends MainIngredient> {
 
     private T mainIngredient;
 
@@ -15,7 +18,7 @@ public class Product<T> {
         this.weight = weight;
     }
 
-    protected Product() {
+    public Product() {
     }
 
     public double getWeight() {
@@ -44,7 +47,7 @@ public class Product<T> {
         return this;
     }
 
-    public static class BuilderProduct<P extends Product<T>, R extends BuilderProduct<? extends P, ?, T>, T> extends BuilderBase<P, R, T> {
+    public static class BuilderProduct<P extends Product<T>, R extends BuilderProduct<? extends P, ?, T>, T extends MainIngredient> extends BuilderBase<P, R, T> {
 
         protected BuilderProduct(P child) {
             super(child);
@@ -66,21 +69,29 @@ public class Product<T> {
         }
 
     }
-
-    private static class FinalBuilderProduct<T> extends BuilderProduct<Product<T>, FinalBuilderProduct<T>, T> {
+    private static class FinalBuilderProduct<T extends MainIngredient> extends BuilderProduct<Product<T>, FinalBuilderProduct<T>, T> {
 
         private FinalBuilderProduct() {
             super(new Product<>());
             injectReturnBuilder(this);
         }
-    }
 
-    public static BuilderProduct<? extends Product, ?, ?> builder() {
+    }
+    public static BuilderProduct<? extends Product, ?, ?> builderProduct() {
         return new FinalBuilderProduct<>();
     }
 
-    public BuilderProduct2<? extends Product<T>, ?, T> builder2() {
-        return new FinalBuilderProduct2<>();
+    public OuterBuilderProduct<? extends Product<T>, ?, T> outerBuilder() {
+        return new FinalOuterBuilderProduct<>();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product<?> product = (Product<?>) o;
+        return Double.compare(product.getWeight(), getWeight()) == 0 &&
+                Objects.equals(getMainIngredient(), product.getMainIngredient()) &&
+                getFinished() == product.getFinished();
+    }
 }

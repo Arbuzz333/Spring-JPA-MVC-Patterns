@@ -5,7 +5,7 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.Flour;
 
-public abstract class Bun extends Product<ParameterPrepareDough> {
+    public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
 
@@ -34,8 +34,8 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
         Bun bun = (Bun) o;
         return getRecipeReady() == bun.getRecipeReady()
                 && getWeight() == bun.getWeight()
-                &&  getMainIngredient().equals(bun.getMainIngredient())
-                && getFinished().equals(bun.getFinished());
+                && getFinished().equals(bun.getFinished())
+                &&  getMainIngredient().equals(bun.getMainIngredient());
     }
 
 }

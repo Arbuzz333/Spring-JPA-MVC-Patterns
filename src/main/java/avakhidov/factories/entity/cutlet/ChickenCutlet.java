@@ -1,6 +1,5 @@
 package avakhidov.factories.entity.cutlet;
 
-import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.livestock.Chicken;
 import avakhidov.factories.entity.meat.ChickenMeat;
 
@@ -17,8 +16,9 @@ public class ChickenCutlet extends Cutlet<ChickenMeat> {
         super.createSesameBun(
                 chickenCutlet.getSesameBun().parameterDough
                 , chickenCutlet.getSesameBun().recipeReady
-                , new Sesame()
+                , chickenCutlet.getSesame()
                 , chickenCutlet.getSesameBun().weight);
+        super.getSesameBun().setKindDough(chickenCutlet.getSesameBun().getMainIngredient().getKindDough());
 
     }
 

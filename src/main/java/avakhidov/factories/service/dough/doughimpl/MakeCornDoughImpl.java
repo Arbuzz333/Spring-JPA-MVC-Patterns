@@ -9,7 +9,7 @@ import avakhidov.factories.service.dough.MakeDough;
 public class MakeCornDoughImpl implements MakeDough<CornFlour> {
 
     @Override
-    public Dough baseMakerDough(ParameterPrepareDough<CornFlour> prepare) {
-        return new CornDough();
+    public Dough baseMakerDough(ParameterPrepareDough<CornFlour> prepare, double fat) {
+        return new CornDough(prepare.getFlour(), prepare.getKindDough(), fat);
     }
 }

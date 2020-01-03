@@ -2,8 +2,10 @@ package avakhidov.factories.entity.meat;
 
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.KindMeat;
+import avakhidov.factories.enums.MainIngredientEnum;
+import avakhidov.factories.service.MainIngredient;
 
-public abstract class Meat {
+public abstract class Meat implements MainIngredient {
 
     private KindMeat kindMeat;
 
@@ -20,6 +22,10 @@ public abstract class Meat {
 
     public FatMeat getFatMeat() {
         return fatMeat;
+    }
+
+    public MainIngredientEnum getMainIngredient() {
+        return MainIngredientEnum.MEAT;
     }
 
 }

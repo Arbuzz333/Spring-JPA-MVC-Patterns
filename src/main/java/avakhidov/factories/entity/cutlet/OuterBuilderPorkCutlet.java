@@ -1,18 +1,18 @@
 package avakhidov.factories.entity.cutlet;
 
-import avakhidov.factories.entity.BuilderProduct2;
+import avakhidov.factories.entity.OuterBuilderProduct;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
-public class BuilderPorkCutlet2<P extends PorkCutlet, R extends BuilderPorkCutlet2<? extends P, ?>>
-        extends BuilderProduct2<P, R, PorkMeat> {
+public class OuterBuilderPorkCutlet<P extends PorkCutlet, R extends OuterBuilderPorkCutlet<? extends P, ?>>
+        extends OuterBuilderProduct<P, R, PorkMeat> {
 
-    boolean recipeReady = false;
+    private boolean recipeReady = false;
 
-    BuilderPorkCutlet2(P child) {
+    OuterBuilderPorkCutlet(P child) {
         super(child);
     }
 

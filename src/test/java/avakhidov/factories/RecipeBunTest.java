@@ -30,7 +30,6 @@ public class RecipeBunTest {
 
     private static final Logger logger = Logger.getLogger(RecipeBunTest.class);
 
-
     @Autowired
     private CornBunRecipe cornBunRecipe;
 
@@ -79,6 +78,7 @@ public class RecipeBunTest {
                 .withRecipeReady(true)
                 .withFinished(Finished.RAW)
                 .withMainIngredient(ParameterDoughEnum.CORN_FLOUR_COARSE.toKneadTheDough())
+                .withKindDough(KindDough.PUFF_PASTRY)
                 .withWeight(0.75)
                 .build();
 

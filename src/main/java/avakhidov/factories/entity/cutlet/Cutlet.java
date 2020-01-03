@@ -5,12 +5,15 @@ import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.Meat;
+import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.BuildParameterPrepareDough;
 
 
 public abstract class Cutlet<T extends Meat> extends Product<T> {
+
+    public static final MainIngredientEnum mainIngredientEnum = MainIngredientEnum.MEAT;
 
     private boolean recipeReady = false;
 
@@ -78,6 +81,10 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
             this.recipeReady = recipeReady;
             this.weight = weight;
             this.parameterDough = parameterDough;
+        }
+
+        void setKindDough(KindDough kindDough) {
+            super.getMainIngredient().setKindDough(kindDough);
         }
 
         @Override
