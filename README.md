@@ -12,3 +12,4 @@
 * HyperMarket - Компоновщик
 * SupplementIngredientDecorator - Decorator
 * BunLiteFactory - Flyweight
+* KitchenFreezer - Заместитель

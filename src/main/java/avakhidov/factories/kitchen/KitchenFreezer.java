@@ -1,88 +1,92 @@
 package avakhidov.factories.kitchen;
 
 import avakhidov.factories.entity.Product;
-import avakhidov.factories.entity.dough.ParameterPrepareDough;
-import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.MainIngredientEnum;
-import avakhidov.factories.service.serviceimpl.BuckwheatBunRecipe;
-import avakhidov.factories.service.serviceimpl.CornBunRecipe;
-import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
-import avakhidov.factories.service.serviceimpl.cutlet.ChickenCutletRecipe;
-import avakhidov.factories.service.serviceimpl.cutlet.PorkCutletRecipe;
-import avakhidov.factories.service.serviceimpl.cutlet.VealCutletRecipe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class KitchenFreezer implements Cook {
+
+    private final Logger logger = LoggerFactory.getLogger(KitchenFreezer.class);
 
     private static final int FREEZER_CAPACITY = 100;
 
     @Autowired
     private Kitchen kitchen;
-    @Autowired
-    private CornBunRecipe cornBunRecipe;
-    @Autowired
-    private BuckwheatBunRecipe buckwheatBunRecipe;
-    @Autowired
-    private WheatBunRecipe wheatBunRecipe;
 
-    @Autowired
-    private ChickenCutletRecipe chickenCutletRecipe;
-    @Autowired
-    private VealCutletRecipe vealCutletRecipe;
-    @Autowired
-    private PorkCutletRecipe porkCutletRecipe;
+    private Map<MainIngredientEnum, Deque<Product>> enumProductMapFreezer = new TreeMap<>();
 
-    private Deque<Product<Meat>> productCutletList = new ArrayDeque<>();
-    private Deque<Product<ParameterPrepareDough>> productBunList = new ArrayDeque<>();
-
-    private void fillTheFreeze(int kitchenCount) {
-        List<Product> productList = kitchen.createCutletWithBunList(kitchenCount);
+    private void fillTheFreeze(MainIngredientEnum ingredientEnum) {
+        List<Product> productList = kitchen.createProductList(Map.of(ingredientEnum, FREEZER_CAPACITY));
         for (Product product : productList) {
-            if (product.getMainIngredient().getMainIngredient().equals(MainIngredientEnum.PARAMETER_PREPARE_DOUGH)) {
-                productBunList.addLast(product);
-            } else {
-                productCutletList.addLast(product);
-            }
+            enumProductMapFreezer.merge(product.getMainIngredient().getMainIngredient(), new ArrayDeque<>(Collections.singleton(product)), (v1, v2) -> {
+                v1.addLast(v2.remove());
+                return v1;
+            });
+        }
+        if (enumProductMapFreezer.containsKey(ingredientEnum)) {
+            logger.info("The Freezer is filled with {} in quantity {}", ingredientEnum, enumProductMapFreezer.get(ingredientEnum).size());
         }
     }
 
     @Override
-    public List<Product> createCutletWithBunList(int count) {
+    public List<Product> createProductList(Map<MainIngredientEnum, Integer> enumIntegerMap) {
+        fillTheFreezeIsEmpty();
         List<Product> productList = new ArrayList<>();
-        int kitchenCount = productCutletList.size() - count;
-        if (kitchenCount > 0) {
-            for (int i = 0; i < count; i++) {
-                productList.add(productCutletList.poll());
-                productList.add(productBunList.poll());
-                productList.add(productBunList.poll());
+        for (Map.Entry<MainIngredientEnum, Integer> ingredientEnumEntry : enumIntegerMap.entrySet()) {
+            if (enumProductMapFreezer.containsKey(ingredientEnumEntry.getKey())) {
+                int kitchenCount = enumProductMapFreezer.get(ingredientEnumEntry.getKey()).size() - ingredientEnumEntry.getValue();
+                if (kitchenCount > 0) {
+                    for (int i = 0; i < ingredientEnumEntry.getValue(); i++) {
+                        productList.add(enumProductMapFreezer.get(ingredientEnumEntry.getKey()).poll());
+                    }
+                } else {
+                    productList.addAll(enumProductMapFreezer.get(ingredientEnumEntry.getKey()));
+                    enumProductMapFreezer.get(ingredientEnumEntry.getKey()).clear();
+                    fillTheFreeze(ingredientEnumEntry.getKey());
+
+                    int countCutletAdditive = Math.abs(kitchenCount);
+                    for (int i = 0; i < countCutletAdditive; i++) {
+                        productList.add(enumProductMapFreezer.get(ingredientEnumEntry.getKey()).poll());
+                    }
+                }
             }
-            fillTheFreeze(count);
-        } else {
-            productList.addAll(productCutletList);
-            productList.addAll(productBunList);
-            List<Product> cutletWithBunList = kitchen.createCutletWithBunList(Math.abs(kitchenCount));
-            productList.addAll(cutletWithBunList);
-            fillTheFreeze(FREEZER_CAPACITY);
         }
+        enumProductMapFreezer.keySet().forEach(f -> logger.info("In the Freezer left {} in quantity {}", f, enumProductMapFreezer.get(f).size()));
         return productList;
     }
 
-    private void setup() {
-        kitchen.setRecipeListBun(Arrays.asList(cornBunRecipe, buckwheatBunRecipe, wheatBunRecipe));
-        kitchen.setRecipeListCutlet(Arrays.asList(chickenCutletRecipe, vealCutletRecipe, porkCutletRecipe));
-        fillTheFreeze(FREEZER_CAPACITY);
+    @Override
+    public List<Product> createProductList(int count) {
+        Map<MainIngredientEnum, Integer> mainIngredientEnumIntegerMap = new TreeMap<>();
+        Arrays.stream(MainIngredientEnum.values()).forEach(v -> mainIngredientEnumIntegerMap.put(v, count));
+        return createProductList(mainIngredientEnumIntegerMap);
     }
 
-    private void cleanup() {
-        productCutletList.clear();
-        productBunList.clear();
+    @PostConstruct
+    private void initialize() {
+        fillTheFreezeIsEmpty();
+    }
+
+    private void fillTheFreezeIsEmpty() {
+        MainIngredientEnum[] values = MainIngredientEnum.values();
+        Arrays.stream(values).forEach(v -> {
+            if (enumProductMapFreezer.get(v) == null || enumProductMapFreezer.get(v).isEmpty()) {
+                fillTheFreeze(v);
+            }
+        });
     }
 }

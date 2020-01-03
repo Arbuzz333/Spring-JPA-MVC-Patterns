@@ -2,7 +2,6 @@ package avakhidov.factories;
 
 import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.entity.ingredient.SupplementIngredientDecorator;
-import avakhidov.factories.entity.ingredient.SupplementPeanutDecorator;
 import avakhidov.factories.entity.ingredient.SupplementRaisinsDecorator;
 import avakhidov.factories.entity.ingredient.SupplementWalnutDecorator;
 import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
@@ -30,7 +29,7 @@ public class SupplementIngredientDecoratorTest {
 
         WheatBun wheatBun = (WheatBun) wheatBunRecipe.cooked(0.125);
 
-        decorator.setIngredients(new SupplementPeanutDecorator(), new SupplementRaisinsDecorator(), new SupplementWalnutDecorator());
+        decorator.setIngredients(new SupplementRaisinsDecorator(), new SupplementWalnutDecorator());
         wheatBun.supplement(decorator);
         assertEquals(wheatBun.getAdditionalIngredient().size(), 3);
     }
