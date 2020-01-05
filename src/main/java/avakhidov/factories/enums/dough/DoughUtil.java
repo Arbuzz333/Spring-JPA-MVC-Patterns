@@ -12,15 +12,10 @@ public enum DoughUtil {
     ;
     public static KindDough setParameterKindDough(GrindingFlour grinding) {
 
-        if (grinding.equals(GrindingFlour.FINE)) {
-            return KindDough.YEAST_DOUGH;
-        } else {
-            if (grinding.equals(GrindingFlour.MEDIUM)) {
-                return KindDough.PUFF_PASTRY;
-            } else {
-                return KindDough.SHORTCRUST_PASTRY;
-            }
-        }
+        AbstractDoughUtil doughUtil = new FineDoughUtil();
+        doughUtil.setNext(new MediumDoughUtil()).setNext(new CoarseDoughUtil());
+        return doughUtil.findByGrinding(grinding);
+
     }
 
     public static KindDough setParameterKindDoughFromFlour(KindFlour flour) {

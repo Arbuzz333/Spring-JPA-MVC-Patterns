@@ -13,3 +13,4 @@
 * SupplementIngredientDecorator - Decorator
 * BunLiteFactory - Flyweight
 * KitchenFreezer - Заместитель
+* AbstractDoughUtil - Цепочка обязанностей
