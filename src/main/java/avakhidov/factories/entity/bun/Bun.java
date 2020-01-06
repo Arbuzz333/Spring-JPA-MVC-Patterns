@@ -5,7 +5,7 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.Flour;
 
-    public abstract class Bun extends Product<ParameterPrepareDough> {
+public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
 

@@ -81,6 +81,7 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
             this.recipeReady = recipeReady;
             this.weight = weight;
             this.parameterDough = parameterDough;
+            setKindDough();
         }
 
         void setKindDough(KindDough kindDough) {

@@ -14,3 +14,4 @@
 * BunLiteFactory - Flyweight
 * KitchenFreezer - Заместитель
 * AbstractDoughUtil - Цепочка обязанностей
+* CommandOrders - Команда
