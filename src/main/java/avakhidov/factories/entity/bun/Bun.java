@@ -4,10 +4,16 @@ package avakhidov.factories.entity.bun;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.Flour;
+import avakhidov.factories.enums.Finished;
+import avakhidov.factories.event.EventManager;
+
+import java.util.UUID;
 
 public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
+    private UUID uuid;
+    private EventManager events;
 
     protected Bun() {
     }
@@ -15,9 +21,17 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
     public Bun(ParameterPrepareDough<? extends Flour> prepareDough, boolean recipeReady, double weight) {
         super(prepareDough, weight);
         this.recipeReady = recipeReady;
+        this.uuid = UUID.randomUUID();
+        this.events = new EventManager(EventManager.EventTypeEnum.FINISHED_TYPE);
     }
 
     public abstract void setKindDough();
+
+    @Override
+    public Bun setFinished(Finished finished) {
+        super.setFinished(finished);
+        return this;
+    }
 
     public boolean getRecipeReady() {
         return recipeReady;
