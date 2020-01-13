@@ -29,7 +29,7 @@ public class EventManager {
     public void notify(EventTypeEnum eventType, UUID uuid) {
         List<EventListener> users = listeners.get(eventType);
         for (EventListener listener : users) {
-            listener.notifyEventFINISHED(uuid);
+            listener.notifyEvent(uuid);
         }
     }
 

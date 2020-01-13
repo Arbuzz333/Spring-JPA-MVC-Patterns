@@ -4,5 +4,5 @@ import java.util.UUID;
 
 public interface EventListener {
 
-    void notifyEventFINISHED(UUID uuid);
+    void notifyEvent(UUID uuid);
 }

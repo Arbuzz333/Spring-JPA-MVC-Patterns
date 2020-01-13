@@ -4,6 +4,7 @@ import avakhidov.factories.entity.bun.BuckwheatBun;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.enums.KindFlour;
+import avakhidov.factories.event.EventListenerBun;
 import avakhidov.factories.service.Oven;
 import avakhidov.factories.service.serviceimpl.*;
 import org.junit.Test;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +29,12 @@ public class OvenBunTest {
 
     @Autowired
     private BuckwheatBunRecipe buckwheatBunRecipe;
+
+    @Autowired
+    private CornBunRecipe cornBunRecipe;
+
+    @Autowired
+    private EventListenerBun listenerBun;
 
     @Test
     public void toBakeTestPreheated() {
@@ -52,6 +62,21 @@ public class OvenBunTest {
         assertEquals(bun.getFinished().getTitle(), 0);
         assertEquals(bun.getMainIngredient().getFlour().getKind(), KindFlour.BUCKWHEAT);
         assertEquals(bun.getClass(), BuckwheatBun.class);
+    }
+
+    @Test
+    public void listenerTest() {
+        List<Bun> buns = Arrays.asList(cornBunRecipe.cooked(0.75), wheatBunRecipe.cooked(0.120),
+                buckwheatBunRecipe.cooked(0.95));
+        Oven<Bun> oven = new PreheatedOven<>();
+        buns.forEach(b -> b.setListenerSave(listenerBun));
+        buns.forEach(oven::toBake);
+
+        assertTrue(listenerBun.getUuidsFINISHED().contains(buns.get(0).getUuid()));
+        assertTrue(listenerBun.getUuidsFINISHED().contains(buns.get(1).getUuid()));
+        assertTrue(listenerBun.getUuidsFINISHED().contains(buns.get(2).getUuid()));
+        assertEquals(listenerBun.getUuidsFINISHED().size(), 3);
+
     }
 
 }
