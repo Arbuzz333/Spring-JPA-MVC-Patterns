@@ -10,6 +10,8 @@ public class Product<T extends MainIngredient> {
 
     protected UUID uuid;
 
+    protected boolean recipeReady = false;
+
     private T mainIngredient;
 
     private double weight;

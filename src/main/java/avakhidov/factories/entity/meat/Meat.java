@@ -24,6 +24,7 @@ public abstract class Meat implements MainIngredient {
         return fatMeat;
     }
 
+    @Override
     public MainIngredientEnum getMainIngredient() {
         return MainIngredientEnum.MEAT;
     }
