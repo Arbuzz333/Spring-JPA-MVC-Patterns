@@ -8,7 +8,7 @@ import avakhidov.factories.enums.dough.KindDough;
 
 import java.time.LocalTime;
 
-public abstract class PancakePrepareDough<T extends Flour> extends ParameterPrepareDough<T> {
+public class PancakePrepareDough<T extends Flour> extends ParameterPrepareDough<T> {
 
     private Egg egg;
 

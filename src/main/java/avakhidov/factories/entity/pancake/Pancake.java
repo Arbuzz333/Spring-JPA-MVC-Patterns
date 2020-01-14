@@ -5,7 +5,7 @@ import avakhidov.factories.entity.dough.pancakedough.PancakePrepareDough;
 import avakhidov.factories.entity.flour.Flour;
 import avakhidov.factories.service.MainIngredient;
 
-abstract class Pancake<T extends Flour> extends Product<PancakePrepareDough<T>> {
+public abstract class Pancake<T extends Flour> extends Product<PancakePrepareDough<T>> {
 
     private MainIngredient ingredient;
 
