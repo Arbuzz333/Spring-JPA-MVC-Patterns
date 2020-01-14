@@ -8,17 +8,13 @@ import avakhidov.factories.enums.Finished;
 import avakhidov.factories.event.EventListenerBun;
 import avakhidov.factories.event.EventManager;
 
-import java.util.UUID;
 
 public abstract class Bun extends Product<ParameterPrepareDough> {
 
     private boolean recipeReady = false;
 
-    private UUID uuid;
-
     private EventManager events;
     {
-        this.uuid = UUID.randomUUID();
         this.events = new EventManager(EventManager.EventTypeEnum.FINISHED_TYPE);
     }
 
@@ -51,10 +47,6 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
 
     public void setListenerSave(EventListenerBun listenerSave) {
         events.subscribe(EventManager.EventTypeEnum.FINISHED_TYPE, listenerSave);
-    }
-
-    public UUID getUuid() {
-        return uuid;
     }
 
     @Override
