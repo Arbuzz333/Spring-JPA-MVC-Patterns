@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,12 +75,7 @@ public class KitchenFreezer implements Cook {
         return createProductList(mainIngredientEnumIntegerMap);
     }
 
-    @PostConstruct
-    private void initialize() {
-        fillTheFreezeIsEmpty();
-    }
-
-    private void fillTheFreezeIsEmpty() {
+    public void fillTheFreezeIsEmpty() {
         MainIngredientEnum[] values = MainIngredientEnum.values();
         Arrays.stream(values).forEach(v -> {
             if (enumProductMapFreezer.get(v) == null || enumProductMapFreezer.get(v).isEmpty()) {

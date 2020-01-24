@@ -1,6 +1,8 @@
 package avakhidov.factories.comand;
 
+import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
+import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.ingredient.Peanut;
 import avakhidov.factories.entity.meat.PorkMeat;
 import org.junit.Test;
@@ -44,6 +46,9 @@ public class CommandOrdersTest {
         assertTrue(commandOrders.getOrders().containsKey(uuids.get(1)));
         commandOrders.undoOrder(uuids.get(1));
         assertFalse(commandOrders.getOrders().containsKey(uuids.get(1)));
+
+        assertEquals(((WheatBun)commandOrders.getOrders().get(uuids.get(3))).getWeight(), 0.075, 0.001);
+        assertEquals(((ChickenCutlet)commandOrders.getOrders().get(uuids.get(0))).getWeight(), 0.125, 0.001);
     }
 
 }

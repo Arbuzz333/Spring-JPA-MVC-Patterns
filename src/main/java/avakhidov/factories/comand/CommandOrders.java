@@ -5,6 +5,7 @@ import avakhidov.factories.service.serviceimpl.CornBunRecipe;
 import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.ChickenCutletRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.PorkCutletRecipe;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
@@ -20,8 +21,10 @@ public class CommandOrders {
     private final WheatBunRecipe wheatBunRecipe;
     private final PorkCutletRecipe porkCutletRecipe;
 
-    private final static double WEIGHT_CUTLET = 0.125;
-    private final static double WEIGHT_BUN = 0.075;
+    @Value("#{new Double('${weight_cutlet}')}")
+    private double weightCutlet;
+    @Value("#{new Double('${weight_bun}')}")
+    private double weightBun;
 
     private Map<UUID, Product> orders = new HashMap<>();
 
@@ -35,23 +38,23 @@ public class CommandOrders {
     }
 
     public UUID createOderChickenCutlet() {
-        CommandChickenCutlet commandChickenCutlet = new CommandChickenCutlet(chickenCutletRecipe, WEIGHT_CUTLET);
+        CommandChickenCutlet commandChickenCutlet = new CommandChickenCutlet(chickenCutletRecipe, weightCutlet);
         executeCommand(commandChickenCutlet);
         return commandChickenCutlet.getUuid();
     }
 
     public UUID createOrderCornBun() {
-        CommandCornBun commandCornBun = new CommandCornBun(cornBunRecipe, WEIGHT_BUN);
+        CommandCornBun commandCornBun = new CommandCornBun(cornBunRecipe, weightBun);
         executeCommand(commandCornBun);
         return commandCornBun.getUuid();
     }
     public UUID createOrderPorkCutlet() {
-        CommandPorkCutlet commandPorkCutlet = new CommandPorkCutlet(porkCutletRecipe, WEIGHT_CUTLET);
+        CommandPorkCutlet commandPorkCutlet = new CommandPorkCutlet(porkCutletRecipe, weightCutlet);
         executeCommand(commandPorkCutlet);
         return commandPorkCutlet.getUuid();
     }
     public UUID createOrderWheatBun() {
-        CommandWheatBun commandPorkCutlet = new CommandWheatBun(wheatBunRecipe, WEIGHT_BUN, LocalTime.now());
+        CommandWheatBun commandPorkCutlet = new CommandWheatBun(wheatBunRecipe, weightBun, LocalTime.now());
         executeCommand(commandPorkCutlet);
         return commandPorkCutlet.getUuid();
     }

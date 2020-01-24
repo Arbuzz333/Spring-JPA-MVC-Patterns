@@ -12,6 +12,8 @@ import avakhidov.factories.service.serviceimpl.cutlet.PorkCutletRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.VealCutletRecipe;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Configuration
+@PropertySource("classpath:value.properties")
 class AppContext {
 
     private final static double WEIGHT_CUTLET = 0.125;
@@ -53,6 +56,11 @@ class AppContext {
         mainIngredientWeight.put(MainIngredientEnum.MEAT, WEIGHT_CUTLET);
 
         return new Kitchen(enumRecipeMap, mainIngredientWeight);
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer configurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
 }
