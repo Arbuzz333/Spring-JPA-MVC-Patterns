@@ -1,6 +1,5 @@
 package avakhidov.factories.comand;
 
-import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.ingredient.Peanut;
