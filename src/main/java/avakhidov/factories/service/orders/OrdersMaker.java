@@ -39,7 +39,7 @@ public class OrdersMaker {
             if (m.isAnnotationPresent(KitchenFreezerAspect.class)) {
                 KitchenFreezerAspect kitchen = m.getAnnotation(KitchenFreezerAspect.class);
 
-                MethodHandle handle = publicLookup.findVirtual(OrdersSplitter.class, m.getName(), mt);
+                MethodHandle handle = publicLookup.findVirtual(kitchen.ordersClass(), m.getName(), mt);
                 MethodHandle handleBind = handle.bindTo(ordersSplitter);
                 SPLITTER_HANDLES.put(kitchen.mainIngredientEnum(), handleBind);
             }

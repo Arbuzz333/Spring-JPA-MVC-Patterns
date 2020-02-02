@@ -1,7 +1,7 @@
 package avakhidov.factories.annotations;
 
 
-import avakhidov.factories.service.orders.OrdersMaker;
+import avakhidov.factories.service.orders.OrdersSplitter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -16,6 +16,6 @@ public @interface KitchenFreezerAspect {
 
     String  mainIngredientEnum() default "MEAT";
 
-    Class<?> orders() default OrdersMaker.class;
+    Class<?> ordersClass() default OrdersSplitter.class;
 
 }
