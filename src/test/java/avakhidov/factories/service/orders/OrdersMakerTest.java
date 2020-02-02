@@ -1,16 +1,16 @@
 package avakhidov.factories.service.orders;
 
+import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.livestock.Chicken;
 import avakhidov.factories.entity.meat.ChickenMeat;
 import avakhidov.factories.enums.FatMeat;
-import avakhidov.factories.enums.MainIngredientEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +24,8 @@ public class OrdersMakerTest {
     @Test
     public void makeProductListTest() throws Throwable {
         ordersMaker.init();
-        ordersMaker.makeProductList(15, new ChickenMeat(FatMeat.LOWFAT, new Chicken()));
+        List<Product> products = ordersMaker.makeProductList(15, new ChickenMeat(FatMeat.LOWFAT, new Chicken()));
+        assertEquals("List size must be 15", products.size(), 15);
     }
 
 }
