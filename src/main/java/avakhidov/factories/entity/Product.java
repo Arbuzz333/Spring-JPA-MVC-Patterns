@@ -4,14 +4,23 @@ import avakhidov.factories.enums.Finished;
 import avakhidov.factories.service.MainIngredient;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Product<T extends MainIngredient> {
+
+    protected UUID uuid;
+
+    protected boolean recipeReady = false;
 
     private T mainIngredient;
 
     private double weight;
 
     private Finished finished;
+
+    {
+        this.uuid = UUID.randomUUID();
+    }
 
     protected Product(T mainIngredient, double weight) {
         this.mainIngredient = mainIngredient;
@@ -45,6 +54,10 @@ public class Product<T extends MainIngredient> {
     public Product<T> setFinished(Finished finished) {
         this.finished = finished;
         return this;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public static class BuilderProduct<P extends Product<T>, R extends BuilderProduct<? extends P, ?, T>, T extends MainIngredient> extends BuilderBase<P, R, T> {

@@ -9,20 +9,14 @@ import java.time.LocalTime;
 
 public class ParameterPrepareDough<T extends Flour> implements MainIngredient {
 
-    public static final MainIngredientEnum mainIngredientEnum = MainIngredientEnum.PARAMETER_PREPARE_DOUGH;
-
     private int temperature;
 
     private LocalTime time;
-
-    /*TODO remove*/
-    private T flourDough;
 
     private Dough<T> dough;
 
     public ParameterPrepareDough(T flourDough, KindDough kindDoughParameter,
                                  int temperature, LocalTime time, double fatParameter) {
-        this.flourDough = flourDough;
         this.temperature = temperature;
         this.time = time;
         this.dough = new Dough.BuilderDough<T>() {{
@@ -33,20 +27,23 @@ public class ParameterPrepareDough<T extends Flour> implements MainIngredient {
     }
 
     public T getFlour() {
-        return flourDough;
+        return dough.getFlour();
     }
 
-    public void setKindDough(KindDough kindDough) {
-        this.dough = new Dough<>(flourDough, kindDough, 0.0);
+    public void setKindDough(KindDough kind) {
+        this.dough = new Dough.BuilderDough<T>() {{
+            withFlour(dough.getFlour());
+            withKindDough(kind);
+            withFat(dough.getFat());
+        }}.buildDough();
     }
 
     public void setKindDoughAndFat(KindDough kindDoughBuild, double fatBuild) {
-        Dough<T> dough = new Dough.BuilderDough<T>() {{
-            withFlour(flourDough);
+        this.dough = new Dough.BuilderDough<T>() {{
+            withFlour(dough.getFlour());
             withKindDough(kindDoughBuild);
             withFat(fatBuild);
         }}.buildDough();
-        this.dough = dough;
     }
 
     public KindDough getKindDough() {

@@ -9,6 +9,7 @@ import avakhidov.factories.service.OvenWorks;
 import avakhidov.factories.service.serviceimpl.PreheatedOven;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.math.MathContext;
@@ -16,6 +17,7 @@ import java.math.RoundingMode;
 import java.util.ArrayDeque;
 
 @Component
+@Scope("prototype")
 public class BakeryHouseFSM<T extends Product<ParameterPrepareDough>, S extends Ingredient> {
 
     private final Logger logger = LoggerFactory.getLogger(BakeryHouseFSM.class);
@@ -38,11 +40,7 @@ public class BakeryHouseFSM<T extends Product<ParameterPrepareDough>, S extends 
         if (!this.states.peekLast().equals(BakeryConditionEnum.DOWNTIME)) {
             return this.states.peekLast();
         }
-
-        logger.info("market.orderQuantity() {}", market.orderQuantity());
-        logger.info("oven.getMinPartyProduct() {}", oven.getMinPartyProduct());
-        logger.info("oven.getMinPartyIngredient().setScale(3, RoundingMode.HALF_UP) {}", oven.getMinPartyIngredient(market.orderQuantity()).setScale(3, RoundingMode.HALF_UP));
-        logger.info("storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP) {}", storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP));
+        logState(this.states.peekLast().name());
 
         if(order > oven.getMinPartyProduct() &&
                 oven.getMinPartyIngredient(market.orderQuantity()).setScale(3, RoundingMode.HALF_UP)
@@ -64,7 +62,7 @@ public class BakeryHouseFSM<T extends Product<ParameterPrepareDough>, S extends 
         if (!this.states.peekLast().equals(BakeryConditionEnum.PREPARATION_FOR_WORK)) {
             return this.states.peekLast();
         }
-        logger.info("order {}", order);
+        logState(this.states.peekLast().name());
 
         if (order > 0) {
             order = 0;
@@ -79,7 +77,7 @@ public class BakeryHouseFSM<T extends Product<ParameterPrepareDough>, S extends 
             return this.states.peekLast();
         }
 
-        logger.info("order {}", order);
+        logState(this.states.peekLast().name());
 
         if (order <= 0) {
             states.pollLast();
@@ -105,6 +103,66 @@ public class BakeryHouseFSM<T extends Product<ParameterPrepareDough>, S extends 
 
     public void setStorageBakery(StorageBakery<S> storageBakery) {
         this.storageBakery = storageBakery;
+    }
+
+    private void logState(String state) {
+        logger.info(state);
+        logger.info("order {}", order);
+        logger.info("market.orderQuantity() {}", market.orderQuantity());
+        logger.info("oven.getMinPartyProduct() {}", oven.getMinPartyProduct());
+        logger.info("oven.getMinPartyIngredient().setScale(3, RoundingMode.HALF_UP) {}", oven.getMinPartyIngredient(market.orderQuantity()).setScale(3, RoundingMode.HALF_UP));
+        logger.info("storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP) {}", storageBakery.stockValue().setScale(3, RoundingMode.HALF_UP));
+
+    }
+
+    public Market<T> getMarket() {
+        return market;
+    }
+
+    public OvenWorks<T> getOven() {
+        return oven;
+    }
+
+    private StorageBakery<S> getStorageBakery() {
+        return storageBakery;
+    }
+
+    private int getOrder() {
+        return order;
+    }
+
+    private void restore(Market<T> market, OvenWorks<T> oven, StorageBakery<S> storageBakery, int order, BakeryConditionEnum state) {
+        this.market = market;
+        this.oven = oven;
+        this.storageBakery = storageBakery;
+        this.order = order;
+        states.pollLast();
+        states.addLast(state);
+    }
+
+    protected class MementoBakeryHouse {
+
+        private BakeryConditionEnum state;
+
+        private Market<T> market;
+
+        private OvenWorks<T> oven;
+
+        private StorageBakery<S> storageBakery;
+
+        private int order;
+
+        MementoBakeryHouse() {
+            this.state = getCurrentState();
+            this.market = getMarket();
+            this.oven = getOven();
+            this.storageBakery = getStorageBakery();
+            this.order = getOrder();
+        }
+
+        void restoreBakeryHouse() {
+            restore(market, oven, storageBakery, order, state);
+        }
     }
 
 }

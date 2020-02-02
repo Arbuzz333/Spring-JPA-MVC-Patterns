@@ -13,3 +13,7 @@
 * SupplementIngredientDecorator - Decorator
 * BunLiteFactory - Flyweight
 * KitchenFreezer - Заместитель
+* AbstractDoughUtil - Цепочка обязанностей
+* CommandOrders - Команда
+* PancakeVisitor - Visitor
+* BakeryCommandExecutor - Снимок + Команда

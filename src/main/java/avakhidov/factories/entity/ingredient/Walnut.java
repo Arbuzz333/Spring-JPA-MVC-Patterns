@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Walnut extends Ingredient {
 
-    String walnut;
+    private String walnut;
 
     public Walnut(String walnut) {
         this.walnut = walnut;
