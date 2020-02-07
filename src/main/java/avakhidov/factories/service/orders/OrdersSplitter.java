@@ -1,46 +1,57 @@
 package avakhidov.factories.service.orders;
 
 import avakhidov.factories.annotations.KitchenFreezerAspect;
-import avakhidov.factories.entity.Product;
-import avakhidov.factories.entity.bun.Bun;
-import avakhidov.factories.entity.cutlet.Cutlet;
-import avakhidov.factories.entity.pancake.Pancake;
-import avakhidov.factories.enums.MainIngredientEnum;
+import avakhidov.factories.comand.CommandOrders;
+import avakhidov.factories.entity.bun.CornBun;
+import avakhidov.factories.entity.bun.WheatBun;
+import avakhidov.factories.entity.cutlet.ChickenCutlet;
+import avakhidov.factories.entity.cutlet.PorkCutlet;
+import avakhidov.factories.enums.KindFlour;
+import avakhidov.factories.enums.dough.KindDough;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static avakhidov.factories.utility.MainUtility.repeat;
+
 @Component
 public class OrdersSplitter {
 
-    @KitchenFreezerAspect()
-    public List<Cutlet> getProductListCutlet(List<Product> products) {
-        List<Cutlet> result = new ArrayList<>();
+    @KitchenFreezerAspect(productClass = CornBun.class, kindDough = KindDough.PUFF_PASTRY, kindFlour = KindFlour.CORN)
+    public List<CornBun> getOrdersCornBun(int count, CommandOrders commandOrders) {
+        List<CornBun> result = new ArrayList<>();
 
-        return getList(products, MainIngredientEnum.MEAT, result);
-    }
+        repeat(count, () -> result.add((CornBun) commandOrders.getOrders().remove(commandOrders.createOrderCornBun())));
 
-    @KitchenFreezerAspect(mainIngredientEnum = "PARAMETER_PREPARE_DOUGH")
-    public List<Bun> getProductListBun(List<Product> products) {
-        List<Bun> result = new ArrayList<>();
-
-        return getList(products, MainIngredientEnum.PARAMETER_PREPARE_DOUGH, result);
-    }
-
-    @KitchenFreezerAspect(mainIngredientEnum = "PREPARE_PANCAKE_DOUGH")
-    public List<Pancake> getProductListPancake(List<Product> products) {
-        List<Pancake> result = new ArrayList<>();
-
-        return getList(products, MainIngredientEnum.PREPARE_PANCAKE_DOUGH, result);
-    }
-
-    private <T extends Product> List<T> getList(List<Product> products, MainIngredientEnum mainIngredientEnum, List<T> result) {
-        products.forEach(v -> {
-            if (v.getMainIngredient().getMainIngredient().equals(mainIngredientEnum)) {
-                result.add((T) v);
-            }
-        });
         return result;
     }
+
+    @KitchenFreezerAspect(productClass = ChickenCutlet.class)
+    public List<ChickenCutlet> getOrdersChickenCutlet(int count, CommandOrders commandOrders) {
+        List<ChickenCutlet> result = new ArrayList<>();
+
+        repeat(count, () -> result.add((ChickenCutlet) commandOrders.getOrders().remove(commandOrders.createOderChickenCutlet())));
+
+        return result;
+    }
+
+    @KitchenFreezerAspect(productClass = PorkCutlet.class)
+    public List<PorkCutlet> getOrdersPorkCutlet(int count, CommandOrders commandOrders) {
+        List<PorkCutlet> result = new ArrayList<>();
+
+        repeat(count, () -> result.add((PorkCutlet) commandOrders.getOrders().remove(commandOrders.createOrderPorkCutlet())));
+
+        return result;
+    }
+
+    @KitchenFreezerAspect(productClass = WheatBun.class)
+    public List<WheatBun> getOrdersWheatBun(int count, CommandOrders commandOrders) {
+        List<WheatBun> result = new ArrayList<>();
+
+        repeat(count, () -> result.add((WheatBun) commandOrders.getOrders().remove(commandOrders.createOrderWheatBun())));
+
+        return result;
+    }
+
 }
