@@ -1,12 +1,15 @@
 package avakhidov.factories.service.orders;
 
-import avakhidov.factories.annotations.KitchenFreezerAspect;
+import avakhidov.factories.annotations.KitchenBun;
+import avakhidov.factories.annotations.KitchenCutlet;
 import avakhidov.factories.comand.CommandOrders;
 import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.cutlet.PorkCutlet;
+import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.KindFlour;
+import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.dough.KindDough;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +21,7 @@ import static avakhidov.factories.utility.MainUtility.repeat;
 @Component
 public class OrdersSplitter {
 
-    @KitchenFreezerAspect(productClass = CornBun.class, kindDough = KindDough.PUFF_PASTRY, kindFlour = KindFlour.CORN)
+    @KitchenBun(productClass = CornBun.class, kindDough = KindDough.PUFF_PASTRY, kindFlour = KindFlour.CORN)
     public List<CornBun> getOrdersCornBun(int count, CommandOrders commandOrders) {
         List<CornBun> result = new ArrayList<>();
 
@@ -27,7 +30,7 @@ public class OrdersSplitter {
         return result;
     }
 
-    @KitchenFreezerAspect(productClass = ChickenCutlet.class)
+    @KitchenCutlet(productClass = ChickenCutlet.class, fatMeat = FatMeat.DIETARY)
     public List<ChickenCutlet> getOrdersChickenCutlet(int count, CommandOrders commandOrders) {
         List<ChickenCutlet> result = new ArrayList<>();
 
@@ -36,7 +39,7 @@ public class OrdersSplitter {
         return result;
     }
 
-    @KitchenFreezerAspect(productClass = PorkCutlet.class)
+    @KitchenCutlet(productClass = PorkCutlet.class, kindMeat = KindMeat.PORK)
     public List<PorkCutlet> getOrdersPorkCutlet(int count, CommandOrders commandOrders) {
         List<PorkCutlet> result = new ArrayList<>();
 
@@ -45,7 +48,7 @@ public class OrdersSplitter {
         return result;
     }
 
-    @KitchenFreezerAspect(productClass = WheatBun.class)
+    @KitchenBun(productClass = WheatBun.class)
     public List<WheatBun> getOrdersWheatBun(int count, CommandOrders commandOrders) {
         List<WheatBun> result = new ArrayList<>();
 
