@@ -72,25 +72,36 @@ public class OrdersMaker {
 
         List<Product> result = new ArrayList<>();
         if (clazz.getSuperclass().equals(Bun.class)) {
-            MethodHandleBun methodHandleBun = CLASS_HANDLES_BUN.get(clazz.getName());
-            MethodHandle methodHandle = methodHandleBun.handle;
-            result = (List<Product>) methodHandle.invokeExact(quantity, commandOrders);
-            Bun product = (Bun) result.get(MainUtility.randomInt(0, result.size() - 1));
-            verification.verificationBun(product, methodHandleBun.kindFlour, methodHandleBun.kindDough);
+            result.addAll(makeBunOrders(quantity, clazz));
         } else {
             if (clazz.getSuperclass().equals(Cutlet.class)) {
-                MethodHandleCutlet methodHandleCutlet = CLASS_HANDLES_CUTLET.get(clazz.getName());
-                MethodHandle handle = methodHandleCutlet.handle;
-                result = (List<Product>) handle.invokeExact(quantity, commandOrders);
-
-                Cutlet product = (Cutlet) result.get(MainUtility.randomInt(0, result.size() - 1));
-                verification.verificationCutlet(product, methodHandleCutlet.kindMeat, methodHandleCutlet.fatMeat);
+                result.addAll(makeCutletOrders(quantity, clazz));
             }
         }
         return result;
     }
 
-    private class MethodHandleBun {
+    public List<Bun> makeBunOrders(int quantity, Class clazz) throws Throwable {
+        MethodHandleBun methodHandleBun = CLASS_HANDLES_BUN.get(clazz.getName());
+        MethodHandle methodHandle = methodHandleBun.handle;
+        List<Bun> result = (List<Bun>) methodHandle.invokeExact(quantity, commandOrders);
+
+        Bun product = result.get(MainUtility.randomInt(0, result.size() - 1));
+        verification.verificationBun(product, methodHandleBun.kindFlour, methodHandleBun.kindDough);
+        return result;
+    }
+
+    public List<Cutlet> makeCutletOrders(int quantity, Class clazz) throws Throwable {
+        MethodHandleCutlet methodHandleCutlet = CLASS_HANDLES_CUTLET.get(clazz.getName());
+        MethodHandle handle = methodHandleCutlet.handle;
+        List<Cutlet> result = (List<Cutlet>) handle.invokeExact(quantity, commandOrders);
+
+        Cutlet product = result.get(MainUtility.randomInt(0, result.size() - 1));
+        verification.verificationCutlet(product, methodHandleCutlet.kindMeat, methodHandleCutlet.fatMeat);
+        return result;
+    }
+
+        private class MethodHandleBun {
 
         private MethodHandle handle;
         KindFlour kindFlour;
