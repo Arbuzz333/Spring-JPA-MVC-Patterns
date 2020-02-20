@@ -19,7 +19,7 @@ public class OrderMakerBunVisitor implements OrderMakerProductVisitor {
     }
 
     public List<Product> makeOrdersProduct(OrdersMakerProduct makerBun) throws Throwable {
-        List<Bun> bunList = this.maker.makeBunOrders(makerBun.getQuantity(), makerBun.getClazz());
+        List<Bun> bunList = this.maker.makeBunOrders(makerBun.getQuantity(), makerBun.getProductClazz());
         return new ArrayList<>(bunList);
     }
 }

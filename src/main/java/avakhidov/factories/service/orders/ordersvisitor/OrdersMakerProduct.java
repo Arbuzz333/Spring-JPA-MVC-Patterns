@@ -24,11 +24,11 @@ public class OrdersMakerProduct {
         return new ArrayList<>(products);
     }
 
-    Class getClazz() {
+    public Class getProductClazz() {
         return clazz;
     }
 
-    int getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 }

@@ -8,6 +8,7 @@ import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.cutlet.PorkCutlet;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.meat.Meat;
+import avakhidov.factories.entity.pancake.PancakeCorn;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.MainIngredientEnum;
@@ -39,6 +40,9 @@ public class OrderMakerVisitorTest {
     @Qualifier("orderMakerCutletVisitor")
     @Autowired
     private OrderMakerProductVisitor makerCutlet;
+    @Qualifier("orderMakerPancakeVisitor")
+    @Autowired
+    private OrderMakerProductVisitor makerPancake;
 
     @Test
     public void makeOrdersFirst() throws Throwable {
@@ -57,6 +61,8 @@ public class OrderMakerVisitorTest {
 
         Cutlet cutlet = (Cutlet) listProduct.get(35);
         assertEquals(((Meat)cutlet.getMainIngredient()).getKindMeat(), KindMeat.PORK);
+        List<Product> acceptPorkCutletTwo = visitor.accept();
+        List<Product> acceptCornBunTwo = visitor.accept();
     }
 
     @Test
@@ -77,5 +83,15 @@ public class OrderMakerVisitorTest {
         ParameterPrepareDough mainIngredientEleven = (ParameterPrepareDough) listProduct.get(11).getMainIngredient();
         assertEquals(mainIngredientZero.getMainIngredient(), MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
         assertEquals(mainIngredientEleven.getFlour().getKind(), KindFlour.WHEAT);
+        List<Product> acceptWheatBunTwo = visitor.accept();
+        List<Product> acceptChickenCutletTwo = visitor.accept();
+    }
+
+    @Test
+    public void makeOrderPancake() throws Throwable {
+        visitor.initOrdersMakerProduct(77, PancakeCorn.class, makerPancake);
+        List<Product> productList = visitor.accept();
+
+        assertEquals(productList.size(), 77);
     }
 }

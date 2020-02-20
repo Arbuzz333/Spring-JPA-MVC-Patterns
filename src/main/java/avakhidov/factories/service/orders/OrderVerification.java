@@ -23,9 +23,8 @@ public class OrderVerification {
         boolean result;
 
         result = bun.getMainIngredient().getFlour().getKind().equals(kindFlour);
-        result = bun.getMainIngredient().getKindDough().equals(kindDough) && result;
 
-        if (!result && bun.getMainIngredient().getFlour().getKind().equals(KindFlour.WHEAT)) {
+        if (bun.getMainIngredient().getFlour().getKind().equals(KindFlour.WHEAT)) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
             String ampm = formatter.format(LocalTime.now());
 
@@ -36,6 +35,7 @@ public class OrderVerification {
             }
             logger.info("Verification Bun is replaced KindDough: {}.", kindDough.name());
         }
+        result = bun.getMainIngredient().getKindDough().equals(kindDough) && result;
         if (!result) {
             throw new BunNotVerificationException(bun.getClass().getName(), bun.getUuid().toString(), kindDough.name() + kindFlour.name());
         }
@@ -53,6 +53,6 @@ public class OrderVerification {
         if (!result) {
             throw new BunNotVerificationException(cutlet.getClass().getName(), cutlet.getUuid().toString(), fatMeat.name() + kindMeat.name());
         }
-        logger.info("Verification Cutlet is success, Cutlet: {}.", cutlet.getClass().getName());
+        logger.info("Verification Cutletv is success, Cutlet: {}.", cutlet.getClass().getName());
     }
 }
