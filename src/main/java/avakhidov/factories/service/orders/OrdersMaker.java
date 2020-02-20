@@ -10,6 +10,7 @@ import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.dough.KindDough;
+import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.utility.MainUtility;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,9 @@ public class OrdersMaker {
     }
 
     public List<Bun> makeBunOrders(int quantity, Class clazz) throws Throwable {
+        if (!CLASS_HANDLES_BUN.containsKey(clazz.getName())) {
+            throw new ClassArgumentIllegalException(clazz.toString(), "public List<Bun> makeBunOrders(int quantity, Class clazz)", this.getClass().toString());
+        }
         MethodHandleBun methodHandleBun = CLASS_HANDLES_BUN.get(clazz.getName());
         MethodHandle methodHandle = methodHandleBun.handle;
         List<Bun> result = (List<Bun>) methodHandle.invokeExact(quantity, commandOrders);
@@ -92,6 +96,9 @@ public class OrdersMaker {
     }
 
     public List<Cutlet> makeCutletOrders(int quantity, Class clazz) throws Throwable {
+        if (!CLASS_HANDLES_CUTLET.containsKey(clazz.getName())) {
+            throw new ClassArgumentIllegalException(clazz.toString(), "public List<Cutlet> makeCutletOrders(int quantity, Class clazz)", this.getClass().toString());
+        }
         MethodHandleCutlet methodHandleCutlet = CLASS_HANDLES_CUTLET.get(clazz.getName());
         MethodHandle handle = methodHandleCutlet.handle;
         List<Cutlet> result = (List<Cutlet>) handle.invokeExact(quantity, commandOrders);
