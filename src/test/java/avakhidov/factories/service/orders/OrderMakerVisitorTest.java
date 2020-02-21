@@ -96,14 +96,22 @@ public class OrderMakerVisitorTest {
     }
 
     @Test(expected = ClassArgumentIllegalException.class)
-    public void makeOrderExceptionBuckwheat() throws Throwable {
-        visitor.initOrdersMakerProduct(25, BuckwheatBun.class);
-        visitor.accept();
-    }
-
-    @Test(expected = ClassArgumentIllegalException.class)
     public void makeOrderExceptionMuttonCutlet() throws Throwable {
         visitor.initOrdersMakerProduct(25, MuttonCutlet.class);
-        visitor.accept();
+        List<Product> accept = visitor.accept();
+    }
+
+    @Test
+    public void makeOrderSpecify() throws Throwable {
+        visitor.initOrdersMakerProduct(135, BuckwheatBun.class);
+        List<Product> accept = visitor.accept();
+
+        assertEquals("", accept.size(), 135);
+
+        ParameterPrepareDough mainIngredientZero = (ParameterPrepareDough) accept.get(randomInt(0, accept.size() - 1)).getMainIngredient();
+        ParameterPrepareDough mainIngredientEleven = (ParameterPrepareDough) accept.get(randomInt(0, accept.size() - 1)).getMainIngredient();
+        assertEquals("", mainIngredientZero.getKindDough(), KindDough.CHOUX_PASTRY);
+        assertEquals("", mainIngredientEleven.getFlour().getKind(), KindFlour.BUCKWHEAT);
+
     }
 }

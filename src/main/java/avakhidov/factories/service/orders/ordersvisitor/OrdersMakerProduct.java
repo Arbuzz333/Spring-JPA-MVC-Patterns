@@ -1,5 +1,6 @@
 package avakhidov.factories.service.orders.ordersvisitor;
 
+import avakhidov.factories.annotations.SeeingSpecifyProductClass;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.cutlet.Cutlet;
@@ -34,6 +35,7 @@ public class OrdersMakerProduct {
         this.clazz = clazz;
     }
 
+    @SeeingSpecifyProductClass
     public List<Product> accept() throws Throwable {
         OrderMakerProductVisitor orderMakerProductVisitor = productVisitorMap.get(clazz.getSuperclass());
         List<Product> products = orderMakerProductVisitor.makeOrdersProduct(this);
