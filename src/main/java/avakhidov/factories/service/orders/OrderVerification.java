@@ -53,6 +53,6 @@ public class OrderVerification {
         if (!result) {
             throw new BunNotVerificationException(cutlet.getClass().getName(), cutlet.getUuid().toString(), fatMeat.name() + kindMeat.name());
         }
-        logger.info("Verification Cutletv is success, Cutlet: {}.", cutlet.getClass().getName());
+        logger.info("Verification Cutlet is success, Cutlet: {}.", cutlet.getClass().getName());
     }
 }

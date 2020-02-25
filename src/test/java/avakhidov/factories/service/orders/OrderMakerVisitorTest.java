@@ -18,7 +18,6 @@ import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.enums.dough.KindDough;
-import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.service.orders.ordersvisitor.OrdersMakerProduct;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static avakhidov.factories.utility.MainUtility.randomInt;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
 import java.util.ArrayList;
@@ -95,10 +95,11 @@ public class OrderMakerVisitorTest {
         assertEquals("", pancakeDough.getKindDough(), KindDough.PANCAKE);
     }
 
-    @Test(expected = ClassArgumentIllegalException.class)
+    @Test
     public void makeOrderExceptionMuttonCutlet() throws Throwable {
         visitor.initOrdersMakerProduct(25, MuttonCutlet.class);
         List<Product> accept = visitor.accept();
+        assertTrue("", accept.isEmpty());
     }
 
     @Test

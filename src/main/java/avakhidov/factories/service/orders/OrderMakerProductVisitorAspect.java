@@ -2,6 +2,7 @@ package avakhidov.factories.service.orders;
 
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.BuckwheatBun;
+import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.service.MainIngredient;
 import avakhidov.factories.service.Recipe;
 import avakhidov.factories.service.orders.ordersvisitor.OrdersMakerProduct;
@@ -97,24 +98,26 @@ public class OrderMakerProductVisitorAspect {
 
         List<Product> products = new ArrayList<>();
         OrdersMakerProduct aThis = (OrdersMakerProduct) joinPoint.getTarget();
-        saveProductQuantity(classIntegerMapRequest, aThis.getProductClazz(), aThis.getQuantity());
         try {
             if (specifyClasses.containsKey(aThis.getProductClazz())) {
+                saveProductQuantity(classIntegerMapRequest, aThis.getProductClazz(), aThis.getQuantity());
                 logger.info("Saved request for Product is: {} . {} . {} .", classIntegerMapRequest.values().stream().reduce(0, Integer::sum),
                         aThis.getProductClazz(), aThis.getQuantity());
 
                 Recipe recipe = specifyClasses.get(aThis.getProductClazz());
                 repeat(aThis.getQuantity(), () -> products.add((Product) recipe.cooked(weightBun)));
+
+                saveProductQuantity(classIntegerMapRequestReady, aThis.getProductClazz(), aThis.getQuantity());
+                logger.info("Saved success request for Product is: {} . {} . {} .", classIntegerMapRequestReady.values().stream().reduce(0, Integer::sum),
+                        aThis.getProductClazz(), aThis.getQuantity());
             } else {
                 return joinPoint.proceed();
             }
-            saveProductQuantity(classIntegerMapRequestReady, aThis.getProductClazz(), aThis.getQuantity());
-            logger.info("Saved success request for Product is: {} . {} . {} .", classIntegerMapRequestReady.values().stream().reduce(0, Integer::sum),
-                    aThis.getProductClazz(), aThis.getQuantity());
-//        ToDo
+        } catch (ClassArgumentIllegalException ar) {
+            logger.error("ClassArgumentIllegalException annotated method SeeingSpecifyProductClass");
         } catch (Exception e) {
             saveProductQuantity(classIntegerMapRequestDecline, aThis.getProductClazz(), aThis.getQuantity());
-            logger.info("Saved decline request for Product is: {} . {} . {} .", classIntegerMapRequestDecline.values().stream().reduce(0, Integer::sum),
+            logger.error("Saved error request for Product is: {} . {} . {} .", classIntegerMapRequestDecline.values().stream().reduce(0, Integer::sum),
                     aThis.getProductClazz(), aThis.getQuantity());
             throw e;
         }
