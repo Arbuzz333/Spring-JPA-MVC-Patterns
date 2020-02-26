@@ -1,9 +1,11 @@
 package avakhidov.factories.entity.bun;
 
+import avakhidov.factories.annotations.FlourCounter;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.Flour;
 import avakhidov.factories.entity.ingredient.Ingredient;
+import avakhidov.factories.enums.KindFlour;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class BunLiteFactory {
     private List<List<Ingredient>> listListIngredient = new ArrayList<>();
     private List<Product<ParameterPrepareDough<? extends Flour>>> productList = new ArrayList<>();
 
+    @FlourCounter(kindFlour = KindFlour.WHEAT)
+    @FlourCounter(kindFlour = KindFlour.BUCKWHEAT)
     public BunLite getBunLite(Date date, List<Ingredient> ingredientList, Product<ParameterPrepareDough<? extends Flour>> product) {
 
         List<Ingredient> findIngredient = null;
