@@ -12,7 +12,9 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +43,7 @@ public class FlourCounterServiceAspect {
         KindFlour kind = product.getMainIngredient().getFlour().getKind();
         if (kindFlours.contains(kind)) {
             OperatorOperatorCounterFlour v = OperatorOperatorCounterFlour.valueOf(kind.name());
-            double quantityFlour = v.countFlour(product.getWeight());
+            double quantityFlour = v.countFlour();
             logger.info("Kind of flour: {}. Weight flour: {}", kind.name(), quantityFlour);
             flourDoubleMap.merge(kind, quantityFlour, Double::sum);
         }
@@ -55,18 +57,47 @@ public class FlourCounterServiceAspect {
 
         BUCKWHEAT {
             @Override
-            public double countFlour(double weight) {
+            public double countFlour() {
                 return coefficient_buckwheat * weight;
             }
         },
 
         CORN {
             @Override
-            public double countFlour(double weight) {
+            public double countFlour() {
                 return coefficient_corn * weight;
             }
         },
 
-        WHEAT
+        WHEAT;
+
+        static double weight;
+        static double coefficient_wheat;
+        static double coefficient_corn;
+        static double coefficient_buckwheat;
+
+        @Component
+        public static class ReportOperatorOperatorCounterFlour {
+
+            private final ReportOperatorOperatorCounterFlourService report;
+
+            public ReportOperatorOperatorCounterFlour(ReportOperatorOperatorCounterFlourService report) {
+                this.report = report;
+            }
+
+            @PostConstruct
+            public void postConstruct() {
+                for (OperatorOperatorCounterFlour flour : EnumSet.allOf(OperatorOperatorCounterFlour.class)) {
+                    flour.setDataPrepareService(report);
+                }
+            }
+        }
+
+        private void setDataPrepareService(ReportOperatorOperatorCounterFlourService report) {
+            weight = report.getWeight();
+            coefficient_buckwheat = report.getCoefficientBuckwheat();
+            coefficient_corn = report.getCoefficientCorn();
+            coefficient_wheat = report.getCoefficientWheat();
+        }
     }
 }

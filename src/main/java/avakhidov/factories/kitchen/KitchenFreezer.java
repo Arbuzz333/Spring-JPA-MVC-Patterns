@@ -34,6 +34,9 @@ public class KitchenFreezer implements Cook {
     }
 
     private void fillTheFreeze(MainIngredientEnum ingredientEnum) {
+        logger.info("The Freezer contains with {} in quantity {}", ingredientEnum,
+                enumProductMapFreezer.containsKey(ingredientEnum) ? enumProductMapFreezer.get(ingredientEnum).size() : "zero");
+
         List<Product> productList = kitchen.createProductList(Map.of(ingredientEnum, FREEZER_CAPACITY));
         for (Product product : productList) {
             enumProductMapFreezer.merge(product.getMainIngredient().getMainIngredient(), new ArrayDeque<>(Collections.singleton(product)), (v1, v2) -> {

@@ -7,7 +7,6 @@ import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.BuckwheatFlour;
 import avakhidov.factories.entity.flour.CornFlour;
 import avakhidov.factories.entity.flour.FlourCounterServiceAspect;
-import avakhidov.factories.entity.flour.OperatorCounterFlourInterface;
 import avakhidov.factories.entity.flour.WheatFlour;
 import avakhidov.factories.entity.ingredient.Ingredient;
 import avakhidov.factories.entity.ingredient.Peanut;
@@ -23,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -56,8 +56,13 @@ public class BunLiteFactoryTest {
     Product productCorn;
     Product productWheat;
 
-    private static final double weightOne = 0.125;
-    private static final double weightTwo = 0.215;
+    @Value("#{new Double('${weight_bun}')}")
+    double weightOne;
+    @Value("#{new Double('${coefficient_buckwheat}')}")
+    double coefficient_buckwheat;
+
+    @Value("#{new Double('${coefficient_wheat}')}")
+    double coefficient_wheat;
 
     @Before
     public void fillingListIngredient() {
@@ -109,13 +114,13 @@ public class BunLiteFactoryTest {
         productCorn = new Product<>()
                 .outerBuilder()
                 .withFinished(Finished.RAW)
-                .withWeight(weightTwo)
+                .withWeight(weightOne)
                 .withMainIngredient(cornParameterClone)
                 .build();
         productWheat = new Product<>()
                 .outerBuilder()
                 .withFinished(Finished.RAW)
-                .withWeight(weightTwo)
+                .withWeight(weightOne)
                 .withMainIngredient(wheatParameter)
                 .build();
 
@@ -149,8 +154,8 @@ public class BunLiteFactoryTest {
         assertEquals(flours.size(), 2);
         Double buckwheatWeight = flourDoubleMap.get(KindFlour.BUCKWHEAT);
         Double wheatWeight = flourDoubleMap.get(KindFlour.WHEAT);
-        assertEquals(buckwheatWeight, OperatorCounterFlourInterface.coefficient_buckwheat * weightOne * 3);
-        assertEquals(wheatWeight, OperatorCounterFlourInterface.coefficient_wheat * weightTwo * 2);
+        assertEquals(buckwheatWeight, coefficient_buckwheat * weightOne * 3);
+        assertEquals(wheatWeight, coefficient_wheat * weightOne * 2);
 
     }
 }

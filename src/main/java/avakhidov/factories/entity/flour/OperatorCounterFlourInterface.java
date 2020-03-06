@@ -1,15 +1,12 @@
 package avakhidov.factories.entity.flour;
 
 
+import static avakhidov.factories.entity.flour.FlourCounterServiceAspect.OperatorOperatorCounterFlour.coefficient_wheat;
+import static avakhidov.factories.entity.flour.FlourCounterServiceAspect.OperatorOperatorCounterFlour.weight;
+
 public interface OperatorCounterFlourInterface {
 
-    double coefficient_wheat = 0.67;
-
-    double coefficient_corn = 0.55;
-
-    double coefficient_buckwheat = 0.5;
-
-    default double countFlour(double weight) {
+    default double countFlour() {
         return coefficient_wheat * weight;
     }
 
