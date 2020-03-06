@@ -143,13 +143,25 @@ public class BunLiteFactoryTest {
         assertEquals(bunLite1.getAdditionalIngredient(), bunLite3.getAdditionalIngredient());
         assertEquals(bunLite4.getAdditionalIngredient(), bunLite5.getAdditionalIngredient());
         assertEquals(bunLite5.getProduct(), bunLite6.getProduct());
+
+        flourCounterServiceAspect.getFlourDoubleMap().clear();
     }
 
     @Test
     public void flourDoubleMapTest() {
 
+        factory.getBunLite(new Date(), ingredientListFirst, product);
+        factory.getBunLite(new Date(), ingredientListFirstRevers, productClone);
+        factory.getBunLite(new Date(), ingredientListFirst, productCorn);
+        factory.getBunLite(new Date(), ingredientListNut, product);
+        factory.getBunLite(new Date(), ingredientListNutRevers, productWheat);
+        factory.getBunLite(new Date(), ingredientListNut, productWheat);
+
         Map<KindFlour, Double> flourDoubleMap = flourCounterServiceAspect.getFlourDoubleMap();
         Set<KindFlour> flours = flourDoubleMap.keySet();
+
+        assertEquals(factory.getCountIngredientList(), 2);
+        assertEquals(factory.getCountProductList(), 3);
 
         assertEquals(flours.size(), 2);
         Double buckwheatWeight = flourDoubleMap.get(KindFlour.BUCKWHEAT);

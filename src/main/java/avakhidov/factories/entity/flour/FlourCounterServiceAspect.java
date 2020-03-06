@@ -77,23 +77,23 @@ public class FlourCounterServiceAspect {
         static double coefficient_buckwheat;
 
         @Component
-        public static class ReportOperatorOperatorCounterFlour {
+        static class ReportOperatorOperatorCounterFlour {
 
-            private final ReportOperatorOperatorCounterFlourService report;
+            private final ReportOperatorCounterFlourService report;
 
-            public ReportOperatorOperatorCounterFlour(ReportOperatorOperatorCounterFlourService report) {
+            private ReportOperatorOperatorCounterFlour(ReportOperatorCounterFlourService report) {
                 this.report = report;
             }
 
             @PostConstruct
-            public void postConstruct() {
+            private void postConstruct() {
                 for (OperatorOperatorCounterFlour flour : EnumSet.allOf(OperatorOperatorCounterFlour.class)) {
                     flour.setDataPrepareService(report);
                 }
             }
         }
 
-        private void setDataPrepareService(ReportOperatorOperatorCounterFlourService report) {
+        private void setDataPrepareService(ReportOperatorCounterFlourService report) {
             weight = report.getWeight();
             coefficient_buckwheat = report.getCoefficientBuckwheat();
             coefficient_corn = report.getCoefficientCorn();
