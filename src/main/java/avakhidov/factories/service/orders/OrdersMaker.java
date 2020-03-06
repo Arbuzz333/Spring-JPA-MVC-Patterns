@@ -13,7 +13,6 @@ import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.utility.MainUtility;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -24,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-@Service
 public class OrdersMaker {
 
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(OrdersMaker.class);

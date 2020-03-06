@@ -4,7 +4,7 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.enums.MainIngredientEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayDeque;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+@Lazy
 @Service
 public class KitchenFreezer implements Cook {
 
@@ -23,10 +24,14 @@ public class KitchenFreezer implements Cook {
 
     private static final int FREEZER_CAPACITY = 100;
 
-    @Autowired
-    private Kitchen kitchen;
+    private final Kitchen kitchen;
 
     private Map<MainIngredientEnum, Deque<Product>> enumProductMapFreezer = new TreeMap<>();
+
+    public KitchenFreezer(
+            Kitchen kitchen) {
+        this.kitchen = kitchen;
+    }
 
     private void fillTheFreeze(MainIngredientEnum ingredientEnum) {
         List<Product> productList = kitchen.createProductList(Map.of(ingredientEnum, FREEZER_CAPACITY));

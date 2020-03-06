@@ -1,9 +1,13 @@
 package avakhidov.factories.config;
 
 
+import avakhidov.factories.comand.CommandOrders;
 import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.kitchen.Kitchen;
 import avakhidov.factories.service.Recipe;
+import avakhidov.factories.service.orders.OrderVerification;
+import avakhidov.factories.service.orders.OrdersMaker;
+import avakhidov.factories.service.orders.OrdersSplitter;
 import avakhidov.factories.service.serviceimpl.BuckwheatBunRecipe;
 import avakhidov.factories.service.serviceimpl.CornBunRecipe;
 import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
@@ -12,6 +16,7 @@ import avakhidov.factories.service.serviceimpl.cutlet.PorkCutletRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.VealCutletRecipe;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
@@ -35,17 +40,26 @@ class AppContext {
     private final VealCutletRecipe vealCutletRecipe;
     private final PorkCutletRecipe porkCutletRecipe;
 
+    private final CommandOrders commandOrders;
+    private final OrdersSplitter ordersSplitter;
+    private final OrderVerification verification;
+
     public AppContext(CornBunRecipe cornBunRecipe
             , BuckwheatBunRecipe buckwheatBunRecipe
             , WheatBunRecipe wheatBunRecipe
             , ChickenCutletRecipe chickenCutletRecipe
             , VealCutletRecipe vealCutletRecipe
-            , PorkCutletRecipe porkCutletRecipe) {
+            , PorkCutletRecipe porkCutletRecipe
+            , CommandOrders commandOrders
+            , OrdersSplitter ordersSplitter
+            , OrderVerification verification) {
         this.cornBunRecipe = cornBunRecipe; this.buckwheatBunRecipe = buckwheatBunRecipe; this.wheatBunRecipe = wheatBunRecipe;
         this.chickenCutletRecipe = chickenCutletRecipe; this.vealCutletRecipe = vealCutletRecipe; this.porkCutletRecipe = porkCutletRecipe;
+        this.commandOrders = commandOrders; this.ordersSplitter = ordersSplitter; this.verification = verification;
     }
 
     @Bean
+    @Lazy
     public Kitchen kitchen() {
         Map<MainIngredientEnum, List<Recipe>> enumRecipeMap = new TreeMap<>();
         enumRecipeMap.put(MainIngredientEnum.PARAMETER_PREPARE_DOUGH, Arrays.asList(cornBunRecipe, buckwheatBunRecipe, wheatBunRecipe));
@@ -56,6 +70,12 @@ class AppContext {
         mainIngredientWeight.put(MainIngredientEnum.MEAT, WEIGHT_CUTLET);
 
         return new Kitchen(enumRecipeMap, mainIngredientWeight);
+    }
+
+    @Bean(initMethod = "initMapClassMethodHandler")
+    @Lazy
+    public OrdersMaker ordersMaker() {
+        return new OrdersMaker(commandOrders, ordersSplitter, verification);
     }
 
     @Bean

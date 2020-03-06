@@ -20,6 +20,7 @@ public class OrderVerification {
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderVerification.class);
 
     void verificationBun(Bun bun, KindFlour kindFlour, KindDough kindDough) {
+        KindDough startKindDough = kindDough;
         boolean result;
 
         result = bun.getMainIngredient().getFlour().getKind().equals(kindFlour);
@@ -33,7 +34,7 @@ public class OrderVerification {
             } else {
                 kindDough = KindDough.YEAST_DOUGH;
             }
-            logger.info("Verification Bun is replaced KindDough: {}.", kindDough.name());
+            logger.info("Verification Bun is replaced KindDough from {} to {}.", startKindDough.name(), kindDough.name());
         }
         result = bun.getMainIngredient().getKindDough().equals(kindDough) && result;
         if (!result) {
