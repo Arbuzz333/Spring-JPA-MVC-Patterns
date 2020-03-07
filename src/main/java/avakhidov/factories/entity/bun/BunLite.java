@@ -25,4 +25,15 @@ public class BunLite {
         this.product = product;
     }
 
+    public List<Ingredient> getAdditionalIngredient() {
+        return additionalIngredient;
+    }
+
+    public Product<ParameterPrepareDough<? extends Flour>> getProduct() {
+        return product;
+    }
+
+    public Date getDate() {
+        return date;
+    }
 }

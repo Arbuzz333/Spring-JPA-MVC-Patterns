@@ -11,17 +11,32 @@ import avakhidov.factories.exception.BunNotVerificationException;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class OrderVerification {
 
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderVerification.class);
 
     void verificationBun(Bun bun, KindFlour kindFlour, KindDough kindDough) {
+        KindDough startKindDough = kindDough;
         boolean result;
 
         result = bun.getMainIngredient().getFlour().getKind().equals(kindFlour);
-        result = bun.getMainIngredient().getKindDough().equals(kindDough) && result;
 
+        if (bun.getMainIngredient().getFlour().getKind().equals(KindFlour.WHEAT)) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+            String ampm = formatter.format(LocalTime.now());
+
+            if (ampm.contains("AM")) {
+                kindDough = KindDough.PUFF_PASTRY;
+            } else {
+                kindDough = KindDough.YEAST_DOUGH;
+            }
+            logger.info("Verification Bun is replaced KindDough from {} to {}.", startKindDough.name(), kindDough.name());
+        }
+        result = bun.getMainIngredient().getKindDough().equals(kindDough) && result;
         if (!result) {
             throw new BunNotVerificationException(bun.getClass().getName(), bun.getUuid().toString(), kindDough.name() + kindFlour.name());
         }

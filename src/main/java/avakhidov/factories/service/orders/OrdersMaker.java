@@ -10,9 +10,9 @@ import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.dough.KindDough;
+import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.utility.MainUtility;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-@Service
 public class OrdersMaker {
 
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(OrdersMaker.class);
@@ -72,25 +71,42 @@ public class OrdersMaker {
 
         List<Product> result = new ArrayList<>();
         if (clazz.getSuperclass().equals(Bun.class)) {
-            MethodHandleBun methodHandleBun = CLASS_HANDLES_BUN.get(clazz.getName());
-            MethodHandle methodHandle = methodHandleBun.handle;
-            result = (List<Product>) methodHandle.invokeExact(quantity, commandOrders);
-            Bun product = (Bun) result.get(MainUtility.randomInt(0, result.size() - 1));
-            verification.verificationBun(product, methodHandleBun.kindFlour, methodHandleBun.kindDough);
+            result.addAll(makeBunOrders(quantity, clazz));
         } else {
             if (clazz.getSuperclass().equals(Cutlet.class)) {
-                MethodHandleCutlet methodHandleCutlet = CLASS_HANDLES_CUTLET.get(clazz.getName());
-                MethodHandle handle = methodHandleCutlet.handle;
-                result = (List<Product>) handle.invokeExact(quantity, commandOrders);
-
-                Cutlet product = (Cutlet) result.get(MainUtility.randomInt(0, result.size() - 1));
-                verification.verificationCutlet(product, methodHandleCutlet.kindMeat, methodHandleCutlet.fatMeat);
+                result.addAll(makeCutletOrders(quantity, clazz));
             }
         }
         return result;
     }
 
-    private class MethodHandleBun {
+    public List<Bun> makeBunOrders(int quantity, Class clazz) throws Throwable {
+        if (!CLASS_HANDLES_BUN.containsKey(clazz.getName())) {
+            throw new ClassArgumentIllegalException(clazz.toString(), "public List<Bun> makeBunOrders(int quantity, Class clazz)", this.getClass().toString());
+        }
+        MethodHandleBun methodHandleBun = CLASS_HANDLES_BUN.get(clazz.getName());
+        MethodHandle methodHandle = methodHandleBun.handle;
+        List<Bun> result = (List<Bun>) methodHandle.invokeExact(quantity, commandOrders);
+
+        Bun product = result.get(MainUtility.randomInt(0, result.size() - 1));
+        verification.verificationBun(product, methodHandleBun.kindFlour, methodHandleBun.kindDough);
+        return result;
+    }
+
+    public List<Cutlet> makeCutletOrders(int quantity, Class clazz) throws Throwable {
+        if (!CLASS_HANDLES_CUTLET.containsKey(clazz.getName())) {
+            throw new ClassArgumentIllegalException(clazz.toString(), "public List<Cutlet> makeCutletOrders(int quantity, Class clazz)", this.getClass().toString());
+        }
+        MethodHandleCutlet methodHandleCutlet = CLASS_HANDLES_CUTLET.get(clazz.getName());
+        MethodHandle handle = methodHandleCutlet.handle;
+        List<Cutlet> result = (List<Cutlet>) handle.invokeExact(quantity, commandOrders);
+
+        Cutlet product = result.get(MainUtility.randomInt(0, result.size() - 1));
+        verification.verificationCutlet(product, methodHandleCutlet.kindMeat, methodHandleCutlet.fatMeat);
+        return result;
+    }
+
+        private class MethodHandleBun {
 
         private MethodHandle handle;
         KindFlour kindFlour;
