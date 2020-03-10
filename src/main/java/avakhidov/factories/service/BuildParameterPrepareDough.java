@@ -6,5 +6,5 @@ import avakhidov.factories.entity.dough.ParameterPrepareDough;
 
 public interface BuildParameterPrepareDough {
 
-    ParameterPrepareDough toKneadTheDough();
+    ParameterPrepareDough<?> toKneadTheDough();
 }

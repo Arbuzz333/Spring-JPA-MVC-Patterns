@@ -77,11 +77,11 @@ public class FlourCounterServiceAspect {
         static double coefficient_buckwheat;
 
         @Component
-        static class ReportOperatorOperatorCounterFlour {
+        static class ReportOperatorCounterFlour {
 
             private final ReportOperatorCounterFlourService report;
 
-            private ReportOperatorOperatorCounterFlour(ReportOperatorCounterFlourService report) {
+            private ReportOperatorCounterFlour(ReportOperatorCounterFlourService report) {
                 this.report = report;
             }
 

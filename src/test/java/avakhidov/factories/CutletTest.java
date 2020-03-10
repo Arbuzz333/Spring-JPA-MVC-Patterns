@@ -52,19 +52,19 @@ public class CutletTest {
     public void cutletTest() {
         final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(0.100);
 
-        final Cutlet chickenCutlet = new ChickenCutlet(
-                new ChickenMeat(FatMeat.DIETARY, new Chicken())
+        final Cutlet<ChickenMeat> chickenCutlet = new ChickenCutlet(
+                (ChickenMeat) meatService.buildMeat(ChickenMeat.class)
                 , true
                 , 120.0);
 
-        Cutlet.SesameBun sesameBun = porkCutlet.createSesameBun(ParameterDoughEnum.WHEAT_FLOUR_FINE
+        Cutlet<PorkMeat>.SesameBun sesameBun = porkCutlet.createSesameBun(ParameterDoughEnum.WHEAT_FLOUR_FINE
                 , true
                 , new Sesame()
                 , 80.0);
 
         sesameBun.setKindDough();
 
-        List<Cutlet> cutlets = new ArrayList<>();
+        List<Cutlet<? extends Meat>> cutlets = new ArrayList<>();
         cutlets.add(porkCutlet);
         cutlets.add(chickenCutlet);
 
@@ -84,8 +84,8 @@ public class CutletTest {
         cutlets.add(vealCutlet);
 
         assertEquals(porkCutletFat.getMainIngredient().getFatMeat(), FatMeat.SPECK);
-        assertEquals(muttonCutlet.getMainIngredient().getFatMeat(), FatMeat.LOWFAT);
-        assertEquals(vealCutlet.getMainIngredient().getFatMeat(), FatMeat.DIETARY);
+        assertEquals(muttonCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUMFAT);
+        assertEquals(vealCutlet.getMainIngredient().getFatMeat(), FatMeat.LOWFAT);
         assertEquals(5, cutlets.size());
         assertEquals(KindDough.YEAST_DOUGH, porkCutlet.getParameterPrepareDoughBun().getKindDough());
 
@@ -97,7 +97,7 @@ public class CutletTest {
         final Cutlet<VealMeat> vealCutlet = vealCutletRecipe.cooked(0.90);
         final Cutlet<PorkMeat> porkCutlet = porkCutletRecipe.cooked(0.100);
 
-        Cutlet cutlet = cutletService.getMoreFatCutlet(vealCutlet, porkCutlet);
+        Cutlet<?> cutlet = cutletService.getMoreFatCutlet(vealCutlet, porkCutlet);
 
         assertFalse(cutlet instanceof VealCutlet);
 
