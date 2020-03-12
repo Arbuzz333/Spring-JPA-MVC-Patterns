@@ -3,7 +3,6 @@ package avakhidov.factories.service.meat.meatimpl;
 import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.service.meat.MeatService;
-import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -11,7 +10,7 @@ import java.util.TreeMap;
 
 import static avakhidov.factories.enums.FatMeat.*;
 
-//@Service
+
 public class MeatServiceImpl implements MeatService {
 
     final Map<Class<? extends Meat>, Meat> classMeatMap = new TreeMap<>(Comparator.comparing(Class::getName));

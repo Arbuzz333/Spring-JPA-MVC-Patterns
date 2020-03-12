@@ -3,6 +3,7 @@ package avakhidov.factories.entity.cutlet;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
+import avakhidov.factories.entity.flour.Flour;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.enums.dough.DoughUtil;
@@ -43,7 +44,7 @@ public abstract class Cutlet<T extends Meat> extends Product<T> {
         return this.sesameBun.sesame;
     }
 
-    public ParameterPrepareDough getParameterPrepareDoughBun() {
+    public ParameterPrepareDough<? extends Flour> getParameterPrepareDoughBun() {
         return this.sesameBun.getMainIngredient();
     }
 
