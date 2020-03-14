@@ -6,5 +6,5 @@ import avakhidov.factories.entity.dough.ParameterPrepareDough;
 
 public interface MakeDough<T extends Flour> {
 
-    Dough baseMakerDough(ParameterPrepareDough<T> prepare, double fat);
+    Dough<T> baseMakerDough(ParameterPrepareDough<T> prepare, double fat);
 }
