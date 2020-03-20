@@ -3,6 +3,7 @@ package avakhidov.factories.service.pancake;
 import avakhidov.factories.entity.dough.pancakedough.PancakePrepareDough;
 import avakhidov.factories.entity.flour.BuckwheatFlour;
 import avakhidov.factories.entity.flour.CornFlour;
+import avakhidov.factories.entity.flour.Flour;
 import avakhidov.factories.entity.flour.WheatFlour;
 import avakhidov.factories.entity.ingredient.Egg;
 import avakhidov.factories.entity.livestock.Calf;
@@ -14,7 +15,6 @@ import avakhidov.factories.entity.pancake.PancakeWheat;
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.GrindingFlour;
-import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.order.OrderPancake;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,9 @@ import java.util.List;
 @Service
 public class PancakeRecipe implements PancakeVisitor {
 
-    public List<OrderPancake> createListPancakeRecipe(PancakeRecipeCreate...creates) {
-        List<OrderPancake> result = new ArrayList<>();
-        for (PancakeRecipeCreate create : creates) {
+    public List<OrderPancake<? extends Flour>> createListPancakeRecipe(PancakeRecipeCreate<? extends Flour>...creates) {
+        List<OrderPancake<? extends Flour>> result = new ArrayList<>();
+        for (PancakeRecipeCreate<? extends Flour> create : creates) {
             result.add(create.pancakeOrderCreate(this));
         }
         return result;
@@ -38,7 +38,6 @@ public class PancakeRecipe implements PancakeVisitor {
         PancakeBuckwheat pancakeBuckwheat = new PancakeBuckwheat(
                 new PancakePrepareDough<>(
                         new BuckwheatFlour(GrindingFlour.MEDIUM),
-                        KindDough.PANCAKE,
                         36,
                         LocalTime.of(0, 40),
                         6.7,
@@ -53,7 +52,6 @@ public class PancakeRecipe implements PancakeVisitor {
         PancakeCorn pancakeCorn = new PancakeCorn(
                 new PancakePrepareDough<>(
                         new CornFlour(GrindingFlour.COARSE),
-                        KindDough.PANCAKE,
                         36,
                         LocalTime.of(1, 40),
                         8.5,
@@ -68,7 +66,6 @@ public class PancakeRecipe implements PancakeVisitor {
         PancakeWheat pancakeWheat = new PancakeWheat(
                 new PancakePrepareDough<>(
                         new WheatFlour(GrindingFlour.FINE),
-                        KindDough.PANCAKE,
                         41,
                         LocalTime.of(0, 55),
                         9.1,

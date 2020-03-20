@@ -14,6 +14,8 @@ import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.ChickenCutletRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.PorkCutletRecipe;
 import avakhidov.factories.service.serviceimpl.cutlet.VealCutletRecipe;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -81,6 +83,11 @@ class AppContext {
     @Bean
     public static PropertySourcesPlaceholderConfigurer configurer() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean(name = "ConcurrentMapCacheManager")
+    public CacheManager concurrentMapCacheManager() {
+        return new ConcurrentMapCacheManager();
     }
 
 }
