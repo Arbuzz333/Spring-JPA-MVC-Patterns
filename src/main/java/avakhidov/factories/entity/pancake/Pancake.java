@@ -9,7 +9,7 @@ public abstract class Pancake<T extends Flour> extends Product<PancakePrepareDou
 
     private MainIngredient ingredient;
 
-    Pancake(PancakePrepareDough<T> mainIngredient, double weight, MainIngredient ingredient) {
+    public Pancake(PancakePrepareDough<T> mainIngredient, double weight, MainIngredient ingredient) {
         super(mainIngredient, weight);
         this.ingredient = ingredient;
     }

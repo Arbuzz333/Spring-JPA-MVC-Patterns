@@ -12,9 +12,8 @@ public class PancakePrepareDough<T extends Flour> extends ParameterPrepareDough<
 
     private Egg egg;
 
-    public PancakePrepareDough(T flourDough, KindDough kindDoughParameter,
-                               int temperature, LocalTime time, double fatParameter, Egg egg) {
-        super(flourDough, kindDoughParameter, temperature, time, fatParameter);
+    public PancakePrepareDough(T flourDough, int temperature, LocalTime time, double fatParameter, Egg egg) {
+        super(flourDough, KindDough.PANCAKE, temperature, time, fatParameter);
         this.egg = egg;
     }
 

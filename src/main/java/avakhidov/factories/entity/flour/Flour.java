@@ -5,6 +5,7 @@ import avakhidov.factories.entity.ingredient.Ingredient;
 import avakhidov.factories.enums.GrindingFlour;
 import avakhidov.factories.enums.KindFlour;
 
+// ToDo MainIngredient
 public abstract class Flour extends Ingredient {
 
     private KindFlour kind;
