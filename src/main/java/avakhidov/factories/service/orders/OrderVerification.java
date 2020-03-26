@@ -8,6 +8,7 @@ import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.exception.BunNotVerificationException;
+import avakhidov.factories.exception.CutletNotVerificationException;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class OrderVerification {
         result = meat.getFatMeat().equals(fatMeat) && result;
 
         if (!result) {
-            throw new BunNotVerificationException(cutlet.getClass().getName(), cutlet.getUuid().toString(), fatMeat.name() + kindMeat.name());
+            throw new CutletNotVerificationException(cutlet.getClass().getName(), cutlet.getUuid().toString(), fatMeat.name() + kindMeat.name());
         }
         logger.info("Verification Cutlet is success, Cutlet: {}.", cutlet.getClass().getName());
     }
