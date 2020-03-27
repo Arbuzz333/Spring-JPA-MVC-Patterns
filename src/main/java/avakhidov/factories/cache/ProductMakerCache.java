@@ -140,7 +140,7 @@ public class ProductMakerCache {
         return productDouble;
     }
 
-    /*key = "#mainIngredientKey" -- не обязательный параметр*/
+    /*key = "#mainIngredientKey" -- не обязательный параметр тут*/
     @CacheEvict(cacheNames = "productDouble", key = "#mainIngredientKey")
     public void productDoubleEvict(MainIngredientEnum mainIngredientKey, MainIngredientEnum mainIngredient) {
         Predicate<Product> predicateOne = p -> p.getMainIngredient().getMainIngredient().equals(mainIngredientKey);
