@@ -79,7 +79,7 @@ public class ProductMakerCache {
         return product;
     }
 
-    @Cacheable(cacheNames="product", cacheManager = "ConcurrentMapCacheManager")
+    @Cacheable(cacheNames="product")
     public Product<? extends MainIngredient> getProduct(MainIngredientEnum flour) {
         Product<? extends MainIngredient> product = null;
         if (products != null) {
@@ -106,7 +106,7 @@ public class ProductMakerCache {
         return productList;
     }
 
-    @Cacheable(cacheNames={"productList", "bunList"}, cacheManager = "ConcurrentMapCacheManager")
+    @Cacheable(cacheNames={"productList", "bunList"})
     public List<Product<? extends MainIngredient>> getProductList(MainIngredientEnum flour) {
         List<Product<? extends MainIngredient>> productList = null;
         if (products != null) {
@@ -119,7 +119,7 @@ public class ProductMakerCache {
         return productList;
     }
 
-    @Cacheable(cacheNames ="productDouble", cacheManager = "ConcurrentMapCacheManager", key = "#mainIngredientKey")
+    @Cacheable(cacheNames ="productDouble", key = "#mainIngredientKey")
     public ProductDouble getDoubleProduct(MainIngredientEnum mainIngredientKey, MainIngredientEnum mainIngredient) {
         ProductDouble productDouble = null;
         Product<? extends MainIngredient> productOne;
