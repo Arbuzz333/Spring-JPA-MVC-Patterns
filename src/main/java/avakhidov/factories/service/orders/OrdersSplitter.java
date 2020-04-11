@@ -39,7 +39,7 @@ public class OrdersSplitter {
         return result;
     }
 
-    @KitchenCutlet(productClass = PorkCutlet.class, kindMeat = KindMeat.PORK)
+    @KitchenCutlet(productClass = PorkCutlet.class, kindMeat = KindMeat.PORK, fatMeat = FatMeat.SPECK)
     public List<PorkCutlet> getOrdersPorkCutlet(int count, CommandOrders commandOrders) {
         List<PorkCutlet> result = new ArrayList<>();
 
