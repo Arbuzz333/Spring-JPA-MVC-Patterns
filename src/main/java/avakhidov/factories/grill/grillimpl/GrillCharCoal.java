@@ -8,10 +8,10 @@ import avakhidov.factories.grill.energy.energyimpl.CharCoal;
 
 public class GrillCharCoal implements Grill {
 
-    private CharCoal enegy;
+    private CharCoal energy;
 
     public GrillCharCoal(CharCoal enegy) {
-        this.enegy = enegy;
+        this.energy = enegy;
     }
 
     @Override
@@ -21,6 +21,6 @@ public class GrillCharCoal implements Grill {
 
     @Override
     public Energy getEnergy() {
-        return enegy;
+        return energy;
     }
 }

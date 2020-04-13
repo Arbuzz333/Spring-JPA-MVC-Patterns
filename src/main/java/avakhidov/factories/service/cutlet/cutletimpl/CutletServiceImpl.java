@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class CutletServiceImpl implements CutletService {
 
     @Override
-    public <T extends Meat, S extends Meat> Cutlet getMoreFatCutlet(Cutlet<T> cutletFirst, Cutlet<S> cutletSecond) {
+    public <T extends Meat, S extends Meat> Cutlet<? extends Meat> getMoreFatCutlet(Cutlet<T> cutletFirst, Cutlet<S> cutletSecond) {
         if (cutletFirst.getMainIngredient().getFatMeat().compareTo(cutletSecond.getMainIngredient().getFatMeat()) <= 0) {
             return cutletFirst;
         }

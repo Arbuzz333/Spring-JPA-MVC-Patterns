@@ -1,6 +1,7 @@
 package avakhidov.factories.service.pancake;
 
 import avakhidov.factories.entity.dough.pancakedough.PancakePrepareDough;
+import avakhidov.factories.entity.flour.Flour;
 import avakhidov.factories.entity.ingredient.Ketchup;
 import avakhidov.factories.entity.ingredient.SourCream;
 import avakhidov.factories.entity.ingredient.Walnut;
@@ -42,7 +43,7 @@ public class PancakeRecipeVisitorTest {
     private PancakeWheatRecipeCreate pancakeWheatRecipe;
 
     private Map<Class, OrderPancake> classOrderPancakeMap = new HashMap<>();
-    private List<OrderPancake> listPancakeRecipe = new ArrayList<>();
+    private List<OrderPancake<? extends Flour>> listPancakeRecipe = new ArrayList<>();
 
     @Before
     public void createListClassOrder() {

@@ -7,7 +7,7 @@ public interface PancakeVisitor {
 
     <T extends Flour> Pancake<T> pancakeBuckwheatVisit(PancakeBuckwheatRecipeCreate buckwheatOrderCreate);
 
-    <T extends Flour> Pancake<T> pancakeWheatVisit(PancakeWheatRecipeCreate wheatOrderCreate);
+    <S extends Flour> Pancake<S> pancakeWheatVisit(PancakeWheatRecipeCreate wheatOrderCreate);
 
-    <T extends Flour> Pancake<T> pancakeCornVisit(PancakeCornRecipeCreate cornOrderCreate);
+    <E extends Flour> Pancake<E> pancakeCornVisit(PancakeCornRecipeCreate cornOrderCreate);
 }
