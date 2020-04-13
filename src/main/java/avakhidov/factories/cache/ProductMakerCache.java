@@ -140,6 +140,29 @@ public class ProductMakerCache {
         return productDouble;
     }
 
+    @CachePut(cacheNames = "productDouble", key = "#mainIngredientKey")
+    public ProductDouble getDoubleProductPut(MainIngredientEnum mainIngredientKey, Class clazzOne, Class clazzTwo) {
+        ProductDouble productDouble;
+        Product<? extends MainIngredient> productOne = getProductBtVisitor(clazzOne);
+        Product<? extends MainIngredient> productTwo = getProductBtVisitor(clazzTwo);
+
+        productDouble = new ProductDouble(productOne, productTwo);
+        return productDouble;
+
+    }
+
+    private Product<? extends MainIngredient> getProductBtVisitor(Class clazz) {
+        Product<? extends MainIngredient> product = null;
+
+        visitor.initOrdersMakerProduct(1, clazz);
+        try {
+            product = (visitor.accept()).get(0);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        return product;
+    }
+
     /*key = "#mainIngredientKey" -- не обязательный параметр тут*/
     @CacheEvict(cacheNames = "productDouble", key = "#mainIngredientKey")
     public void productDoubleEvict(MainIngredientEnum mainIngredientKey, MainIngredientEnum mainIngredient) {
