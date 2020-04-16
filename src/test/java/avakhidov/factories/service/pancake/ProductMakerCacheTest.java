@@ -134,7 +134,7 @@ public class ProductMakerCacheTest {
         assertEquals("products.size()", 55, bunListAfterCache.size());
         WheatBun wheatBunAfterCache = (WheatBun) bunListAfterCache.get(MainUtility.randomInt(0, 55 - 1));
         assertEquals("KindFlour", KindFlour.WHEAT, wheatBunAfterCache.getMainIngredient().getFlour().getKind());
-        assertEquals("KindFlour", KindDough.YEAST_DOUGH, wheatBunAfterCache.getMainIngredient().getKindDough());
+        assertEquals("KindFlour", KindDough.PUFF_PASTRY, wheatBunAfterCache.getMainIngredient().getKindDough());
 
     }
 

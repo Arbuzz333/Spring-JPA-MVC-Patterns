@@ -9,6 +9,10 @@ public class ChickenCutlet extends Cutlet<ChickenMeat> {
         super(meat, recipeReady, weight);
     }
 
+    ChickenCutlet() {
+
+    }
+
     private ChickenCutlet(ChickenCutlet chickenCutlet) {
         super(new ChickenMeat(chickenCutlet.getMainIngredient().getFatMeat(), new Chicken())
                 , chickenCutlet.isRecipeReady()
@@ -24,5 +28,9 @@ public class ChickenCutlet extends Cutlet<ChickenMeat> {
 
     public ChickenCutlet cloneChickenCutlet(ChickenCutlet cutlet) {
         return new ChickenCutlet(cutlet);
+    }
+
+    public static OuterBuilderChickenCutlet<? extends ChickenCutlet, ?> outerBuilderChickenCutlet() {
+        return new FinalOuterBuilderChickenCutlet();
     }
 }

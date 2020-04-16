@@ -25,15 +25,12 @@ public class ProductMakerEhCache {
 
     private final OrdersMakerProduct visitor;
 
-    private final ProductCacheEventListener listener;
 
     public ProductMakerEhCache(
             OrdersMakerProduct visitor,
-            CacheManager ehcacheCacheManager,
-            ProductCacheEventListener listener) {
+            CacheManager ehcacheCacheManager) {
         this.visitor = visitor;
         this.ehcacheCacheManager = ehcacheCacheManager;
-        this.listener = listener;
     }
 
 

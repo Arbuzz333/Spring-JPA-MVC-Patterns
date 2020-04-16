@@ -62,7 +62,7 @@ public class OrdersMakerTest {
 
         assertEquals("List of WheatBun size must be 12", products.size(), 12);
         ParameterPrepareDough<WheatFlour> prepareDough = (ParameterPrepareDough<WheatFlour>) products.get(0).getMainIngredient();
-        assertEquals("Main ingredient from CornFlour", prepareDough.getKindDough(), KindDough.YEAST_DOUGH);
+        assertEquals("Main ingredient from CornFlour", prepareDough.getKindDough(), KindDough.PUFF_PASTRY);
     }
 
 }

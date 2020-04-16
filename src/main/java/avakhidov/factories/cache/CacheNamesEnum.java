@@ -2,7 +2,8 @@ package avakhidov.factories.cache;
 
 public enum CacheNamesEnum {
 
-    PRODUCT_EHCACHE("productEhcache");
+    PRODUCT_EHCACHE("productEhcache"),
+    CUTLET_EHCACHE("cutletEhcache");
 
     private String code;
 

@@ -33,6 +33,12 @@ public class MuttonCutlet extends Cutlet<MuttonMeat> {
             return self();
         }
 
+        public R withMainIngredient(FatMeat fatMeat) {
+            R self = self();
+            self.withMainIngredient(new MuttonMeat(fatMeat, new Sheep()));
+            return self();
+        }
+
     }
 
     private static class FinalBuilderMuttonCutlet extends BuilderMuttonCutlet<MuttonCutlet, FinalBuilderMuttonCutlet> {

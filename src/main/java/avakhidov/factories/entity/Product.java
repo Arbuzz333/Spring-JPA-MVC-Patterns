@@ -46,7 +46,7 @@ public class Product<T extends MainIngredient> {
         return finished;
     }
 
-    Product<T> setMainIngredient(T mainIngredient) {
+    public Product<T> setMainIngredient(T mainIngredient) {
         this.mainIngredient = mainIngredient;
         return this;
     }
