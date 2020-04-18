@@ -1,6 +1,12 @@
 package avakhidov.factories.entity.cutlet;
 
+import avakhidov.factories.entity.livestock.Pig;
 import avakhidov.factories.entity.meat.PorkMeat;
+import avakhidov.factories.enums.FatMeat;
+import avakhidov.factories.enums.Finished;
+import avakhidov.factories.enums.dough.KindDough;
+
+import static avakhidov.factories.enums.dough.ParameterDoughEnum.BUCKWHEAT_FLOUR_MEDIUM;
 
 public class PorkCutlet extends Cutlet<PorkMeat> {
 
@@ -24,6 +30,22 @@ public class PorkCutlet extends Cutlet<PorkMeat> {
         public R withRecipeReady(boolean recipeReady) {
             this.recipeReady = recipeReady;
             getNested().setRecipeReady(recipeReady);
+            return self();
+        }
+
+        public R withMainIngredient(FatMeat fatMeat) {
+            R self = self();
+            self.withMainIngredient(new PorkMeat(fatMeat, new Pig()));
+            return self();
+        }
+
+        public R withSeasamBun(double weight) {
+            getNested().builderSesameBun()
+                    .withMainIngredient(BUCKWHEAT_FLOUR_MEDIUM.toKneadTheDough())
+                    .withFinished(Finished.RAW)
+                    .withRecipeReady(true)
+                    .withKindDough(KindDough.SHORTCRUST_PASTRY).withWeight(weight)
+                    .build();
             return self();
         }
 

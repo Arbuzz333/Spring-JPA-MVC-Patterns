@@ -138,36 +138,4 @@ public class ProductMakerCacheTest {
 
     }
 
-    @Test
-    public void getDoubleProductTest() {
-        ProductDouble doubleProduct = productMakerCacheFour.getDoubleProduct(MainIngredientEnum.MEAT, MainIngredientEnum.PREPARE_PANCAKE_DOUGH);
-
-        List<Product> product = productMakerCacheFour.getProduct();
-        assertEquals("products double.size()", 51, product.size());
-
-        PorkMeat porkMeat = ((PorkMeat) doubleProduct.getProductOne().getMainIngredient());
-        assertEquals("KindMeat.PORK", KindMeat.PORK, porkMeat.getKindMeat());
-
-        PancakePrepareDough<BuckwheatFlour> dough = ((PancakePrepareDough<BuckwheatFlour>) doubleProduct.getProductTwo().getMainIngredient());
-        assertEquals("KindFlour.BUCKWHEAT", KindFlour.BUCKWHEAT, dough.getFlour().getKind());
-        assertEquals("KindDough.PANCAKE", KindDough.PANCAKE, dough.getKindDough());
-
-        ProductDouble doubleProductDough = productMakerCacheFour.getDoubleProduct(MainIngredientEnum.MEAT, MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
-        PorkMeat porkMeatDough = ((PorkMeat) doubleProductDough.getProductOne().getMainIngredient());
-        assertEquals("KindMeat.PORK", KindMeat.PORK, porkMeatDough.getKindMeat());
-
-        PancakePrepareDough<BuckwheatFlour> doughDough = ((PancakePrepareDough<BuckwheatFlour>) doubleProductDough.getProductTwo().getMainIngredient());
-        assertEquals("KindFlour.BUCKWHEAT", KindFlour.BUCKWHEAT, doughDough.getFlour().getKind());
-        assertEquals("KindDough.PANCAKE", KindDough.PANCAKE, doughDough.getKindDough());
-
-        ProductDouble doubleProductReplace = productMakerCacheFour.getDoubleProduct(MainIngredientEnum.PARAMETER_PREPARE_DOUGH, MainIngredientEnum.MEAT);
-        PorkMeat porkMeatReplace = ((PorkMeat) doubleProductReplace.getProductTwo().getMainIngredient());
-        assertEquals("KindMeat.PORK", KindMeat.PORK, porkMeatReplace.getKindMeat());
-
-        ParameterPrepareDough<CornFlour> doughReplace = ((ParameterPrepareDough<CornFlour>) doubleProductReplace.getProductOne().getMainIngredient());
-        assertEquals("KindFlour.BUCKWHEAT", KindFlour.CORN, doughReplace.getFlour().getKind());
-        assertEquals("KindDough.PANCAKE", KindDough.PUFF_PASTRY, doughReplace.getKindDough());
-
-    }
-
 }
