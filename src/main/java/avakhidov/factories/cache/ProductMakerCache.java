@@ -106,7 +106,7 @@ public class ProductMakerCache {
         return productList;
     }
 
-    @Cacheable(cacheNames={"productList", "bunList"})
+    @Cacheable(cacheNames="productList")
     public List<Product<? extends MainIngredient>> getProductList(MainIngredientEnum flour) {
         List<Product<? extends MainIngredient>> productList = null;
         if (products != null) {
@@ -116,6 +116,12 @@ public class ProductMakerCache {
                     .filter(p -> p.getMainIngredient().getMainIngredient().equals(flour))
                     .collect(Collectors.toList());
         }
+        return productList;
+    }
+
+    @Cacheable(cacheNames="productList")
+    public List<Product<? extends MainIngredient>> getProductListFromCache(MainIngredientEnum flour) {
+        List<Product<? extends MainIngredient>> productList = null;
         return productList;
     }
 

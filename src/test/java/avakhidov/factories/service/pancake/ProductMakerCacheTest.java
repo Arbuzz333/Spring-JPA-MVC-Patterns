@@ -33,6 +33,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalTime;
 import java.util.List;
 
+import static org.junit.Assert.assertNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
@@ -123,7 +124,7 @@ public class ProductMakerCacheTest {
         assertEquals("KindFlour", KindDough.PUFF_PASTRY, cornBun.getMainIngredient().getKindDough());
 
         productMakerCacheThree.initProductMaker(WheatBun.class, 55);
-        List<Product<? extends MainIngredient>> bunListAfter = productMakerCacheThree.getProductList(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
+        List<Product<? extends MainIngredient>> bunListAfter = productMakerCacheThree.getProductListFromCache(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
         assertNotNull("products.size()", bunListAfter);
         assertEquals("products.size()", 77, bunListAfter.size());
         CornBun cornBunAfter = (CornBun) bunListAfter.get(MainUtility.randomInt(0, 77 - 1));
@@ -136,6 +137,9 @@ public class ProductMakerCacheTest {
         WheatBun wheatBunAfterCache = (WheatBun) bunListAfterCache.get(MainUtility.randomInt(0, 55 - 1));
         assertEquals("KindFlour", KindFlour.WHEAT, wheatBunAfterCache.getMainIngredient().getFlour().getKind());
         assertEquals("KindFlour", DoughUtil.setParameterKindDoughFromAMPM(LocalTime.now()), wheatBunAfterCache.getMainIngredient().getKindDough());
+
+        List<Product<? extends MainIngredient>> bunListAfterEvict = productMakerCacheThree.getProductListFromCache(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
+        assertNull("products.size()", bunListAfterEvict);
 
     }
 
