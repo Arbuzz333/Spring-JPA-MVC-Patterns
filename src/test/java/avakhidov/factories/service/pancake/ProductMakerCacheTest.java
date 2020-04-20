@@ -17,8 +17,8 @@ import avakhidov.factories.entity.pancake.PancakeBuckwheat;
 import avakhidov.factories.entity.pancake.PancakeCorn;
 import avakhidov.factories.entity.pancake.PancakeWheat;
 import avakhidov.factories.enums.KindFlour;
-import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.MainIngredientEnum;
+import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.MainIngredient;
 import avakhidov.factories.utility.MainUtility;
@@ -30,6 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
@@ -134,7 +135,7 @@ public class ProductMakerCacheTest {
         assertEquals("products.size()", 55, bunListAfterCache.size());
         WheatBun wheatBunAfterCache = (WheatBun) bunListAfterCache.get(MainUtility.randomInt(0, 55 - 1));
         assertEquals("KindFlour", KindFlour.WHEAT, wheatBunAfterCache.getMainIngredient().getFlour().getKind());
-        assertEquals("KindFlour", KindDough.PUFF_PASTRY, wheatBunAfterCache.getMainIngredient().getKindDough());
+        assertEquals("KindFlour", DoughUtil.setParameterKindDoughFromAMPM(LocalTime.now()), wheatBunAfterCache.getMainIngredient().getKindDough());
 
     }
 
