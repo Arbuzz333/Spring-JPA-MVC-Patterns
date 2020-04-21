@@ -11,6 +11,7 @@ import avakhidov.factories.entity.meat.VealMeat;
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.KindDough;
+import avakhidov.factories.listeners.MuttonCutletSpringEventListener;
 import avakhidov.factories.service.meat.meatimpl.MeatServiceImpl;
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
@@ -41,13 +42,18 @@ public class CutletEhCache {
     private double weightChickenCutlet;
 
     private final MeatServiceImpl meatService;
+
     private final CacheManager ehcacheCacheManagerCutlet;
+
+    private final MuttonCutletSpringEventListener eventListener;
 
     public CutletEhCache(
             MeatServiceImpl meatService,
-            CacheManager ehcacheCacheManagerCutlet) {
+            CacheManager ehcacheCacheManagerCutlet,
+            MuttonCutletSpringEventListener eventListener) {
         this.meatService = meatService;
         this.ehcacheCacheManagerCutlet = ehcacheCacheManagerCutlet;
+        this.eventListener = eventListener;
     }
 
     public Cutlet<? extends Meat> getCutletCacheable(String name, Long id) {
@@ -114,6 +120,7 @@ public class CutletEhCache {
                     .withFinished(Finished.RAW)
                     .withWeight(weightMuttonCutlet)
                     .build();
+            eventListener.onApplicationEvent(((MuttonCutlet)result).getListener());
         }
         if (id == 2) {
             result = PorkCutlet.builderPorkCutlet()
