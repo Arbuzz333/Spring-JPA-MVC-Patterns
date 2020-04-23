@@ -1,59 +1,23 @@
 package avakhidov.factories.cache;
 
-import avakhidov.factories.entity.cutlet.ChickenCutlet;
+import avakhidov.factories.cache.services.CreateCutletByBuildersEnum;
 import avakhidov.factories.entity.cutlet.Cutlet;
-import avakhidov.factories.entity.cutlet.MuttonCutlet;
-import avakhidov.factories.entity.cutlet.PorkCutlet;
-import avakhidov.factories.entity.cutlet.VealCutlet;
-import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.Meat;
-import avakhidov.factories.entity.meat.VealMeat;
-import avakhidov.factories.enums.FatMeat;
-import avakhidov.factories.enums.Finished;
-import avakhidov.factories.enums.dough.KindDough;
-import avakhidov.factories.listeners.MuttonCutletSpringEventListener;
-import avakhidov.factories.service.meat.meatimpl.MeatServiceImpl;
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import static avakhidov.factories.cache.CacheNamesEnum.CUTLET_EHCACHE;
-import static avakhidov.factories.enums.dough.ParameterDoughEnum.CORN_FLOUR_COARSE;
-import static avakhidov.factories.enums.dough.ParameterDoughEnum.WHEAT_FLOUR_FINE;
 
 
 @Service
 public class CutletEhCache {
 
-    @Value("#{new Double('${coefficient_buckwheat}')}")
-    private double coefficient_buckwheat;
-
-    @Value("#{new Double('${coefficient_wheat}')}")
-    private double coefficient_wheat;
-
-    @Value("#{new Double('${weight_mutton_cutlet}')}")
-    private double weightMuttonCutlet;
-
-    @Value("#{new Double('${weight_pork_cutlet}')}")
-    private double weightPorkCutlet;
-
-    @Value("#{new Double('${weight_chicken_cutlet}')}")
-    private double weightChickenCutlet;
-
-    private final MeatServiceImpl meatService;
-
     private final CacheManager ehcacheCacheManagerCutlet;
 
-    private final MuttonCutletSpringEventListener eventListener;
-
     public CutletEhCache(
-            MeatServiceImpl meatService,
-            CacheManager ehcacheCacheManagerCutlet,
-            MuttonCutletSpringEventListener eventListener) {
-        this.meatService = meatService;
+            CacheManager ehcacheCacheManagerCutlet) {
         this.ehcacheCacheManagerCutlet = ehcacheCacheManagerCutlet;
-        this.eventListener = eventListener;
     }
 
     public Cutlet<? extends Meat> getCutletCacheable(String name, Long id) {
@@ -110,52 +74,9 @@ public class CutletEhCache {
         return cache.get(name);
     }
 
-
     private Cutlet<? extends Meat> getCutletById(Long id) {
-        Cutlet<? extends Meat> result = null;
-        if (id == 1) {
-            result = MuttonCutlet.builderMuttonCutlet()
-                    .withMainIngredient(FatMeat.SPECK)
-                    .withRecipeReady(true)
-                    .withFinished(Finished.RAW)
-                    .withWeight(weightMuttonCutlet)
-                    .build();
-            eventListener.onApplicationEvent(((MuttonCutlet)result).getListener());
-        }
-        if (id == 2) {
-            result = PorkCutlet.builderPorkCutlet()
-                    .withMainIngredient(FatMeat.MEDIUMFAT)
-                    .withRecipeReady(true)
-                    .withFinished(Finished.RAW)
-                    .withWeight(weightPorkCutlet)
-                    .withSeasamBun(coefficient_buckwheat * weightPorkCutlet)
-                    .build();
-        }
-        if (id == 3) {
-            result = ChickenCutlet.outerBuilderChickenCutlet()
-                    .withMainIngredient(FatMeat.DIETARY)
-                    .withFinished(Finished.RAW)
-                    .withRecipeReady(true)
-                    .withSesameBun(CORN_FLOUR_COARSE, new Sesame())
-                    .withKindDough(KindDough.PUFF_PASTRY)
-                    .withWeight(weightChickenCutlet)
-                    .build();
-        }
-        if (id == 4) {
-            result = VealCutlet.builderVealCutlet()
-                    .withMainIngredient((VealMeat)meatService.buildMeat(VealMeat.class))
-                    .withFinished(Finished.RAW)
-                    .withRecipeReady(true)
-                    .withWeight(weightChickenCutlet)
-                    .build();
-            Cutlet<? extends Meat>.SesameBun SesameBun = result.builderSesameBun()
-                    .withMainIngredient(WHEAT_FLOUR_FINE.toKneadTheDough())
-                    .withFinished(Finished.RAW)
-                    .withRecipeReady(true)
-                    .withKindDough(KindDough.SHORTCRUST_PASTRY)
-                    .withWeight(weightChickenCutlet * coefficient_wheat)
-                    .build();
-        }
+        Cutlet<? extends Meat> result;
+        result = CreateCutletByBuildersEnum.getCreateCutletByBuildersEnumById(id).createCutletByIndex();
         return result;
     }
 }
