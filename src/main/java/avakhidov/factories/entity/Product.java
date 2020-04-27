@@ -30,6 +30,10 @@ public class Product<T extends MainIngredient> {
     public Product() {
     }
 
+    public boolean isRecipeReady() {
+        return recipeReady;
+    }
+
     public double getWeight() {
         return weight;
     }

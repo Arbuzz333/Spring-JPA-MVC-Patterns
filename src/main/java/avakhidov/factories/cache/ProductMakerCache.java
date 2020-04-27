@@ -54,66 +54,57 @@ public class ProductMakerCache {
 
     @CacheEvict(value = "productList", allEntries = true)
     public List<Product<? extends MainIngredient>> makeProductListEvict(MainIngredientEnum flour) {
-        List<Product<? extends MainIngredient>> productList = null;
-        if (products != null) {
-            productList = products
-                    .stream()
-                    .map(product1 -> (Product<? extends MainIngredient>)product1)
-                    .filter(p -> p.getMainIngredient().getMainIngredient().equals(flour))
-                    .collect(Collectors.toList());
-        }
-        return productList;
+
+        return getBaseProductList(flour);
     }
 
     @CachePut(cacheNames = "product")
     public Product<? extends MainIngredient> getProductCachePut(MainIngredientEnum flour) {
-        Product<? extends MainIngredient> product = null;
-        if (products != null) {
-            product = products
-                    .stream()
-                    .map(product1 -> (Product<? extends MainIngredient>)product1)
-                    .filter(p -> p.getMainIngredient().getMainIngredient().equals(flour))
-                    .findFirst()
-                    .orElse(null);
-        }
-        return product;
+
+        return getBaseProduct(flour);
     }
 
-    @Cacheable(cacheNames="product")
+    @CacheEvict(cacheNames = "product")
+    public Product<? extends MainIngredient> getProductEvict(MainIngredientEnum flour) {
+
+        return getBaseProduct(flour);
+    }
+
+    @Cacheable(cacheNames="product", unless = "#result.finished.name().equals('FINISHED')")
     public Product<? extends MainIngredient> getProduct(MainIngredientEnum flour) {
-        Product<? extends MainIngredient> product = null;
-        if (products != null) {
-            product = products
-                    .stream()
-                    .map(product1 -> (Product<? extends MainIngredient>)product1)
-                    .filter(p -> p.getMainIngredient().getMainIngredient().equals(flour))
-                    .findFirst()
-                    .orElse(null);
-        }
-        return product;
+
+        return getBaseProduct(flour);
     }
 
-    @CachePut(cacheNames="productList")
+    @CachePut(cacheNames="productList", condition = "#flour.name()=='PREPARE_PANCAKE_DOUGH'")
     public List<Product<? extends MainIngredient>> getProductListCachePut(MainIngredientEnum flour) {
-        List<Product<? extends MainIngredient>> productList = null;
-        if (products != null) {
-            productList = products
-                    .stream()
-                    .map(product1 -> (Product<? extends MainIngredient>)product1)
-                    .filter(p -> p.getMainIngredient().getMainIngredient().equals(flour))
-                    .collect(Collectors.toList());
-        }
-        return productList;
+
+        return getBaseProductList(flour);
     }
 
     @Cacheable(cacheNames="productList")
     public List<Product<? extends MainIngredient>> getProductList(MainIngredientEnum flour) {
+
+        return getBaseProductList(flour);
+    }
+
+    private Product<? extends MainIngredient> getBaseProduct(MainIngredientEnum flour) {
+
+        Product<? extends MainIngredient> product = getBaseProductList(flour)
+                .stream()
+                .findFirst()
+                .orElse(null);
+
+        return product;
+    }
+
+    private List<Product<? extends MainIngredient>> getBaseProductList(MainIngredientEnum mainIngredientEnum) {
         List<Product<? extends MainIngredient>> productList = null;
         if (products != null) {
             productList = products
                     .stream()
                     .map(product1 -> (Product<? extends MainIngredient>)product1)
-                    .filter(p -> p.getMainIngredient().getMainIngredient().equals(flour))
+                    .filter(p -> p.getMainIngredient().getMainIngredient().equals(mainIngredientEnum))
                     .collect(Collectors.toList());
         }
         return productList;
