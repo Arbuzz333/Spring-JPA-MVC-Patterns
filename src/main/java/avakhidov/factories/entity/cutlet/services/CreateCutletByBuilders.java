@@ -1,4 +1,4 @@
-package avakhidov.factories.cache.services;
+package avakhidov.factories.entity.cutlet.services;
 
 import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.cutlet.Cutlet;

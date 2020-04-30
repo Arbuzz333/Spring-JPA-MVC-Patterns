@@ -1,7 +1,7 @@
 package avakhidov.factories.comand;
 
 import avakhidov.factories.entity.Product;
-import avakhidov.factories.service.Recipe;
+import avakhidov.factories.service.recipe.Recipe;
 
 import java.util.UUID;
 

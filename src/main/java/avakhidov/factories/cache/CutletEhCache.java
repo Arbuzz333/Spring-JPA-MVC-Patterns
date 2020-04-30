@@ -1,6 +1,6 @@
 package avakhidov.factories.cache;
 
-import avakhidov.factories.cache.services.CreateCutletByBuildersEnum;
+import avakhidov.factories.entity.cutlet.services.CreateCutletByBuildersEnum;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.meat.Meat;
 import org.ehcache.Cache;

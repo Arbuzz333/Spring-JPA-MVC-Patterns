@@ -14,7 +14,7 @@ import avakhidov.factories.market.BunShop;
 import avakhidov.factories.market.Market;
 import avakhidov.factories.service.Oven;
 import avakhidov.factories.service.OvenWorks;
-import avakhidov.factories.service.serviceimpl.CornBunRecipe;
+import avakhidov.factories.service.recipe.bun.CornBunRecipe;
 import avakhidov.factories.service.serviceimpl.OvenWorksImpl;
 import avakhidov.factories.service.serviceimpl.PreheatedOven;
 import org.junit.Test;

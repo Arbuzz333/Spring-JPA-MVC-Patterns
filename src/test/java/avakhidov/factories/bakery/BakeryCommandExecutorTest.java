@@ -14,7 +14,7 @@ import avakhidov.factories.service.Oven;
 import avakhidov.factories.service.OvenWorks;
 import avakhidov.factories.service.serviceimpl.OvenWorksImpl;
 import avakhidov.factories.service.serviceimpl.PreheatedOven;
-import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
+import avakhidov.factories.service.recipe.bun.WheatBunRecipe;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -4,7 +4,7 @@ import avakhidov.factories.entity.bun.WheatBun;
 import avakhidov.factories.entity.ingredient.SupplementIngredientDecorator;
 import avakhidov.factories.entity.ingredient.SupplementRaisinsDecorator;
 import avakhidov.factories.entity.ingredient.SupplementWalnutDecorator;
-import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
+import avakhidov.factories.service.recipe.bun.WheatBunRecipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

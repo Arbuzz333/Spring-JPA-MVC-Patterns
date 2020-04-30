@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static avakhidov.factories.cache.services.CreateCutletByBuildersEnum.CREATE_CHICKEN_CUTLET;
-import static avakhidov.factories.cache.services.CreateCutletByBuildersEnum.CREATE_MUTTON_CUTLET;
-import static avakhidov.factories.cache.services.CreateCutletByBuildersEnum.CREATE_PORK_CUTLET;
-import static avakhidov.factories.cache.services.CreateCutletByBuildersEnum.CREATE_VEAL_CUTLET;
+import static avakhidov.factories.entity.cutlet.services.CreateCutletByBuildersEnum.CREATE_CHICKEN_CUTLET;
+import static avakhidov.factories.entity.cutlet.services.CreateCutletByBuildersEnum.CREATE_MUTTON_CUTLET;
+import static avakhidov.factories.entity.cutlet.services.CreateCutletByBuildersEnum.CREATE_PORK_CUTLET;
+import static avakhidov.factories.entity.cutlet.services.CreateCutletByBuildersEnum.CREATE_VEAL_CUTLET;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 

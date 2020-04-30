@@ -1,10 +1,10 @@
-package avakhidov.factories.service.serviceimpl;
+package avakhidov.factories.service.recipe.bun;
 
 import avakhidov.factories.entity.bun.BuckwheatBun;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
-import avakhidov.factories.service.Recipe;
+import avakhidov.factories.service.recipe.Recipe;
 import org.springframework.stereotype.Service;
 
 

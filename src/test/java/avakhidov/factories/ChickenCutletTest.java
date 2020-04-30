@@ -6,7 +6,7 @@ import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.ChickenMeat;
 import avakhidov.factories.listeners.ChickenCutletSpringEventListener;
-import avakhidov.factories.service.serviceimpl.cutlet.ChickenCutletRecipe;
+import avakhidov.factories.service.recipe.cutlet.ChickenCutletRecipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
