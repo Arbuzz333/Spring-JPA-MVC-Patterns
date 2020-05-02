@@ -5,7 +5,8 @@ import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.ChickenMeat;
-import avakhidov.factories.service.serviceimpl.cutlet.ChickenCutletRecipe;
+import avakhidov.factories.listeners.ChickenCutletSpringEventListener;
+import avakhidov.factories.service.recipe.cutlet.ChickenCutletRecipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ChickenCutletTest {
     @Autowired
     ChickenCutletRecipe chickenCutletRecipe;
 
+    @Autowired
+    private ChickenCutletSpringEventListener eventListener;
+
     @Test
     public void chickenCloneTest() {
 
@@ -32,6 +36,8 @@ public class ChickenCutletTest {
         Cutlet<ChickenMeat> clone = chickenMeatCutlet.cloneChickenCutlet(chickenMeatCutlet);
         Sesame sesameClone = clone.getSesame();
         Sesame sesame = chickenMeatCutlet.getSesame();
+
+        eventListener.onApplicationEvent(chickenMeatCutlet.getListener());
 
         assertSame(sesameClone, sesame);
         assertNotSame(chickenMeatCutlet, clone);

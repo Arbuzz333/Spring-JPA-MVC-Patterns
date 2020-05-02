@@ -10,7 +10,9 @@ import avakhidov.factories.entity.flour.CornFlour;
 import avakhidov.factories.entity.flour.WheatFlour;
 import avakhidov.factories.entity.meat.ChickenMeat;
 import avakhidov.factories.entity.meat.PorkMeat;
+import avakhidov.factories.enums.KindFlour;
 import avakhidov.factories.enums.KindMeat;
+import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.enums.dough.KindDough;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -62,7 +65,8 @@ public class OrdersMakerTest {
 
         assertEquals("List of WheatBun size must be 12", products.size(), 12);
         ParameterPrepareDough<WheatFlour> prepareDough = (ParameterPrepareDough<WheatFlour>) products.get(0).getMainIngredient();
-        assertEquals("Main ingredient from CornFlour", prepareDough.getKindDough(), KindDough.PUFF_PASTRY);
+        assertEquals("Main ingredient from WheatFlour", prepareDough.getKindDough(),  DoughUtil.setParameterKindDoughFromAMPM(LocalTime.now()));
+        assertEquals("Main ingredient from WheatFlour", prepareDough.getFlour().getKind(), KindFlour.WHEAT);
     }
 
 }

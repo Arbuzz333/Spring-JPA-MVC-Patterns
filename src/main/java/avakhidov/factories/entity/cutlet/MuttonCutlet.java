@@ -6,16 +6,25 @@ import avakhidov.factories.entity.meat.MuttonMeat;
 import avakhidov.factories.enums.FatMeat;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
+import avakhidov.factories.listeners.GenericSpringEvent;
 
 
 public class MuttonCutlet extends Cutlet<MuttonMeat> {
 
+    private GenericSpringEvent<MuttonCutlet> listener;
+
     private MuttonCutlet() {
         super();
+        this.listener = new GenericSpringEvent<>(this);
     }
 
     public MuttonCutlet(MuttonMeat meat, boolean recipeReady, double weight) {
         super(meat, recipeReady, weight);
+        this.listener = new GenericSpringEvent<>(this);
+    }
+
+    public GenericSpringEvent<MuttonCutlet> getListener() {
+        return listener;
     }
 
     public static class BuilderMuttonCutlet<P extends MuttonCutlet, R extends BuilderMuttonCutlet<? extends P, ?>>

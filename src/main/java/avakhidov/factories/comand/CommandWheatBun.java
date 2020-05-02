@@ -1,7 +1,7 @@
 package avakhidov.factories.comand;
 
 import avakhidov.factories.entity.bun.WheatBun;
-import avakhidov.factories.service.serviceimpl.WheatBunRecipe;
+import avakhidov.factories.service.recipe.bun.WheatBunRecipe;
 
 import java.time.LocalTime;
 

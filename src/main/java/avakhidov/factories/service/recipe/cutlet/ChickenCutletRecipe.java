@@ -1,4 +1,4 @@
-package avakhidov.factories.service.serviceimpl.cutlet;
+package avakhidov.factories.service.recipe.cutlet;
 
 import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.cutlet.Cutlet;
@@ -6,7 +6,7 @@ import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.meat.ChickenMeat;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
-import avakhidov.factories.service.Recipe;
+import avakhidov.factories.service.recipe.Recipe;
 import avakhidov.factories.service.meat.meatimpl.MeatServiceImpl;
 import org.springframework.stereotype.Service;
 

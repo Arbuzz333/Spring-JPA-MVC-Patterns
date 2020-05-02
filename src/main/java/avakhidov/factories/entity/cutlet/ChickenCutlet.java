@@ -2,15 +2,23 @@ package avakhidov.factories.entity.cutlet;
 
 import avakhidov.factories.entity.livestock.Chicken;
 import avakhidov.factories.entity.meat.ChickenMeat;
+import avakhidov.factories.listeners.GenericSpringEvent;
 
 public class ChickenCutlet extends Cutlet<ChickenMeat> {
 
+    private GenericSpringEvent<ChickenCutlet> listener;
+
     public ChickenCutlet(ChickenMeat meat, boolean recipeReady, double weight) {
         super(meat, recipeReady, weight);
+        this.listener = new GenericSpringEvent<>(this);
     }
 
     ChickenCutlet() {
 
+    }
+
+    public GenericSpringEvent<ChickenCutlet> getListener() {
+        return listener;
     }
 
     private ChickenCutlet(ChickenCutlet chickenCutlet) {

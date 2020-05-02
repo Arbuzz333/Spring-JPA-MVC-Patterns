@@ -1,7 +1,7 @@
 package avakhidov.factories.comand;
 
 import avakhidov.factories.entity.cutlet.ChickenCutlet;
-import avakhidov.factories.service.serviceimpl.cutlet.ChickenCutletRecipe;
+import avakhidov.factories.service.recipe.cutlet.ChickenCutletRecipe;
 
 public class CommandChickenCutlet extends CommandRecipe {
 

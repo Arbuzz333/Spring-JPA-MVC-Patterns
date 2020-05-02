@@ -1,24 +1,20 @@
 package avakhidov.factories.service.pancake;
 
-import avakhidov.factories.cache.ProductDouble;
 import avakhidov.factories.cache.ProductMakerCache;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
+import avakhidov.factories.entity.cutlet.ChickenCutlet;
 import avakhidov.factories.entity.cutlet.PorkCutlet;
-import avakhidov.factories.entity.dough.ParameterPrepareDough;
-import avakhidov.factories.entity.dough.pancakedough.PancakePrepareDough;
-import avakhidov.factories.entity.flour.BuckwheatFlour;
-import avakhidov.factories.entity.flour.CornFlour;
 import avakhidov.factories.entity.flour.Flour;
-import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.entity.pancake.Pancake;
 import avakhidov.factories.entity.pancake.PancakeBuckwheat;
 import avakhidov.factories.entity.pancake.PancakeCorn;
 import avakhidov.factories.entity.pancake.PancakeWheat;
+import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.KindFlour;
-import avakhidov.factories.enums.KindMeat;
 import avakhidov.factories.enums.MainIngredientEnum;
+import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.MainIngredient;
 import avakhidov.factories.utility.MainUtility;
@@ -30,8 +26,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import java.time.LocalTime;
 import java.util.List;
 
+import static org.junit.Assert.assertNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
@@ -66,7 +64,7 @@ public class ProductMakerCacheTest {
         Product<? extends MainIngredient> pancakeProduct = productMakerCache.getProduct(MainIngredientEnum.PREPARE_PANCAKE_DOUGH);
         assertNotNull("products.size()", pancakeProduct);
 
-        Pancake<? extends Flour> pancake = (Pancake<? extends Flour>) pancakeProduct;
+        PancakeBuckwheat pancake = (PancakeBuckwheat) pancakeProduct;
         assertEquals("KindFlour", KindFlour.BUCKWHEAT, pancake.getMainIngredient().getFlour().getKind());
         assertEquals("KindFlour", KindDough.PANCAKE, pancake.getMainIngredient().getKindDough());
 
@@ -79,6 +77,23 @@ public class ProductMakerCacheTest {
 
         Pancake<? extends Flour> pancakeAfterCachePut = (Pancake<? extends Flour>) productsAfterCachePutProduct;
         assertEquals("KindFlour", KindFlour.CORN, pancakeAfterCachePut.getMainIngredient().getFlour().getKind());
+
+        productMakerCache.initProductMaker(PancakeWheat.class, 7);
+        productMakerCache.getProduct().forEach(p -> p.setFinished(Finished.FINISHED));
+
+        Product<? extends MainIngredient> productWheat = productMakerCache.getProductEvict(MainIngredientEnum.PREPARE_PANCAKE_DOUGH);
+        PancakeWheat pancakeWheat = (PancakeWheat) productWheat;
+        assertEquals("KindFlour", KindFlour.WHEAT, pancakeWheat.getMainIngredient().getFlour().getKind());
+
+        Product<? extends MainIngredient> product = productMakerCache.getProduct(MainIngredientEnum.PREPARE_PANCAKE_DOUGH);
+        PancakeWheat pancakeCorn = (PancakeWheat) product;
+        assertEquals("KindFlour", KindFlour.WHEAT, pancakeCorn.getMainIngredient().getFlour().getKind());
+
+        productMakerCache.initProductMaker(PancakeBuckwheat.class, 10);
+
+        Product<? extends MainIngredient> productBuckwheat = productMakerCache.getProduct(MainIngredientEnum.PREPARE_PANCAKE_DOUGH);
+        PancakeBuckwheat pancakeFinished = (PancakeBuckwheat) productBuckwheat;
+        assertEquals("KindFlour", KindFlour.BUCKWHEAT, pancakeFinished.getMainIngredient().getFlour().getKind());
     }
 
     @Test
@@ -109,6 +124,19 @@ public class ProductMakerCacheTest {
         Pancake<? extends Flour> pancakeAfterCache = (Pancake<? extends Flour>) pancakeListAfterCache.get(MainUtility.randomInt(0, 77 - 1));
         assertEquals("KindFlour", KindFlour.BUCKWHEAT, pancakeAfterCache.getMainIngredient().getFlour().getKind());
         assertEquals("KindFlour", KindDough.PANCAKE, pancakeAfterCache.getMainIngredient().getKindDough());
+
+        productMakerCacheTwo.initProductMaker(ChickenCutlet.class, 7);
+        List<Product<? extends MainIngredient>> pancakeListSeven = productMakerCacheTwo.getProductListCachePut(MainIngredientEnum.MEAT);
+
+        List<Product<? extends MainIngredient>> listCondition = productMakerCacheTwo.getProductListFromCache(MainIngredientEnum.PREPARE_PANCAKE_DOUGH);
+        assertEquals("products.size()",  77, listCondition.size());
+
+        Pancake<? extends Flour> pancakeCondition = (Pancake<? extends Flour>) listCondition.get(MainUtility.randomInt(0, 77 - 1));
+        assertEquals("KindFlour", KindFlour.BUCKWHEAT, pancakeCondition.getMainIngredient().getFlour().getKind());
+        assertEquals("KindFlour", KindDough.PANCAKE, pancakeCondition.getMainIngredient().getKindDough());
+
+        List<Product<? extends MainIngredient>> listMeat = productMakerCacheTwo.getProductListFromCache(MainIngredientEnum.MEAT);
+        assertNull("listMeat.size()", listMeat);
     }
 
     @Test
@@ -122,7 +150,7 @@ public class ProductMakerCacheTest {
         assertEquals("KindFlour", KindDough.PUFF_PASTRY, cornBun.getMainIngredient().getKindDough());
 
         productMakerCacheThree.initProductMaker(WheatBun.class, 55);
-        List<Product<? extends MainIngredient>> bunListAfter = productMakerCacheThree.getProductList(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
+        List<Product<? extends MainIngredient>> bunListAfter = productMakerCacheThree.getProductListFromCache(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
         assertNotNull("products.size()", bunListAfter);
         assertEquals("products.size()", 77, bunListAfter.size());
         CornBun cornBunAfter = (CornBun) bunListAfter.get(MainUtility.randomInt(0, 77 - 1));
@@ -134,7 +162,10 @@ public class ProductMakerCacheTest {
         assertEquals("products.size()", 55, bunListAfterCache.size());
         WheatBun wheatBunAfterCache = (WheatBun) bunListAfterCache.get(MainUtility.randomInt(0, 55 - 1));
         assertEquals("KindFlour", KindFlour.WHEAT, wheatBunAfterCache.getMainIngredient().getFlour().getKind());
-        assertEquals("KindFlour", KindDough.PUFF_PASTRY, wheatBunAfterCache.getMainIngredient().getKindDough());
+        assertEquals("KindFlour", DoughUtil.setParameterKindDoughFromAMPM(LocalTime.now()), wheatBunAfterCache.getMainIngredient().getKindDough());
+
+        List<Product<? extends MainIngredient>> bunListAfterEvict = productMakerCacheThree.getProductListFromCache(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
+        assertNull("products.size()", bunListAfterEvict);
 
     }
 

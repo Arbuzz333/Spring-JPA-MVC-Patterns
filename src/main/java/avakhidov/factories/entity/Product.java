@@ -3,10 +3,11 @@ package avakhidov.factories.entity;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.service.MainIngredient;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Product<T extends MainIngredient> {
+public class Product<T extends MainIngredient> implements Serializable {
 
     protected UUID uuid;
 
@@ -28,6 +29,10 @@ public class Product<T extends MainIngredient> {
     }
 
     public Product() {
+    }
+
+    public boolean isRecipeReady() {
+        return recipeReady;
     }
 
     public double getWeight() {

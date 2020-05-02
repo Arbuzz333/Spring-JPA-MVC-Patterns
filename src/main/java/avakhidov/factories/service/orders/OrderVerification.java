@@ -38,6 +38,7 @@ public class OrderVerification {
             logger.info("Verification Bun is replaced KindDough from {} to {}.", startKindDough.name(), kindDough.name());
         }
         result = bun.getMainIngredient().getKindDough().equals(kindDough) && result;
+//        bun.setKindDough();
         if (!result) {
             throw new BunNotVerificationException(bun.getClass().getName(), bun.getUuid().toString(), kindDough.name() + kindFlour.name());
         }

@@ -1,4 +1,4 @@
-package avakhidov.factories.service;
+package avakhidov.factories.service.recipe;
 
 
 public interface Recipe<T> {

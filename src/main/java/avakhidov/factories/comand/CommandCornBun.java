@@ -1,7 +1,7 @@
 package avakhidov.factories.comand;
 
 import avakhidov.factories.entity.bun.CornBun;
-import avakhidov.factories.service.serviceimpl.CornBunRecipe;
+import avakhidov.factories.service.recipe.bun.CornBunRecipe;
 
 public class CommandCornBun extends CommandRecipe {
 
