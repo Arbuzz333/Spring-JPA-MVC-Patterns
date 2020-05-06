@@ -1,6 +1,8 @@
 package avakhidov.factories.entity.ingredient;
 
-public abstract class Ingredient {
+import java.io.Serializable;
+
+public abstract class Ingredient implements Serializable {
 
     public abstract String getName();
 }

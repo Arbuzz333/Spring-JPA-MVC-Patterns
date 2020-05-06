@@ -1,5 +1,6 @@
 package avakhidov.factories.config;
 
+import avakhidov.factories.cache.CacheNamesEnum;
 import avakhidov.factories.entity.Product;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -12,7 +13,9 @@ import org.ehcache.config.units.MemoryUnit;
 import org.ehcache.event.EventType;
 import org.ehcache.impl.config.store.disk.OffHeapDiskStoreConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,7 +38,7 @@ public class CacheConfiguration extends CachingConfigurerSupport {
 
         PersistentCacheManager persistentCacheManager = CacheManagerBuilder.newCacheManagerBuilder()
                 .with(CacheManagerBuilder.persistence(new File(getStoragePath(), "productPersistence")))
-                .withCache("tries", CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Product.class,
+                .withCache(CacheNamesEnum.TRIES.getCode(), CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Product.class,
                         ResourcePoolsBuilder.newResourcePoolsBuilder()
                                 .heap(10, MemoryUnit.KB)
                                 .offheap(5, MemoryUnit.MB)
@@ -48,6 +51,11 @@ public class CacheConfiguration extends CachingConfigurerSupport {
                 ).build(true);
 
         return persistentCacheManager;
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager();
     }
 
     private String getStoragePath() {

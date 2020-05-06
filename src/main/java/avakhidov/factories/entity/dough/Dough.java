@@ -3,7 +3,9 @@ package avakhidov.factories.entity.dough;
 import avakhidov.factories.entity.flour.Flour;
 import avakhidov.factories.enums.dough.KindDough;
 
-public class Dough<T extends Flour> {
+import java.io.Serializable;
+
+public class Dough<T extends Flour> implements Serializable {
 
     private T flour;
 
