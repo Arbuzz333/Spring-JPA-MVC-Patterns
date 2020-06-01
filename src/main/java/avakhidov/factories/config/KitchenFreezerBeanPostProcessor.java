@@ -14,6 +14,7 @@ public class KitchenFreezerBeanPostProcessor implements BeanPostProcessor {
         return bean;
     }
 
+    @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 
         if (bean.getClass().equals(KitchenFreezer.class)) {

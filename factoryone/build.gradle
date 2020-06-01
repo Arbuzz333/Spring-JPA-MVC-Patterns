@@ -1,22 +1,11 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.1.RELEASE")
-    }
-}
-
 plugins {
     id 'java'
-    id 'idea'
 }
 
 group 'avakhidov'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.9
-targetCompatibility = 1.9
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -44,8 +33,5 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.ehcache/ehcache
     compile group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
-
-    // https://mvnrepository.com/artifact/org.springframework/spring-context-support
-//    compile group: 'org.springframework', name: 'spring-context-support', version: '5.2.4.RELEASE'
 
 }
