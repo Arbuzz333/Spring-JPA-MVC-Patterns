@@ -31,7 +31,7 @@ public class SuperMarket<T extends Product> implements Market<T>, BigMarket<T> {
     public Map<Product, Integer> orderQuantities() {
         Map<Product, Integer> result = new HashMap<>();
         list.forEach(market -> result.merge(market.getProduct(), market.orderQuantity(),
-                (integer, integer2) -> integer + integer2));
+                Integer::sum));
 
         return result;
     }

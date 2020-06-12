@@ -68,8 +68,10 @@ public class CutletEhCacheTest {
 
         Cutlet<? extends Meat> firstCutletEvict = cutletEhCache.getCutletCach(FIRST_CUTLET.getName());
         Cutlet<? extends Meat> fourCutletEvict = cutletEhCache.getCutletCach(FOUR_CUTLET.getName());
+        Cutlet<? extends Meat> fiveCutletEvict = cutletEhCache.getCutletCach(FIVE_CUTLET.getName());
+        Cutlet<? extends Meat> sixCutletEvict = cutletEhCache.getCutletCach(SIX_CUTLET.getName());
 
-        boolean flag = firstCutletEvict == null || fourCutletEvict == null;
+        boolean flag = firstCutletEvict == null || fourCutletEvict == null || fiveCutletEvict == null || sixCutletEvict == null;
         assertTrue("Flag is false", flag);
 
     }
