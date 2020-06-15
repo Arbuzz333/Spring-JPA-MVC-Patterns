@@ -5,9 +5,10 @@ import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.MainIngredient;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class ParameterPrepareDough<T extends Flour> implements MainIngredient {
+public class ParameterPrepareDough<T extends Flour> implements MainIngredient, Serializable {
 
     private int temperature;
 

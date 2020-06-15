@@ -1,5 +1,6 @@
 package avakhidov.factories.cache;
 
+import avakhidov.factories.annotations.PostProxy;
 import avakhidov.factories.entity.cutlet.services.CreateCutletByBuildersEnum;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.meat.Meat;
@@ -20,6 +21,7 @@ public class CutletEhCache {
         this.ehcacheCacheManagerCutlet = ehcacheCacheManagerCutlet;
     }
 
+    @PostProxy
     public Cutlet<? extends Meat> getCutletCacheable(String name, Long id) {
         Cache<String, Cutlet> cache = ehcacheCacheManagerCutlet.getCache(CUTLET_EHCACHE.getCode(), String.class, Cutlet.class);
 
