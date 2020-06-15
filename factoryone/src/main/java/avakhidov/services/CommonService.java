@@ -3,6 +3,7 @@ package avakhidov.services;
 import avakhidov.data.BaseEvent;
 import avakhidov.data.CalendarEvent;
 import avakhidov.data.MoneyEvent;
+import avakhidov.data.NoteEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,8 @@ public class CommonService {
                     descriptionEvents.addAll(orderServices.get(0).getDescriptionEvents(event.getValue()));
                 } else if (event.getKey().equals(MoneyEvent.class)) {
                     descriptionEvents.addAll(orderServices.get(1).getDescriptionEvents(event.getValue()));
+                } else if (event.getKey().equals(NoteEvent.class)) {
+                    descriptionEvents.addAll(orderServices.get(2).getDescriptionEvents(event.getValue()));
                 }
         }
         return descriptionEvents;

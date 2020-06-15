@@ -33,7 +33,7 @@ public class CommonServiceTest {
 
         List<String> commonEvents = commonService.createCommonEvents(baseEvents);
 
-        assertEquals(2, commonEvents.size());
+        assertEquals(3, commonEvents.size());
 
     }
 

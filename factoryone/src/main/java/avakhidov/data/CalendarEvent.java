@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class CalendarEvent extends BaseEvent {
 
-    @DateTimeFormat(pattern = "M/d/yy h:mm")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDateTime dateTime;
 
     public CalendarEvent(LocalDateTime dateTime) {
