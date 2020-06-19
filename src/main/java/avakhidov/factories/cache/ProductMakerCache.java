@@ -7,8 +7,6 @@ import avakhidov.factories.service.orders.ordersvisitor.OrdersMakerProduct;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,8 +14,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Component
-@Scope("prototype")
+
+
 public class ProductMakerCache {
 
     private final OrdersMakerProduct visitor;
@@ -174,4 +172,9 @@ public class ProductMakerCache {
     public List<Product> getProduct() {
         return products;
     }
+
+    public OrdersMakerProduct getVisitor() {
+        return visitor;
+    }
+
 }

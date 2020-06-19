@@ -4,13 +4,18 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.service.orders.OrdersMaker;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
+
 
 @Service
+@Scope(SCOPE_PROTOTYPE)
 public class OrderMakerBunVisitor implements OrderMakerProductVisitor {
 
     private final OrdersMaker maker;
