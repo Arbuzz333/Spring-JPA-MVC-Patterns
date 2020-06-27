@@ -6,13 +6,13 @@ import avakhidov.factories.entity.bun.Bun;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.entity.pancake.Pancake;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
+
+
 public class OrdersMakerProduct {
 
     private int quantity;

@@ -1,6 +1,7 @@
 package avakhidov.factories.service.pancake;
 
 import avakhidov.factories.cache.ProductMakerCache;
+import avakhidov.factories.cache.ProductMakerCachePrototype;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.bun.WheatBun;
@@ -17,10 +18,12 @@ import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.enums.dough.DoughUtil;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.service.MainIngredient;
+import avakhidov.factories.service.orders.ordersvisitor.OrdersMakerProduct;
 import avakhidov.factories.utility.MainUtility;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,20 +41,26 @@ import static org.springframework.test.util.AssertionErrors.assertNotNull;
 @SpringBootTest
 public class ProductMakerCacheTest {
 
-    @Autowired
-    ProductMakerCache productMakerCache;
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ProductMakerCacheTest.class);
 
     @Autowired
-    ProductMakerCache productMakerCacheTwo;
+    ProductMakerCachePrototype prototype;
 
-    @Autowired
-    ProductMakerCache productMakerCacheThree;
+    private ProductMakerCache productMakerCache;
 
-    @Autowired
-    ProductMakerCache productMakerCacheFour;
+    private ProductMakerCache productMakerCacheTwo;
+
+    private ProductMakerCache productMakerCacheThree;
+
+    private ProductMakerCache productMakerCacheFour;
 
     @Before
     public void initPancakeMaker() {
+        productMakerCache = prototype.getProductMakerCache();
+        productMakerCacheTwo = prototype.getProductMakerCache();
+        productMakerCacheThree = prototype.getProductMakerCache();
+        productMakerCacheFour = prototype.getProductMakerCache();
+
         productMakerCache.initProductMaker(PancakeBuckwheat.class, 15);
         productMakerCacheTwo.initProductMaker(PancakeWheat.class, 25);
         productMakerCacheThree.initProductMaker(CornBun.class, 77);
@@ -167,6 +176,14 @@ public class ProductMakerCacheTest {
         List<Product<? extends MainIngredient>> bunListAfterEvict = productMakerCacheThree.getProductListFromCache(MainIngredientEnum.PARAMETER_PREPARE_DOUGH);
         assertNull("products.size()", bunListAfterEvict);
 
+        OrdersMakerProduct visitor = productMakerCache.getVisitor();
+        OrdersMakerProduct visitorTwo = productMakerCacheTwo.getVisitor();
+        OrdersMakerProduct visitorThree = productMakerCacheThree.getVisitor();
+        OrdersMakerProduct visitorFour = productMakerCacheFour.getVisitor();
+        logger.info(visitor.getClass().getName());
+        logger.info(visitorTwo.getClass().getName());
+        logger.info(visitorThree.getClass().getName());
+        logger.info(visitorFour.getClass().getName());
     }
 
 }

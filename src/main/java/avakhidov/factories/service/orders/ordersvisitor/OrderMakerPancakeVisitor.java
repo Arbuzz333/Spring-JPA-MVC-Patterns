@@ -13,6 +13,7 @@ import avakhidov.factories.service.pancake.PancakeCornRecipeCreate;
 import avakhidov.factories.service.pancake.PancakeRecipe;
 import avakhidov.factories.service.pancake.PancakeRecipeCreate;
 import avakhidov.factories.service.pancake.PancakeWheatRecipeCreate;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,8 +23,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static avakhidov.factories.utility.MainUtility.repeat;
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
+
 
 @Service
+@Scope(SCOPE_PROTOTYPE)
 public class OrderMakerPancakeVisitor implements OrderMakerProductVisitor {
 
     private final PancakeRecipe pancakeRecipe;
