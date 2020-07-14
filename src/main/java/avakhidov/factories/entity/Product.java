@@ -3,21 +3,12 @@ package avakhidov.factories.entity;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.service.MainIngredient;
 
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Product<T extends MainIngredient> implements Serializable {
 
-    protected UUID uuid;
 
-    protected boolean recipeReady = false;
-
-    private T mainIngredient;
-
-    private double weight;
-
-    private Finished finished;
+public class Product<T extends MainIngredient> extends BaseProduct<T> {
 
     {
         this.uuid = UUID.randomUUID();
