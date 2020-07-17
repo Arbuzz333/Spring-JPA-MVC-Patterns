@@ -31,6 +31,7 @@ public class KitchenFreezer implements Cook {
     public KitchenFreezer(
             Kitchen kitchen) {
         this.kitchen = kitchen;
+        logger.info("Bean KitchenFreezer is created");
     }
 
     private void fillTheFreeze(MainIngredientEnum ingredientEnum) {

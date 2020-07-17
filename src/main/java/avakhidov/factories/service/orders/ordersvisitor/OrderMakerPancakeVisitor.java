@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -53,7 +54,7 @@ public class OrderMakerPancakeVisitor implements OrderMakerProductVisitor {
         List<Product> products = new ArrayList<>();
         if (maker.getProductClazz().getSuperclass().equals(Pancake.class)) {
 
-            repeat(maker.getQuantity(), () -> products.addAll(pancakeRecipe.createListPancakeRecipe(classOrderPancakeMap.get(maker.getProductClazz()))
+            repeat(maker.getQuantity(), () -> products.addAll(pancakeRecipe.createListPancakeRecipe(Collections.singletonList(classOrderPancakeMap.get(maker.getProductClazz())))
                     .stream()
                     .map((Function<OrderPancake, Pancake>) OrderPancake::getPancake)
                     .collect(Collectors.toList())));

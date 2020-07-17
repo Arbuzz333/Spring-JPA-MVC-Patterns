@@ -25,6 +25,8 @@ import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.config.builders.ExpiryPolicyBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.event.EventType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -43,6 +45,8 @@ import static avakhidov.factories.cache.CacheNamesEnum.PRODUCT_EHCACHE;
 @Configuration
 @PropertySource("classpath:value.properties")
 class AppContext {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppContext.class);
 
     private final static double WEIGHT_CUTLET = 0.125;
     private final static double WEIGHT_BUN = 0.075;
@@ -89,12 +93,14 @@ class AppContext {
         mainIngredientWeight.put(MainIngredientEnum.PARAMETER_PREPARE_DOUGH, WEIGHT_BUN);
         mainIngredientWeight.put(MainIngredientEnum.MEAT, WEIGHT_CUTLET);
 
+        logger.info("Bean Kitchen is created");
+
         return new Kitchen(enumRecipeMap, mainIngredientWeight);
     }
 
     @Bean(initMethod = "initMapClassMethodHandler")
-    @Lazy
     public OrdersMaker ordersMaker() {
+        logger.info("Bean OrdersMaker is created");
         return new OrdersMaker(commandOrders, ordersSplitter, verification);
     }
 
