@@ -7,6 +7,8 @@ import avakhidov.factories.comand.CommandOrders;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.kitchen.Kitchen;
+import avakhidov.factories.service.meat.MeatService;
+import avakhidov.factories.service.meat.meatimpl.MeatServiceEasyImpl;
 import avakhidov.factories.service.recipe.Recipe;
 import avakhidov.factories.service.orders.OrderVerification;
 import avakhidov.factories.service.orders.OrdersMaker;
@@ -151,6 +153,11 @@ class AppContext {
                 .build(true);
 
         return cacheManager;
+    }
+
+    @Bean
+    public MeatService meatServiceEasy() {
+        return new MeatServiceEasyImpl();
     }
 
 }

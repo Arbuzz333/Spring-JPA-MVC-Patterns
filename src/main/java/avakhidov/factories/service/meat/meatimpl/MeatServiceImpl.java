@@ -36,6 +36,7 @@ public class MeatServiceImpl implements MeatService {
         }
     }
 
+    @Override
     public Meat buildMeat(Class<? extends Meat> clazz) {
         return classMeatMap.get(clazz);
     }
