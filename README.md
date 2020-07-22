@@ -17,3 +17,4 @@
 * CommandOrders - Команда
 * PancakeVisitor - Visitor
 * BakeryCommandExecutor - Снимок + Команда
+* Default method injection from Spring
