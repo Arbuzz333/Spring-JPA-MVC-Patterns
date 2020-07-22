@@ -26,13 +26,13 @@ public class MeatServiceImpl implements MeatService {
 
     @Override
     public FatMeat getMoreFatInMeat(FatMeat fatMeat) {
-        if (fatMeat.getMax() >= MEDIUMFAT.getMax()) {
+        if (fatMeat.getMax() >= MEDIUM_FAT.getMax()) {
             return SPECK;
         }
         if (fatMeat.getMax() == DIETARY.getMax()) {
-            return LOWFAT;
+            return LOW_FAT;
         } else {
-            return MEDIUMFAT;
+            return MEDIUM_FAT;
         }
     }
 

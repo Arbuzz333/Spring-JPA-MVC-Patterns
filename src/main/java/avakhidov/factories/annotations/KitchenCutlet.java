@@ -23,6 +23,6 @@ public @interface KitchenCutlet {
 
     KindMeat kindMeat() default KindMeat.CHICKEN;
 
-    FatMeat fatMeat() default FatMeat.MEDIUMFAT;
+    FatMeat fatMeat() default FatMeat.MEDIUM_FAT;
 
 }

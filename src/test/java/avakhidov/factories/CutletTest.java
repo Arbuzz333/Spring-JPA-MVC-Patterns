@@ -83,8 +83,8 @@ public class CutletTest {
         cutlets.add(vealCutlet);
 
         assertEquals(porkCutletFat.getMainIngredient().getFatMeat(), FatMeat.SPECK);
-        assertEquals(muttonCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUMFAT);
-        assertEquals(vealCutlet.getMainIngredient().getFatMeat(), FatMeat.LOWFAT);
+        assertEquals(muttonCutlet.getMainIngredient().getFatMeat(), FatMeat.MEDIUM_FAT);
+        assertEquals(vealCutlet.getMainIngredient().getFatMeat(), FatMeat.LOW_FAT);
         assertEquals(5, cutlets.size());
         assertEquals(KindDough.YEAST_DOUGH, porkCutlet.getParameterPrepareDoughBun().getKindDough());
 

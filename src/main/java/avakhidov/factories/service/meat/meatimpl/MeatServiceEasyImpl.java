@@ -33,7 +33,7 @@ public class MeatServiceEasyImpl implements MeatService {
 
     @Override
     public Meat buildMeat(Class<? extends Meat> clazz) {
-        return new Meat(KindMeat.CHICKEN, FatMeat.LOWFAT){};
+        return new Meat(KindMeat.CHICKEN, FatMeat.LOW_FAT){};
     }
 
     @PostConstruct

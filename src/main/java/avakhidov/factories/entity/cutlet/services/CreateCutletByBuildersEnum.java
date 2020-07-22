@@ -41,7 +41,7 @@ public enum CreateCutletByBuildersEnum implements CreateCutletByBuilders {
         @Override
         public Cutlet<? extends Meat> createCutletByIndex() {
             PorkCutlet result = PorkCutlet.builderPorkCutlet()
-                    .withMainIngredient(FatMeat.MEDIUMFAT)
+                    .withMainIngredient(FatMeat.MEDIUM_FAT)
                     .withRecipeReady(true)
                     .withFinished(Finished.RAW)
                     .withWeight(weightPorkCutlet)

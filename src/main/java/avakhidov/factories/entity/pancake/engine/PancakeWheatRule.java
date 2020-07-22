@@ -35,7 +35,7 @@ public class PancakeWheatRule implements RuleGetPancake {
                         LocalTime.of(0, 55),
                         9.1,
                         new Egg("2 category", 3)),
-                wheatWeight, new VealMeat(FatMeat.LOWFAT, new Calf()));
+                wheatWeight, new VealMeat(FatMeat.LOW_FAT, new Calf()));
         pancakeWheat.setFinished(Finished.RAW);
         return pancakeWheat;
     }
