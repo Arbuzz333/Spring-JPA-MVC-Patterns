@@ -18,3 +18,4 @@
 * PancakeVisitor - Visitor
 * BakeryCommandExecutor - Снимок + Команда
 * Default method injection from Spring
+* Spring pattern post construct - @MainRunner
