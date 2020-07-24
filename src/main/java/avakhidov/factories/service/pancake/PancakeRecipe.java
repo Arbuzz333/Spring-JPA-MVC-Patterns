@@ -23,7 +23,7 @@ public class PancakeRecipe implements PancakeVisitor {
     @Autowired
     private RilePancakeEngine engine;
 
-    public List<OrderPancake<? extends Flour>> createListPancakeRecipe(PancakeRecipeCreate<? extends Flour>...creates) {
+    public List<OrderPancake<? extends Flour>> createListPancakeRecipe(List<PancakeRecipeCreate<? extends Flour>> creates) {
         List<OrderPancake<? extends Flour>> result = new ArrayList<>();
         for (PancakeRecipeCreate<? extends Flour> create : creates) {
             result.add(create.pancakeOrderCreate(this));

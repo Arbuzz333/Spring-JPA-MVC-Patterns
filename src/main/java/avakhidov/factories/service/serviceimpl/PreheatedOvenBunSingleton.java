@@ -10,7 +10,7 @@ public final class PreheatedOvenBunSingleton {
         if (instance == null) {
             instance = new PreheatedOven<>();
         } else {
-            throw new IllegalStateException("Already initialized.");
+            throw new IllegalStateException("PreheatedOvenBunSingleton already initialized.");
         }
     }
 

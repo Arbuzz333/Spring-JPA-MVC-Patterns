@@ -1,4 +1,4 @@
 package avakhidov.factories.entity.livestock;
 
-public class Chicken {
+public class Chicken implements Livestock  {
 }

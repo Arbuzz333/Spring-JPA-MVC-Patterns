@@ -3,8 +3,12 @@ package avakhidov.factories.adapters;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.grill.Grill;
 import avakhidov.factories.service.Oven;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+
+
+@Lazy
 @Service
 public class OvenToGrill<T extends Product> implements Oven<T> {
 

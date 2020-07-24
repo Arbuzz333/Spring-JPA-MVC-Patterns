@@ -73,7 +73,7 @@ public class HyperMarketTest {
                 new GroceryStore<>(MuttonCutlet.builderMuttonCutlet()
                         .withRecipeReady(true)
                         .withFinished(Finished.RAW)
-                        .withMainIngredient(new MuttonMeat(FatMeat.MEDIUMFAT, new Sheep()))
+                        .withMainIngredient(new MuttonMeat(FatMeat.MEDIUM_FAT, new Sheep()))
                         .withWeight(0.15)
                         .build(),
                         220);

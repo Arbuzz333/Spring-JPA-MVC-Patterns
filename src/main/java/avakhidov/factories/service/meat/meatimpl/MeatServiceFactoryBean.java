@@ -36,8 +36,8 @@ public class MeatServiceFactoryBean implements FactoryBean<MeatServiceImpl>, Ini
     @Override
     public void afterPropertiesSet() {
         meatService.classMeatMap.put(ChickenMeat.class, new ChickenMeat(FatMeat.DIETARY, new Chicken()));
-        meatService.classMeatMap.put(MuttonMeat.class, new MuttonMeat(FatMeat.MEDIUMFAT, new Sheep()));
+        meatService.classMeatMap.put(MuttonMeat.class, new MuttonMeat(FatMeat.MEDIUM_FAT, new Sheep()));
         meatService.classMeatMap.put(PorkMeat.class, new PorkMeat(FatMeat.SPECK, new Pig()));
-        meatService.classMeatMap.put(VealMeat.class, new VealMeat(FatMeat.LOWFAT, new Calf()));
+        meatService.classMeatMap.put(VealMeat.class, new VealMeat(FatMeat.LOW_FAT, new Calf()));
     }
 }

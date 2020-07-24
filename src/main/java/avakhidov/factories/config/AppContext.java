@@ -7,6 +7,8 @@ import avakhidov.factories.comand.CommandOrders;
 import avakhidov.factories.entity.cutlet.Cutlet;
 import avakhidov.factories.enums.MainIngredientEnum;
 import avakhidov.factories.kitchen.Kitchen;
+import avakhidov.factories.service.meat.MeatService;
+import avakhidov.factories.service.meat.meatimpl.MeatServiceEasyImpl;
 import avakhidov.factories.service.recipe.Recipe;
 import avakhidov.factories.service.orders.OrderVerification;
 import avakhidov.factories.service.orders.OrdersMaker;
@@ -25,6 +27,8 @@ import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.config.builders.ExpiryPolicyBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.event.EventType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -43,6 +47,8 @@ import static avakhidov.factories.cache.CacheNamesEnum.PRODUCT_EHCACHE;
 @Configuration
 @PropertySource("classpath:value.properties")
 class AppContext {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppContext.class);
 
     private final static double WEIGHT_CUTLET = 0.125;
     private final static double WEIGHT_BUN = 0.075;
@@ -89,12 +95,14 @@ class AppContext {
         mainIngredientWeight.put(MainIngredientEnum.PARAMETER_PREPARE_DOUGH, WEIGHT_BUN);
         mainIngredientWeight.put(MainIngredientEnum.MEAT, WEIGHT_CUTLET);
 
+        logger.info("Bean Kitchen is created");
+
         return new Kitchen(enumRecipeMap, mainIngredientWeight);
     }
 
     @Bean(initMethod = "initMapClassMethodHandler")
-    @Lazy
     public OrdersMaker ordersMaker() {
+        logger.info("Bean OrdersMaker is created");
         return new OrdersMaker(commandOrders, ordersSplitter, verification);
     }
 
@@ -145,6 +153,11 @@ class AppContext {
                 .build(true);
 
         return cacheManager;
+    }
+
+    @Bean
+    public MeatService meatServiceEasy() {
+        return new MeatServiceEasyImpl();
     }
 
 }

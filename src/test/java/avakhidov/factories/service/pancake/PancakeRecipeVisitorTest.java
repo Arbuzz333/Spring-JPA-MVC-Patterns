@@ -34,20 +34,14 @@ public class PancakeRecipeVisitorTest {
     private PancakeRecipe pancakeRecipe;
 
     @Autowired
-    private PancakeBuckwheatRecipeCreate pancakeBuckwheatRecipe;
-
-    @Autowired
-    private PancakeCornRecipeCreate pancakeCornRecipe;
-
-    @Autowired
-    private PancakeWheatRecipeCreate pancakeWheatRecipe;
+    private List<PancakeRecipeCreate<? extends Flour>> recipeCreateList;
 
     private Map<Class, OrderPancake> classOrderPancakeMap = new HashMap<>();
     private List<OrderPancake<? extends Flour>> listPancakeRecipe = new ArrayList<>();
 
     @Before
     public void createListClassOrder() {
-        listPancakeRecipe = pancakeRecipe.createListPancakeRecipe(pancakeBuckwheatRecipe, pancakeCornRecipe, pancakeWheatRecipe);
+        listPancakeRecipe = pancakeRecipe.createListPancakeRecipe(recipeCreateList);
         classOrderPancakeMap = listPancakeRecipe
                 .stream()
                 .collect(Collectors.toMap(o -> o.getPancake().getClass(), o -> o));

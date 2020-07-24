@@ -12,7 +12,7 @@ import avakhidov.factories.entity.bun.Bun;
         if (flag) {
             flag = false;
         } else {
-            throw new IllegalStateException("Already initialized");
+            throw new IllegalStateException("HoldOvenBunSingleton already initialized");
         }
     }
 
