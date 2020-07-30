@@ -31,7 +31,7 @@ public class CutletEhCache {
         return cutlet;
     }
 
-    public Cutlet<? extends Meat> getCutletCach(String name, Long id) {
+    public Cutlet<? extends Meat> getCutletCache(String name, Long id) {
         Cache<String, Cutlet> cache = ehcacheCacheManagerCutlet.getCache(CUTLET_EHCACHE.getCode(), String.class, Cutlet.class);
 
         Cutlet<? extends Meat> cutletCache = cache.get(name);
@@ -41,7 +41,7 @@ public class CutletEhCache {
         return cutletCache;
     }
 
-    public Cutlet<? extends Meat> getCutletCach(String name) {
+    public Cutlet<? extends Meat> getCutletCache(String name) {
         Cache<String, Cutlet> cache = ehcacheCacheManagerCutlet.getCache(CUTLET_EHCACHE.getCode(), String.class, Cutlet.class);
 
         Cutlet<? extends Meat> cutletCache = cache.get(name);

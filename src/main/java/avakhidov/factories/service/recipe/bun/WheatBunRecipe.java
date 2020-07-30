@@ -7,7 +7,7 @@ import avakhidov.factories.entity.ingredient.SupplementIngredientDecorator;
 import avakhidov.factories.entity.ingredient.SupplementPeanutDecorator;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
-import avakhidov.factories.service.recipe.Recipe;
+import avakhidov.factories.service.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

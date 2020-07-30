@@ -4,7 +4,7 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.CornBun;
 import avakhidov.factories.entity.cutlet.PorkCutlet;
 import avakhidov.factories.enums.KindMeat;
-import avakhidov.factories.service.recipe.cutlet.ChickenCutletRecipe;
+import avakhidov.factories.service.cutlet.cutletimpl.ChickenCutletRecipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

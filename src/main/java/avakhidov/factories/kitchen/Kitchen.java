@@ -2,7 +2,7 @@ package avakhidov.factories.kitchen;
 
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.enums.MainIngredientEnum;
-import avakhidov.factories.service.recipe.Recipe;
+import avakhidov.factories.service.Recipe;
 
 import java.util.ArrayList;
 import java.util.List;

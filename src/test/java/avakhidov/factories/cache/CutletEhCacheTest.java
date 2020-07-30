@@ -34,11 +34,11 @@ public class CutletEhCacheTest {
     @Test
     public void getCutletCacheable() {
 
-        Cutlet<? extends Meat> firstCutlet = cutletEhCache.getCutletCach(FIRST_CUTLET.getName());
+        Cutlet<? extends Meat> firstCutlet = cutletEhCache.getCutletCache(FIRST_CUTLET.getName());
         assertEquals("", KindMeat.MUTTON, firstCutlet.getMainIngredient().getKindMeat());
         assertEquals("", KindDough.YEAST_DOUGH, firstCutlet.getSesameBun().getMainIngredient().getKindDough());
 
-        Cutlet<? extends Meat> secondCutlet = cutletEhCache.getCutletCach(FIRST_CUTLET.getName(), CREATE_PORK_CUTLET.getId());
+        Cutlet<? extends Meat> secondCutlet = cutletEhCache.getCutletCache(FIRST_CUTLET.getName(), CREATE_PORK_CUTLET.getId());
         assertEquals("", KindMeat.MUTTON, secondCutlet.getMainIngredient().getKindMeat());
 
         Cutlet<? extends Meat> firstCutletReplace = cutletEhCache.getCutletCacheReplace(FIRST_CUTLET.getName(), CREATE_PORK_CUTLET.getId());
@@ -66,10 +66,10 @@ public class CutletEhCacheTest {
         Cutlet<? extends Meat> EightCutlet = cutletEhCache.getCutletCachePutIfAbsent(EIGHT_CUTLET.getName(), CREATE_MUTTON_CUTLET.getId());
         assertEquals("", KindMeat.MUTTON, EightCutlet.getMainIngredient().getKindMeat());
 
-        Cutlet<? extends Meat> firstCutletEvict = cutletEhCache.getCutletCach(FIRST_CUTLET.getName());
-        Cutlet<? extends Meat> fourCutletEvict = cutletEhCache.getCutletCach(FOUR_CUTLET.getName());
-        Cutlet<? extends Meat> fiveCutletEvict = cutletEhCache.getCutletCach(FIVE_CUTLET.getName());
-        Cutlet<? extends Meat> sixCutletEvict = cutletEhCache.getCutletCach(SIX_CUTLET.getName());
+        Cutlet<? extends Meat> firstCutletEvict = cutletEhCache.getCutletCache(FIRST_CUTLET.getName());
+        Cutlet<? extends Meat> fourCutletEvict = cutletEhCache.getCutletCache(FOUR_CUTLET.getName());
+        Cutlet<? extends Meat> fiveCutletEvict = cutletEhCache.getCutletCache(FIVE_CUTLET.getName());
+        Cutlet<? extends Meat> sixCutletEvict = cutletEhCache.getCutletCache(SIX_CUTLET.getName());
 
         boolean flag = firstCutletEvict == null || fourCutletEvict == null || fiveCutletEvict == null || sixCutletEvict == null;
         assertTrue("Flag is false", flag);
