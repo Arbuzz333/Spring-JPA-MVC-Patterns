@@ -8,18 +8,26 @@ import java.util.TreeMap;
 
 
 
-public class StorageMortgageAgreement implements StorageAgreement<String, Agreement> {
+public class StorageAgreementMemory implements StorageAgreement<String, Agreement> {
 
     private TreeMap<String, Agreement> storage = new TreeMap<>();
+    private final String system;
+
+    public StorageAgreementMemory(String system) {
+        this.system = system;
+    }
 
     @Override
     public Agreement getAgreement(String number) {
-        return storage.get(number);
+        if (number.startsWith(system)) {
+            return storage.get(number);
+        }
+        throw new UnsupportedOperationException(number);
     }
 
     @Override
     public void saveAgreement(Agreement agreement) {
-        if (storage.containsKey(agreement.getNumber())) {
+        if (storage.containsKey(agreement.getNumber()) && !agreement.getNumber().startsWith(system)) {
             throw new UnsupportedOperationException(agreement.getNumber());
         }
         storage.put(agreement.getNumber(), agreement);
@@ -30,6 +38,7 @@ public class StorageMortgageAgreement implements StorageAgreement<String, Agreem
         return storage.values()
                 .stream()
                 .filter(entry -> entry.getOwner().equals(owner))
+                .filter(entry -> entry.getNumber().startsWith(system))
                 .findFirst();
     }
 }

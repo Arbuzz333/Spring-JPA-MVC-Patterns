@@ -8,6 +8,7 @@ import java.util.Date;
 public class Agreement {
 
     public static final String mortgage = "mortgage_";
+    public static final String car_loan = "car_loan_";
 
     private String number;
     private String owner;

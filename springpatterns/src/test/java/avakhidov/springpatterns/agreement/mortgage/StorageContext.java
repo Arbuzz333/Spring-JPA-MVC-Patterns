@@ -1,12 +1,12 @@
-package avakhidov.springpatterns.agreement.processing;
+package avakhidov.springpatterns.agreement.mortgage;
 
 
 import avakhidov.springpatterns.agreement.entyties.Agreement;
 import avakhidov.springpatterns.agreement.entyties.Payment;
 import avakhidov.springpatterns.agreement.storage.StorageAgreement;
-import avakhidov.springpatterns.agreement.storage.StorageMortgageAgreement;
+import avakhidov.springpatterns.agreement.storage.StorageAgreementMemory;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,18 +14,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static avakhidov.springpatterns.agreement.entyties.Agreement.mortgage;
 
 
 
-@Configuration
+@TestConfiguration
 public class StorageContext {
+
+    public static final String test_system = "test_system";
 
     @Bean
     StorageAgreement<String, Agreement> storage() {
         Agreement agreement =
                 new Agreement(
-                        mortgage + "7771888",
+                        test_system + "7771888",
                         "OwnerMortgage",
                         new Date(1583020800000L),
                         new Payment(new BigDecimal(555), new Date(1583020800000L))
@@ -33,7 +34,7 @@ public class StorageContext {
         List<Agreement> agreementList = new ArrayList<>();
         agreementList.add(agreement);
 
-        return new StorageMortgageAgreement(){
+        return new StorageAgreementMemory(test_system){
 
             public Agreement getAgreement(String number) {
                 return agreementList.stream().filter(a -> a.getNumber().equals(number)).findFirst().orElse(agreement);
