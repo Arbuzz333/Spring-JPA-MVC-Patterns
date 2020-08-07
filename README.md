@@ -19,3 +19,4 @@
 * BakeryCommandExecutor - Снимок + Команда
 * Default method injection from Spring
 * Spring pattern post construct - @MainRunner
+* Spring @TestConfiguration and @ContextHierarchy - ProcessMortgageAgreementTest, ProcessCarLoanAgreementTest
