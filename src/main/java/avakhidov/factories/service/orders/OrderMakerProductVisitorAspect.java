@@ -4,7 +4,7 @@ import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.bun.BuckwheatBun;
 import avakhidov.factories.exception.ClassArgumentIllegalException;
 import avakhidov.factories.service.MainIngredient;
-import avakhidov.factories.service.recipe.Recipe;
+import avakhidov.factories.service.Recipe;
 import avakhidov.factories.service.orders.ordersvisitor.OrdersMakerProduct;
 import avakhidov.factories.service.recipe.bun.BuckwheatBunRecipe;
 import org.aspectj.lang.JoinPoint;

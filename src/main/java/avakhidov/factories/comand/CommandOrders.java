@@ -3,8 +3,8 @@ package avakhidov.factories.comand;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.service.recipe.bun.CornBunRecipe;
 import avakhidov.factories.service.recipe.bun.WheatBunRecipe;
-import avakhidov.factories.service.recipe.cutlet.ChickenCutletRecipe;
-import avakhidov.factories.service.recipe.cutlet.PorkCutletRecipe;
+import avakhidov.factories.service.cutlet.cutletimpl.ChickenCutletRecipe;
+import avakhidov.factories.service.cutlet.cutletimpl.PorkCutletRecipe;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -21,14 +21,14 @@ public class FlourObjectFactoryImplTest {
 
 
     @Autowired
-    private FlourObjectFactory factory;
+    private FlourObjectFactory firstFactory;
 
     @Test
     public void getFlour() {
 
-        BuckwheatFlour buckwheatFlour = factory.getFlour(FlourCode.BUCKWHEAT_FLOUR_COARSE);
+        BuckwheatFlour buckwheatFlour = firstFactory.getFlour(FlourCode.BUCKWHEAT_FLOUR_COARSE);
 
-        CornFlour cornFlour = factory.getFlour(FlourCode.CORN_FLOUR_MEDIUM);
+        CornFlour cornFlour = firstFactory.getFlour(FlourCode.CORN_FLOUR_MEDIUM);
 
         assertEquals(buckwheatFlour.getGrinding(), (GrindingFlour.COARSE));
         assertEquals(cornFlour.getGrinding(), (GrindingFlour.MEDIUM));

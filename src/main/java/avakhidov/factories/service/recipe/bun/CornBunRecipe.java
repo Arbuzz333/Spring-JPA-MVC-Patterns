@@ -7,7 +7,7 @@ import avakhidov.factories.entity.flour.CornFlour;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
-import avakhidov.factories.service.recipe.Recipe;
+import avakhidov.factories.service.Recipe;
 import org.springframework.stereotype.Service;
 
 

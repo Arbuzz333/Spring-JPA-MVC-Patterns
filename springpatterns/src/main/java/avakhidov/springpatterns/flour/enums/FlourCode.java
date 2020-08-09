@@ -10,17 +10,17 @@ public enum FlourCode {
     WHEAT_FLOUR_FINE(GrindingFlour.FINE, KindFlour.WHEAT),
     ;
 
-    private final GrindingFlour coarse;
+    private final GrindingFlour grindingFlour;
     private final KindFlour kindFlour;
 
     FlourCode(GrindingFlour coarse, KindFlour kindFlour) {
-        this.coarse = coarse;
+        this.grindingFlour = coarse;
         this.kindFlour = kindFlour;
 
     }
 
-    public GrindingFlour getCoarse() {
-        return coarse;
+    public GrindingFlour getGrindingFlour() {
+        return grindingFlour;
     }
 
     public KindFlour getKindFlour() {

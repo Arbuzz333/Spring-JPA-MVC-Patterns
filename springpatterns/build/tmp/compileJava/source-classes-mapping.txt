@@ -1,9 +1,14 @@
 avakhidov/springpatterns/flour/entyties/BuckwheatFlour.java
  avakhidov.springpatterns.flour.entyties.BuckwheatFlour
-avakhidov/springpatterns/flour/FlourObjectFactory.java
- avakhidov.springpatterns.flour.FlourObjectFactory
+avakhidov/springpatterns/flour/FlourObjectFactoryImpl.java
+ avakhidov.springpatterns.flour.FlourObjectFactoryImpl
+avakhidov/springpatterns/config/AppSPConfig.java
+ avakhidov.springpatterns.config.AppSPConfig
 avakhidov/springpatterns/flour/entyties/CornFlour.java
  avakhidov.springpatterns.flour.entyties.CornFlour
+avakhidov/springpatterns/flour/FlourObjectSecondFactoryImpl.java
+ avakhidov.springpatterns.flour.FlourObjectSecondFactoryImpl
+ avakhidov.springpatterns.flour.FlourObjectSecondFactoryImpl$1
 avakhidov/springpatterns/flour/enums/FlourCode.java
  avakhidov.springpatterns.flour.enums.FlourCode
 avakhidov/springpatterns/ApplicationRun.java
@@ -14,7 +19,7 @@ avakhidov/springpatterns/flour/enums/KindFlour.java
  avakhidov.springpatterns.flour.enums.KindFlour
 avakhidov/springpatterns/flour/enums/GrindingFlour.java
  avakhidov.springpatterns.flour.enums.GrindingFlour
+avakhidov/springpatterns/flour/FlourObjectFactory.java
+ avakhidov.springpatterns.flour.FlourObjectFactory
 avakhidov/springpatterns/flour/entyties/WheatFlour.java
  avakhidov.springpatterns.flour.entyties.WheatFlour
-avakhidov/springpatterns/flour/FlourObjectFactoryImpl.java
- avakhidov.springpatterns.flour.FlourObjectFactoryImpl

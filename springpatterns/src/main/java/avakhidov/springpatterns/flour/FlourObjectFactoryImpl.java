@@ -7,13 +7,11 @@ import avakhidov.springpatterns.flour.entyties.Flour;
 import avakhidov.springpatterns.flour.entyties.WheatFlour;
 import avakhidov.springpatterns.flour.enums.FlourCode;
 import avakhidov.springpatterns.flour.enums.KindFlour;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-@Component
 public class FlourObjectFactoryImpl implements FlourObjectFactory {
 
     private Map<FlourCode, Flour> flourMap = new HashMap<>();
@@ -28,11 +26,11 @@ public class FlourObjectFactoryImpl implements FlourObjectFactory {
         FlourCode[] values = FlourCode.values();
         for (FlourCode flourCode : values) {
             if (flourCode.getKindFlour().equals(KindFlour.CORN)) {
-                flourMap.put(flourCode, new CornFlour(flourCode.getCoarse()));
+                flourMap.put(flourCode, new CornFlour(flourCode.getGrindingFlour()));
             } else if (flourCode.getKindFlour().equals(KindFlour.BUCKWHEAT)) {
-                flourMap.put(flourCode, new BuckwheatFlour(flourCode.getCoarse()));
+                flourMap.put(flourCode, new BuckwheatFlour(flourCode.getGrindingFlour()));
             } else if (flourCode.getKindFlour().equals(KindFlour.WHEAT)) {
-                flourMap.put(flourCode, new WheatFlour(flourCode.getCoarse()));
+                flourMap.put(flourCode, new WheatFlour(flourCode.getGrindingFlour()));
             }
         }
     }

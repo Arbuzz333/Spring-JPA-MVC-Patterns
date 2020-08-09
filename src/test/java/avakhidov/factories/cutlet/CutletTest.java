@@ -1,4 +1,4 @@
-package avakhidov.factories;
+package avakhidov.factories.cutlet;
 
 import avakhidov.factories.entity.ingredient.Sesame;
 import avakhidov.factories.entity.cutlet.*;
@@ -14,8 +14,8 @@ import avakhidov.factories.enums.dough.KindDough;
 import avakhidov.factories.enums.dough.ParameterDoughEnum;
 import avakhidov.factories.service.cutlet.cutletimpl.CutletServiceImpl;
 import avakhidov.factories.service.meat.meatimpl.MeatServiceImpl;
-import avakhidov.factories.service.recipe.cutlet.PorkCutletRecipe;
-import avakhidov.factories.service.recipe.cutlet.VealCutletRecipe;
+import avakhidov.factories.service.cutlet.cutletimpl.PorkCutletRecipe;
+import avakhidov.factories.service.cutlet.cutletimpl.VealCutletRecipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.apache.log4j.Logger;
