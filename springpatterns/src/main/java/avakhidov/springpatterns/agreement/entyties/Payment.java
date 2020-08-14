@@ -20,6 +20,12 @@ public class Payment {
         payingList = new ArrayList<>();
     }
 
+    public Payment(BigDecimal sum) {
+        this.sum = sum;
+        this.createDate = new Date();
+        payingList = new ArrayList<>();
+    }
+
     public BigDecimal getSum() {
         return sum;
     }
@@ -30,6 +36,10 @@ public class Payment {
 
     public List<Payment> getPayingList() {
         return payingList;
+    }
+
+    public void setPaymentToList(BigDecimal sum) {
+        payingList.add(new Payment(sum, new Date()));
     }
 
 }

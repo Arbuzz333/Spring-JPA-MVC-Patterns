@@ -20,3 +20,4 @@
 * Default method injection from Spring
 * Spring pattern post construct - @MainRunner
 * Spring @TestConfiguration and @ContextHierarchy - ProcessMortgageAgreementTest, ProcessCarLoanAgreementTest
+* Annotation @SelfAutowired - Spring  bean itself injection 

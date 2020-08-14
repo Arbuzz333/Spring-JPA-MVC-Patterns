@@ -9,6 +9,7 @@ public class Agreement {
 
     public static final String mortgage = "mortgage_";
     public static final String car_loan = "car_loan_";
+    public static final String common = "common_";
 
     private String number;
     private String owner;
@@ -19,6 +20,13 @@ public class Agreement {
         this.number = number;
         this.owner = owner;
         this.createDate = createDate;
+        this.payment = payment;
+    }
+
+    public Agreement(String number, String owner, Payment payment) {
+        this.number = number;
+        this.owner = owner;
+        this.createDate = new Date();
         this.payment = payment;
     }
 
