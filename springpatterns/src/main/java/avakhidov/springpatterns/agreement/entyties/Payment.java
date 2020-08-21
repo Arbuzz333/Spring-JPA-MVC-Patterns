@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-
+import java.util.Objects;
 
 
 public class Payment {
@@ -42,4 +41,16 @@ public class Payment {
         payingList.add(new Payment(sum, new Date()));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return getSum().equals(payment.getSum());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSum());
+    }
 }

@@ -1,8 +1,8 @@
 package avakhidov.springpatterns.agreement.entyties;
 
+import java.math.BigDecimal;
 import java.util.Date;
-
-
+import java.util.Objects;
 
 
 public class Agreement {
@@ -30,6 +30,13 @@ public class Agreement {
         this.payment = payment;
     }
 
+    public Agreement(String number, String owner, BigDecimal sum) {
+        this.number = number;
+        this.owner = owner;
+        this.createDate = new Date();
+        this.payment = new Payment(sum);
+    }
+
     public String getNumber() {
         return number;
     }
@@ -49,4 +56,16 @@ public class Agreement {
         return payment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Agreement)) return false;
+        Agreement agreement = (Agreement) o;
+        return getPayment().equals(agreement.getPayment());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPayment());
+    }
 }

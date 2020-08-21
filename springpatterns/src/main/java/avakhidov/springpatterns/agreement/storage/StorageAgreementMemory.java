@@ -10,7 +10,8 @@ import java.util.TreeMap;
 
 public class StorageAgreementMemory implements StorageAgreement<String, Agreement> {
 
-    private TreeMap<String, Agreement> storage = new TreeMap<>();
+    protected TreeMap<String, Agreement> numberAgreement = new TreeMap<>();
+
     private final String system;
 
     public StorageAgreementMemory(String system) {
@@ -20,22 +21,22 @@ public class StorageAgreementMemory implements StorageAgreement<String, Agreemen
     @Override
     public Agreement getAgreement(String number) {
         if (number.startsWith(system)) {
-            return storage.get(number);
+            return numberAgreement.get(number);
         }
         throw new UnsupportedOperationException(number);
     }
 
     @Override
     public void saveAgreement(Agreement agreement) {
-        if (storage.containsKey(agreement.getNumber()) && !agreement.getNumber().startsWith(system)) {
+        if (numberAgreement.containsKey(agreement.getNumber()) && !agreement.getNumber().startsWith(system)) {
             throw new UnsupportedOperationException(agreement.getNumber());
         }
-        storage.put(agreement.getNumber(), agreement);
+        numberAgreement.put(agreement.getNumber(), agreement);
     }
 
     @Override
     public Optional<Agreement> findAgreement(String owner) {
-        return storage.values()
+        return numberAgreement.values()
                 .stream()
                 .filter(entry -> entry.getOwner().equals(owner))
                 .filter(entry -> entry.getNumber().startsWith(system))
