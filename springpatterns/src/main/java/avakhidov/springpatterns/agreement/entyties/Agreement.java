@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 
-public class Agreement {
+public class Agreement implements Comparable {
 
     public static final String mortgage = "mortgage_";
     public static final String car_loan = "car_loan_";
@@ -67,5 +67,12 @@ public class Agreement {
     @Override
     public int hashCode() {
         return Objects.hash(getPayment());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Agreement agreement = (Agreement) o;
+
+        return this.payment.getSum().compareTo(agreement.payment.getSum());
     }
 }

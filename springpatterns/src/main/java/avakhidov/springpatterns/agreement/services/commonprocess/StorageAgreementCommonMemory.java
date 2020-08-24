@@ -26,10 +26,11 @@ public class StorageAgreementCommonMemory extends StorageAgreementMemory {
             pq.addAll(agreements);
         } else {
             List<Agreement> subList = agreements.subList(0, max);
-            agreements.removeAll(subList);
             pq.addAll(subList);
+            agreements.removeAll(subList);
             for (Agreement agreement : agreements) {
-                if (pq.peek().getPayment().getSum().compareTo(agreement.getPayment().getSum()) < 0) {
+                Agreement peek = pq.peek();
+                if (peek.getPayment().getSum().compareTo(agreement.getPayment().getSum()) < 0) {
                     pq.poll();
                     pq.add(agreement);
                 }
