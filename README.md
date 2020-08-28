@@ -22,3 +22,4 @@
 * Spring @TestConfiguration and @ContextHierarchy - ProcessMortgageAgreementTest, ProcessCarLoanAgreementTest
 * Annotation @SelfAutowired - Spring  bean itself injection 
 * Annotation @PostInitialize
+* InitMethodInterfaceRegistryBeanFactoryPostProcessor - scanning InitMethod in interface 
