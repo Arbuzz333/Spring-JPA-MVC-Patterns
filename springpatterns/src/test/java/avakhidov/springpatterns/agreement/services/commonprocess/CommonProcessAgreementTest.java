@@ -23,24 +23,24 @@ public class CommonProcessAgreementTest {
     public static final String ownerFirst = "ownerFirst";
 
     @Autowired
-    private CommonProcessAgreement processAgreement;
+    private CommonProcessAgreement commonProcessAgreementTest;
 
     @Test
     public void process() {
 
-        processAgreement.process(ownerFirst, new BigDecimal(77));
+        commonProcessAgreementTest.process(ownerFirst, new BigDecimal(77));
 
-        Optional<Agreement> agreementByOwner = processAgreement.findAgreementByOwner(ownerFirst);
+        Optional<Agreement> agreementByOwner = commonProcessAgreementTest.findAgreementByOwner(ownerFirst);
         assertTrue("", agreementByOwner.isPresent());
         Agreement agreement = agreementByOwner.get();
         assertEquals("", new BigDecimal(77), agreement.getPayment().getSum());
 
-        Agreement agreementByNumber = processAgreement.findAgreement(agreement.getNumber());
+        Agreement agreementByNumber = commonProcessAgreementTest.findAgreement(agreement.getNumber());
         assertEquals("", ownerFirst, agreementByNumber.getOwner());
 
         assertTrue("", agreementByNumber.getPayment().getPayingList().isEmpty());
 
-        processAgreement.process(ownerFirst, new BigDecimal(55));
+        commonProcessAgreementTest.process(ownerFirst, new BigDecimal(55));
         assertEquals("", new BigDecimal(55), agreementByNumber.getPayment().getPayingList().get(0).getSum());
     }
 }
