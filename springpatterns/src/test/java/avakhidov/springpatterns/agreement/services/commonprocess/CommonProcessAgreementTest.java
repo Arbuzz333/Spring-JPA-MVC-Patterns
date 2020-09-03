@@ -20,7 +20,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 @ContextConfiguration(classes = CommonProcessAgreementContext.class)
 public class CommonProcessAgreementTest {
 
-    public static final String ownerFirst = "ownerFirst";
+    static final String ownerFirst = "ownerFirst";
 
     @Autowired
     private CommonProcessAgreement commonProcessAgreementTest;

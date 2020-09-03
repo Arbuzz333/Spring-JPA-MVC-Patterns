@@ -15,4 +15,6 @@ public interface PriorityLimit<A> {
 
     @PostConstruct
     List<Agreement> creatListAgreement();
+
+    void fillStartStorage(List<Agreement> agreements);
 }

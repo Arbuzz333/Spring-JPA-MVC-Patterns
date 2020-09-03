@@ -49,6 +49,7 @@ public class StorageAgreementCommonMemory extends StorageAgreementMemory impleme
         return agreementList;
     }
 
+    @Override
     public void fillStartStorage(List<Agreement> agreements) {
         super.numberAgreement.putAll(agreements.stream().collect(Collectors.toMap(Agreement::getNumber, a -> a)));
     }

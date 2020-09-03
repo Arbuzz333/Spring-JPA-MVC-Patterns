@@ -2,11 +2,14 @@ package avakhidov.springpatterns.agreement.services.commonprocess;
 
 
 import avakhidov.springpatterns.agreement.entyties.Agreement;
+import avakhidov.springpatterns.agreement.storage.PriorityLimit;
+import avakhidov.springpatterns.agreement.storage.StorageAgreement;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 
 @TestConfiguration
@@ -17,7 +20,7 @@ public class CommonStorageContext {
     @Bean
     public StorageAgreementCommonMemory storageCommonTest() {
         StorageAgreementCommonMemory storage = new StorageAgreementCommonMemory(test_system);
-        storage.fillStartStorage(buildAgreements());
+        fillStartStorageThrowOptional(storage);
         return storage;
     }
 
@@ -33,6 +36,11 @@ public class CommonStorageContext {
         Agreement four = new Agreement("774", owner, new BigDecimal(4477));
         Agreement big = new Agreement(numberBig, ownerBig, new BigDecimal(7000));
         return List.of(one, two, three, four, big);
+    }
+
+    private void fillStartStorageThrowOptional(Object o) {
+        Optional.of((PriorityLimit<Agreement> & StorageAgreement<String, Agreement>) o)
+                .ifPresent(x -> x.fillStartStorage(buildAgreements()));
     }
 
 }
