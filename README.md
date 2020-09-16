@@ -22,3 +22,7 @@
 * Spring @TestConfiguration and @ContextHierarchy - ProcessMortgageAgreementTest, ProcessCarLoanAgreementTest
 * Annotation @SelfAutowired - Spring  bean itself injection 
 * Annotation @PostInitialize
+* InitMethodInterfaceRegistryBeanFactoryPostProcessor - scanning InitMethod in interface 
+* ContractConfig - spring autowiring в fields имеет более высокий приоритет над конструктором 
+   </n> *в fields бины с дженериками инжектятся по принципу List<? extend Number>. В такие бины </n>
+   List<? extend Number> будут инжектится только бины SomeObject< Number > независимо от extends* 
