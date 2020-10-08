@@ -5,14 +5,14 @@ import avakhidov.springpatterns.agreement.services.CreateAgreement;
 import avakhidov.springpatterns.agreement.services.ProcessAgreement;
 import avakhidov.springpatterns.agreement.services.ReplenishAgreement;
 import avakhidov.springpatterns.agreement.storage.StorageAgreement;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 
 
-@Component
+@Service
 public class ProcessCarLoanAgreement implements ProcessAgreement {
 
     private final StorageAgreement<String, Agreement> storageCarLoan;

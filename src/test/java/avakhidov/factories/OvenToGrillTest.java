@@ -3,6 +3,7 @@ package avakhidov.factories;
 
 import avakhidov.factories.adapters.OvenToGrill;
 import avakhidov.factories.entity.cutlet.Cutlet;
+import avakhidov.factories.entity.meat.Meat;
 import avakhidov.factories.entity.meat.PorkMeat;
 import avakhidov.factories.entity.meat.VealMeat;
 import avakhidov.factories.enums.Finished;
@@ -28,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 public class OvenToGrillTest {
 
     @Autowired
-    OvenToGrill<Cutlet> ovenToGrill;
+    OvenToGrill<Cutlet<? extends Meat>> ovenToGrill;
 
     @Autowired
     VealCutletRecipe vealCutletRecipe;
