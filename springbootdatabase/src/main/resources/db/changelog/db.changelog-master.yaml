@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-v1.yaml
+  - changeSet:
+      id: 111
+      author: villagedevelop
+      changes:
+        - createTable:
+            tableName: hint_chennal
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(256)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: date
+                  constraints:
+                    nullable: false
