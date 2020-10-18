@@ -1,5 +1,4 @@
 databaseChangeLog:
-  - logicalFilePath: db/changelog/db.changelog-v1.yaml
   - changeSet:
       id: 111
       author: villagedevelop
@@ -30,3 +29,61 @@ databaseChangeLog:
                   type: date
                   constraints:
                     nullable: false
+  - changeSet:
+      id: 112
+      author: villagedevelop
+      comment: "create table hint_business_op"
+      changes:
+        - createTable:
+            tableName: hint_business_op
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: title
+                  type: varchar(256)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: chennal_code
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: date
+                  constraints:
+                    nullable: false
+  - changeSet:
+     id: 113
+     author: villagedevelop
+     changes:
+       - modifyDataType:
+           columnName: chennal_code
+           newDataType: bigint
+           schemaName: public
+           tableName: hint_business_op
+  - changeSet:
+     id: 114
+     author: villagedevelop
+     changes:
+       - addForeignKeyConstraint:
+            baseColumnNames: chennal_code
+            baseTableName: hint_business_op
+            constraintName: fk_to_chennal_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: hint_chennal
+            validate: true
