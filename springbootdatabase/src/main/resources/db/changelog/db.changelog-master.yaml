@@ -87,3 +87,52 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: hint_chennal
             validate: true
+  - changeSet:
+      id: 115
+      author: villagedevelop
+      comment: "create table hint_business_step"
+      changes:
+        - createTable:
+            tableName: hint_business_step
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: title
+                  type: varchar(256)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: business_op_code
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: date
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 116
+      author: villagedevelop
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: business_op_code
+            baseTableName: hint_business_step
+            constraintName: fk_to_business_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: hint_business_op
+            validate: true
