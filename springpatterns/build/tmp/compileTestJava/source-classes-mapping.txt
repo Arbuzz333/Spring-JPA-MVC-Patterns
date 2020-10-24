@@ -1,2 +1,0 @@
-avakhidov/springpatterns/flour/FlourObjectFactoryImplTest.java
- avakhidov.springpatterns.flour.FlourObjectFactoryImplTest
