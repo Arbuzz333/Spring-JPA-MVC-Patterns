@@ -185,3 +185,68 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: hint_business_op
             validate: true
+  - changeSet:
+      id: 119
+      author: villagedevelop
+      comment: "create table hint_hint"
+      changes:
+        - createTable:
+            tableName: hint_hint
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: chennal_code
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: hint_text
+                  type: varchar(256)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: hint_type
+                  type: varchar(256)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: status
+                  type: varchar(256)
+                  defaultValue: "test"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pilot
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: date
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 120
+      author: villagedevelop
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: chennal_code
+            baseTableName: hint_hint
+            constraintName: fk_to_chennal_id
+            onDelete: RESTRICT
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: hint_chennal
+            validate: true
