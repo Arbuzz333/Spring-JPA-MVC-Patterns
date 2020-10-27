@@ -1,0 +1,32 @@
+databaseChangeLog:
+- changeSet:
+    id: 121
+    author: villagedevelop
+    changes:
+      - renameTable:
+          catalogName: hints
+          newTableName: hint_channel
+          oldTableName: hint_chennal
+          schemaName: public
+- changeSet:
+    id:  122
+    author:  villagedevelop
+    changes:
+      - renameColumn:
+          catalogName:  hints
+          columnDataType:  BIGINT
+          newColumnName:  channel_code
+          oldColumnName:  chennal_code
+          schemaName:  public
+          tableName:  hint_business_op
+- changeSet:
+    id:  123
+    author:  villagedevelop
+    changes:
+      - renameColumn:
+          catalogName:  hints
+          columnDataType:  BIGINT
+          newColumnName:  channel_code
+          oldColumnName:  chennal_code
+          schemaName:  public
+          tableName:  hint_hint

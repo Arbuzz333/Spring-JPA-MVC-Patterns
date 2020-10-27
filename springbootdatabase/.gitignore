@@ -1,5 +1,7 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+.gradle
+gradle/
 .build
 .build/
 ### STS ###
@@ -20,7 +22,6 @@
 
 ### NetBeans ###
 /nbproject/private/
-/build/
 /nbbuild/
 /dist/
 /nbdist/
@@ -29,3 +30,4 @@
 *.log
 gradlew
 gradlew.bat
+/build/
