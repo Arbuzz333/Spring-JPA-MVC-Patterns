@@ -7,8 +7,8 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "hint_chennal", schema = "public", catalog = "hints")
-public class HintChennalEntity {
+@Table(name = "hint_channel", schema = "public", catalog = "hints")
+public class HintChannelEntity {
     @Id
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Long id;
@@ -25,13 +25,13 @@ public class HintChennalEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToMany(mappedBy = "refHintChennalEntity")
+    @OneToMany(mappedBy = "refHintChannelEntity")
     private List<HintBusinessOpEntity> refHintBusinessOpEntities;
 
-    @OneToMany(mappedBy = "refHintChennalEntity")
+    @OneToMany(mappedBy = "refHintChannelEntity")
     private List<HintHintEntity> refHintHintEntities;
 
-    public HintChennalEntity() {
+    public HintChannelEntity() {
     }
 
     public Long getId() {
@@ -85,8 +85,8 @@ public class HintChennalEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof HintChennalEntity)) return false;
-        HintChennalEntity that = (HintChennalEntity) o;
+        if (!(o instanceof HintChannelEntity)) return false;
+        HintChannelEntity that = (HintChannelEntity) o;
         return getId().equals(that.getId()) &&
                 getCode().equals(that.getCode()) &&
                 Objects.equals(getTitle(), that.getTitle()) &&

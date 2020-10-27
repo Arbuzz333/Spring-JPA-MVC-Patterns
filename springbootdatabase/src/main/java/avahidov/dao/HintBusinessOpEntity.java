@@ -25,16 +25,16 @@ public class HintBusinessOpEntity {
     private String title;
 
     @Basic
-    @Column(name = "chennal_code", nullable = false, insertable = false, updatable = false)
-    private Long chennalCode;
+    @Column(name = "channel_code", nullable = false, insertable = false, updatable = false)
+    private Long channelCode;
 
     @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chennal_code", referencedColumnName = "id")
-    private HintChennalEntity refHintChennalEntity;
+    @JoinColumn(name = "channel_code", referencedColumnName = "id")
+    private HintChannelEntity refHintChannelEntity;
 
     @OneToMany(mappedBy = "refHintBusinessOpEntity")
     private List<HintBusinessStepEntity> refHintBusinessStepEntities;
@@ -69,12 +69,12 @@ public class HintBusinessOpEntity {
         this.title = title;
     }
 
-    public Long getChennalCode() {
-        return chennalCode;
+    public Long getchannelCode() {
+        return channelCode;
     }
 
-    public void setChennalCode(Long chennalCode) {
-        this.chennalCode = chennalCode;
+    public void setchannelCode(Long channelCode) {
+        this.channelCode = channelCode;
     }
 
     public Date getModifiedDate() {
@@ -85,12 +85,12 @@ public class HintBusinessOpEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public HintChennalEntity getRefHintChennalEntity() {
-        return refHintChennalEntity;
+    public HintChannelEntity getRefHintChannelEntity() {
+        return refHintChannelEntity;
     }
 
-    public void setRefHintChennalEntity(HintChennalEntity refHintChennalEntity) {
-        this.refHintChennalEntity = refHintChennalEntity;
+    public void setRefHintChannelEntity(HintChannelEntity refHintChannelEntity) {
+        this.refHintChannelEntity = refHintChannelEntity;
     }
 
     public List<HintBusinessStepEntity> getRefHintBusinessStepEntities() {
@@ -114,7 +114,7 @@ public class HintBusinessOpEntity {
                 "id = $id " +
                 "code = $code " +
                 "title = $title " +
-                "chennalCode = $chennalCode " +
+                "channelCode = $channelCode " +
                 "modifiedDate = $modifiedDate " +
                 ")";
     }
@@ -127,16 +127,16 @@ public class HintBusinessOpEntity {
         return id.equals(that.id) &&
                 code.equals(that.code) &&
                 Objects.equals(title, that.title) &&
-                chennalCode.equals(that.chennalCode) &&
+                channelCode.equals(that.channelCode) &&
                 modifiedDate.equals(that.modifiedDate) &&
-                refHintChennalEntity.equals(that.refHintChennalEntity) &&
+                refHintChannelEntity.equals(that.refHintChannelEntity) &&
                 Objects.equals(refHintBusinessStepEntities, that.refHintBusinessStepEntities) &&
                 Objects.equals(refHintUserEntities, that.refHintUserEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, title, chennalCode, modifiedDate, refHintChennalEntity,
+        return Objects.hash(id, code, title, channelCode, modifiedDate, refHintChannelEntity,
                 refHintBusinessStepEntities, refHintUserEntities);
     }
 }

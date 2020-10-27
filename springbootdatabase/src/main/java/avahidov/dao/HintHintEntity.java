@@ -2,7 +2,6 @@ package avahidov.dao;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -14,8 +13,8 @@ public class HintHintEntity {
     private Long id;
 
     @Basic
-    @Column(name = "chennal_code", nullable = false, insertable = false, updatable = false)
-    private Long chennalCode;
+    @Column(name = "channel_code", nullable = false, insertable = false, updatable = false)
+    private Long channelCode;
 
     @Basic
     @Column(name = "code", nullable = false)
@@ -42,8 +41,8 @@ public class HintHintEntity {
     private Date modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chennal_code", referencedColumnName = "id")
-    private HintChennalEntity refHintChennalEntity;
+    @JoinColumn(name = "channel_code", referencedColumnName = "id")
+    private HintChannelEntity refHintChannelEntity;
 
     public HintHintEntity() {
     }
@@ -51,7 +50,7 @@ public class HintHintEntity {
     public String toString() {
         return
                 "id = $id " +
-                "chennalCode = $chennalCode " +
+                "channelCode = $channelCode " +
                 "code = $code " +
                 "hintText = $hintText " +
                 "hintType = $hintType " +
@@ -69,12 +68,12 @@ public class HintHintEntity {
         this.id = id;
     }
 
-    public Long getChennalCode() {
-        return chennalCode;
+    public Long getchannelCode() {
+        return channelCode;
     }
 
-    public void setChennalCode(Long chennalCode) {
-        this.chennalCode = chennalCode;
+    public void setchannelCode(Long channelCode) {
+        this.channelCode = channelCode;
     }
 
     public String getCode() {
@@ -125,12 +124,12 @@ public class HintHintEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public HintChennalEntity getRefHintChennalEntity() {
-        return refHintChennalEntity;
+    public HintChannelEntity getrefHintChannelEntity() {
+        return refHintChannelEntity;
     }
 
-    public void setRefHintChennalEntity(HintChennalEntity refHintChennalEntity) {
-        this.refHintChennalEntity = refHintChennalEntity;
+    public void setrefHintChannelEntity(HintChannelEntity refHintChannelEntity) {
+        this.refHintChannelEntity = refHintChannelEntity;
     }
 
     @Override
@@ -139,20 +138,20 @@ public class HintHintEntity {
         if (!(o instanceof HintHintEntity)) return false;
         HintHintEntity that = (HintHintEntity) o;
         return getId().equals(that.getId()) &&
-                getChennalCode().equals(that.getChennalCode()) &&
+                getchannelCode().equals(that.getchannelCode()) &&
                 getCode().equals(that.getCode()) &&
                 Objects.equals(getHintText(), that.getHintText()) &&
                 Objects.equals(getHintType(), that.getHintType()) &&
                 Objects.equals(getStatus(), that.getStatus()) &&
                 Objects.equals(getPilot(), that.getPilot()) &&
                 getModifiedDate().equals(that.getModifiedDate()) &&
-                Objects.equals(getRefHintChennalEntity(), that.getRefHintChennalEntity());
+                Objects.equals(getrefHintChannelEntity(), that.getrefHintChannelEntity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getChennalCode(), getCode(), getHintText(), getHintType(), getStatus(),
-                getPilot(), getModifiedDate(), getRefHintChennalEntity());
+        return Objects.hash(getId(), getchannelCode(), getCode(), getHintText(), getHintType(), getStatus(),
+                getPilot(), getModifiedDate(), getrefHintChannelEntity());
     }
 }
 
