@@ -2,26 +2,13 @@ package avahidov.dao;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
 
 
 
 
 @Entity
 @Table(name = "hint_business_step", schema = "public", catalog = "hints")
-public class HintBusinessStepEntity {
-
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic
-    @Column(name = "code", nullable = false)
-    private String code;
-
-    @Basic
-    @Column(name = "title", nullable = true)
-    private String title;
+public class HintBusinessStepEntity extends HintBaseEntity {
 
     @Basic
     @Column(name = "business_op_code", nullable = false, insertable = false, updatable = false)
@@ -36,30 +23,6 @@ public class HintBusinessStepEntity {
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintBusinessStepEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Long getBusinessOpCode() {
@@ -88,11 +51,11 @@ public class HintBusinessStepEntity {
 
     public String toString() {
         return
-                "id = $id " +
-                "code = $code " +
-                "title = $title " +
-                "businessOpCode = $businessOpCode " +
-                "modifiedDate = $modifiedDate " +
+                "id =" + getId() +
+                "code = " + getCode() +
+                "title = " + getTitle() +
+                "businessOpCode = " + businessOpCode +
+                "modifiedDate = " + modifiedDate +
                 ")";
     }
 
@@ -101,17 +64,12 @@ public class HintBusinessStepEntity {
         if (this == o) return true;
         if (!(o instanceof HintBusinessStepEntity)) return false;
         HintBusinessStepEntity that = (HintBusinessStepEntity) o;
-        return id.equals(that.id) &&
-                code.equals(that.code) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(businessOpCode, that.businessOpCode) &&
-                modifiedDate.equals(that.modifiedDate) &&
-                Objects.equals(refHintBusinessOpEntity, that.refHintBusinessOpEntity);
+        return getId() != null && getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, title, businessOpCode, modifiedDate, refHintBusinessOpEntity);
+        return 27;
     }
 }
 

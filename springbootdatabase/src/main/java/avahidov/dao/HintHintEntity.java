@@ -2,7 +2,7 @@ package avahidov.dao;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
+
 
 
 @Entity
@@ -49,14 +49,14 @@ public class HintHintEntity {
 
     public String toString() {
         return
-                "id = $id " +
-                "channelCode = $channelCode " +
-                "code = $code " +
-                "hintText = $hintText " +
-                "hintType = $hintType " +
-                "status = $status " +
-                "pilot = $pilot " +
-                "modifiedDate = $modifiedDate " +
+                "id = " + id +
+                "channelCode = " + channelCode +
+                "code = " + code +
+                "hintText = " + hintText +
+                "hintType = " + hintType +
+                "status = " + status +
+                "pilot = " + pilot +
+                "modifiedDate = " + modifiedDate +
                 ")";
     }
 
@@ -137,21 +137,12 @@ public class HintHintEntity {
         if (this == o) return true;
         if (!(o instanceof HintHintEntity)) return false;
         HintHintEntity that = (HintHintEntity) o;
-        return getId().equals(that.getId()) &&
-                getchannelCode().equals(that.getchannelCode()) &&
-                getCode().equals(that.getCode()) &&
-                Objects.equals(getHintText(), that.getHintText()) &&
-                Objects.equals(getHintType(), that.getHintType()) &&
-                Objects.equals(getStatus(), that.getStatus()) &&
-                Objects.equals(getPilot(), that.getPilot()) &&
-                getModifiedDate().equals(that.getModifiedDate()) &&
-                Objects.equals(getrefHintChannelEntity(), that.getrefHintChannelEntity());
+        return  getId() !=null && getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getchannelCode(), getCode(), getHintText(), getHintType(), getStatus(),
-                getPilot(), getModifiedDate(), getrefHintChannelEntity());
+        return 15;
     }
 }
 
