@@ -1,7 +1,10 @@
 plugins {
     id 'java'
     id "org.liquibase.gradle" version "2.0.4"
+    id 'net.ltgt.apt' version '0.20'
 }
+
+apply plugin: 'net.ltgt.apt-idea'
 
 group 'avakhidov.factories'
 version '1.0-SNAPSHOT'
@@ -24,6 +27,14 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.3.0.RELEASE'
     // https://mvnrepository.com/artifact/org.liquibase/liquibase-core
     compile group: 'org.liquibase', name: 'liquibase-core', version: '3.9.0'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.0'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+    compile "org.mapstruct:mapstruct:1.4.1.Final"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
 
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.6.RELEASE'
@@ -32,9 +43,10 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter:5.7.0'
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testCompile 'org.junit.vintage:junit-vintage-engine:5.7.0'
-    testCompile 'org.junit:junit-bom:5.7.0'
+//    testCompile 'org.junit:junit-bom:5.7.0'
     testCompile 'org.apiguardian:apiguardian-api:1.1.0'
     testCompile 'org.opentest4j:opentest4j:1.2.0'
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
 }
 
 test {

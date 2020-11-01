@@ -17,8 +17,8 @@ public class HintChannelEntity extends HintBaseEntity{
     @OneToMany(mappedBy = "refHintChannelEntity")
     private List<HintBusinessOpEntity> refHintBusinessOpEntities;
 
-    @OneToMany(mappedBy = "refHintChannelEntity")
-    private List<HintHintEntity> refHintHintEntities;
+    @OneToOne(mappedBy = "refHintChannelEntity")
+    private HintHintEntity refHintHintEntities;
 
     public HintChannelEntity() {
     }
@@ -39,11 +39,11 @@ public class HintChannelEntity extends HintBaseEntity{
         this.refHintBusinessOpEntities = refHintBusinessOpEntities;
     }
 
-    public List<HintHintEntity> getRefHintHintEntities() {
+    public HintHintEntity getRefHintHintEntities() {
         return refHintHintEntities;
     }
 
-    public void setRefHintHintEntities(List<HintHintEntity> refHintHintEntities) {
+    public void setRefHintHintEntities(HintHintEntity refHintHintEntities) {
         this.refHintHintEntities = refHintHintEntities;
     }
 
@@ -65,7 +65,7 @@ public class HintChannelEntity extends HintBaseEntity{
                 "id =" + getId() +
                         "code = " + getCode() +
                         "title = " + getTitle() +
-                        "modifiedDate = $modifiedDate " +
+                        "modifiedDate = " + modifiedDate +
                         ")";
     }
 

@@ -40,7 +40,7 @@ public class HintHintEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_code", referencedColumnName = "id")
     private HintChannelEntity refHintChannelEntity;
 
