@@ -2,8 +2,6 @@ package avahidov.dao;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
-import java.util.Objects;
 
 
 
@@ -40,11 +38,11 @@ public class HintUserEntity {
 
     public String toString() {
         return
-                "id = $id " +
-                        "businessOpCode = $businessOpCode " +
-                        "user = $user " +
-                        "createDate = $createDate " +
-                        "modifiedDate = $modifiedDate " +
+                "id = " + id +
+                        "businessOpCode = " + businessOpCode +
+                        "user = " + user +
+                        "createDate = " + createDate +
+                        "modifiedDate = " + modifiedDate +
                         ")";
     }
 
@@ -101,17 +99,12 @@ public class HintUserEntity {
         if (this == o) return true;
         if (!(o instanceof HintUserEntity)) return false;
         HintUserEntity that = (HintUserEntity) o;
-        return getId().equals(that.getId()) &&
-                Objects.equals(getBusinessOpCode(), that.getBusinessOpCode()) &&
-                getUser().equals(that.getUser()) &&
-                getCreateDate().equals(that.getCreateDate()) &&
-                Objects.equals(getModifiedDate(), that.getModifiedDate()) &&
-                Objects.equals(getRefHintBusinessOpEntity(), that.getRefHintBusinessOpEntity());
+        return  getId() != null && getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getBusinessOpCode(), getUser(), getCreateDate(), getModifiedDate(), getRefHintBusinessOpEntity());
+        return 37;
     }
 }
 
