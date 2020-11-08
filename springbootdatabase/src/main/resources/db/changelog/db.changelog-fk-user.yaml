@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id:  128
+      author:  villagedevelop
+      changes:
+        -  dropForeignKeyConstraint:
+             baseTableCatalogName:  hints
+             baseTableName:  hint_user
+             baseTableSchemaName:  public
+             constraintName:  fk_to_business_id
+  - changeSet:
+      id: 129
+      author: villagedevelop
+      changes:
+        - addColumn:
+            tableName: hint_business_op
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+  - changeSet:
+      id: 130
+      author: villagedevelop
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: hint_business_op
+            constraintName: fk_to_user_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: hint_user
+            validate: true
+  - changeSet:
+      id:  131
+      author:  villagedevelop
+      changes:
+        - dropColumn:
+            catalogName:  hints
+            schemaName: public
+            tableName: hint_user
+            columns:
+              - column:
+                  name: business_op_code
+                  type: BIGINT

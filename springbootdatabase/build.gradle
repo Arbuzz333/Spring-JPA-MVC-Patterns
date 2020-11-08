@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-configuration-processor"
+//    compile "org.springframework.boot:spring-boot-configuration-processor"
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.6.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
@@ -43,7 +43,7 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter:5.7.0'
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testCompile 'org.junit.vintage:junit-vintage-engine:5.7.0'
-//    testCompile 'org.junit:junit-bom:5.7.0'
+    testCompile 'org.junit:junit-bom:5.7.0'
     testCompile 'org.apiguardian:apiguardian-api:1.1.0'
     testCompile 'org.opentest4j:opentest4j:1.2.0'
     testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
