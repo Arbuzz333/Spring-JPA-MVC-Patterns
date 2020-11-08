@@ -17,6 +17,8 @@
 * CommandOrders - Команда
 * PancakeVisitor - Visitor
 * BakeryCommandExecutor - Снимок + Команда
+* MeatServiceFactoryBean - пример реализации FactoryBean и InitializingBean
+   *если использовать xml кофигурацию, то генерирует bean, заменяя метод @Bean в java кофигурации*
 * Default method injection from Spring
 * Spring pattern post construct - @MainRunner
 * Spring @TestConfiguration and @ContextHierarchy - ProcessMortgageAgreementTest, ProcessCarLoanAgreementTest
