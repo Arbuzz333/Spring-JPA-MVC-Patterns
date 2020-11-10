@@ -11,26 +11,14 @@ import java.sql.Date;
 public class HintBusinessStepEntity extends HintBaseEntity {
 
     @Basic
-    @Column(name = "business_op_code", nullable = false, insertable = false, updatable = false)
-    private Long businessOpCode;
-
-    @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_op_code", referencedColumnName = "id")
+    @JoinColumn(name = "business_op_id", referencedColumnName = "id")
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintBusinessStepEntity() {
-    }
-
-    public Long getBusinessOpCode() {
-        return businessOpCode;
-    }
-
-    public void setBusinessOpCode(Long businessOpCode) {
-        this.businessOpCode = businessOpCode;
     }
 
     public Date getModifiedDate() {
@@ -54,7 +42,6 @@ public class HintBusinessStepEntity extends HintBaseEntity {
                 "id =" + getId() +
                 "code = " + getCode() +
                 "title = " + getTitle() +
-                "businessOpCode = " + businessOpCode +
                 "modifiedDate = " + modifiedDate +
                 ")";
     }

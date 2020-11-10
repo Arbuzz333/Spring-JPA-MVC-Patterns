@@ -12,32 +12,19 @@ import java.util.List;
 public class HintBusinessOpEntity extends HintBaseEntity {
 
     @Basic
-    @Column(name = "channel_code", nullable = false, insertable = false, updatable = false)
-    private Long channelCode;
-
-    @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_code", referencedColumnName = "id")
-    private HintChannelEntity refHintChannelEntity;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "business_op_id")
+    private List<HintChannelEntity> refHintChannelEntity;
 
-    @OneToMany(mappedBy = "refHintBusinessOpEntity")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntity")
     private List<HintBusinessStepEntity> refHintBusinessStepEntities;
 
-    @OneToMany(mappedBy = "refHintBusinessOpEntity")
-    private List<HintUserEntity> refHintUserEntities;
+    @OneToOne(mappedBy = "refHintBusinessOpEntity")
+    private HintUserEntity refHintUserEntities;
     
     public HintBusinessOpEntity() {
-    }
-
-    public Long getchannelCode() {
-        return channelCode;
-    }
-
-    public void setchannelCode(Long channelCode) {
-        this.channelCode = channelCode;
     }
 
     public Date getModifiedDate() {
@@ -48,11 +35,11 @@ public class HintBusinessOpEntity extends HintBaseEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public HintChannelEntity getRefHintChannelEntity() {
+    public List<HintChannelEntity> getRefHintChannelEntity() {
         return refHintChannelEntity;
     }
 
-    public void setRefHintChannelEntity(HintChannelEntity refHintChannelEntity) {
+    public void setRefHintChannelEntity(List<HintChannelEntity> refHintChannelEntity) {
         this.refHintChannelEntity = refHintChannelEntity;
     }
 
@@ -64,11 +51,11 @@ public class HintBusinessOpEntity extends HintBaseEntity {
         this.refHintBusinessStepEntities = refHintBusinessStepEntities;
     }
 
-    public List<HintUserEntity> getRefHintUserEntities() {
+    public HintUserEntity getRefHintUserEntities() {
         return refHintUserEntities;
     }
 
-    public void setRefHintUserEntities(List<HintUserEntity> refHintUserEntities) {
+    public void setRefHintUserEntities(HintUserEntity refHintUserEntities) {
         this.refHintUserEntities = refHintUserEntities;
     }
 

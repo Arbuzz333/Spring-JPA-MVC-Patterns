@@ -13,10 +13,6 @@ public class HintHintEntity {
     private Long id;
 
     @Basic
-    @Column(name = "channel_code", nullable = false, insertable = false, updatable = false)
-    private Long channelCode;
-
-    @Basic
     @Column(name = "code", nullable = false)
     private String code;
 
@@ -40,8 +36,8 @@ public class HintHintEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_code", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "channel_id", referencedColumnName = "id")
     private HintChannelEntity refHintChannelEntity;
 
     public HintHintEntity() {
@@ -50,7 +46,6 @@ public class HintHintEntity {
     public String toString() {
         return
                 "id = " + id +
-                "channelCode = " + channelCode +
                 "code = " + code +
                 "hintText = " + hintText +
                 "hintType = " + hintType +
@@ -66,14 +61,6 @@ public class HintHintEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getchannelCode() {
-        return channelCode;
-    }
-
-    public void setchannelCode(Long channelCode) {
-        this.channelCode = channelCode;
     }
 
     public String getCode() {

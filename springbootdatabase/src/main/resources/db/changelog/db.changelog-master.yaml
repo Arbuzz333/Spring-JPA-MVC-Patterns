@@ -11,3 +11,7 @@ databaseChangeLog:
      file: "/db/changelog/db.changelog-fk-channel.yaml"
  - include:
      file: "/db/changelog/db.changelog-fk-hint.yaml"
+ - include:
+     file: "/db/changelog/db.changelog-fk2-business_step.yaml"
+ - include:
+     file: "/db/changelog/db.changelog-fk2-channel.yaml"

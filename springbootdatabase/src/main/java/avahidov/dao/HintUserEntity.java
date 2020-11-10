@@ -14,10 +14,6 @@ public class HintUserEntity {
     private Long id;
 
     @Basic
-    @Column(name = "business_op_code", nullable = false, insertable = false, updatable = false)
-    private Long businessOpCode;
-
-    @Basic
     @Column(name = "user", nullable = false)
     private String user;
 
@@ -29,8 +25,8 @@ public class HintUserEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_op_code", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(referencedColumnName = "user_id")
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintUserEntity() {
@@ -39,7 +35,6 @@ public class HintUserEntity {
     public String toString() {
         return
                 "id = " + id +
-                        "businessOpCode = " + businessOpCode +
                         "user = " + user +
                         "createDate = " + createDate +
                         "modifiedDate = " + modifiedDate +
@@ -52,14 +47,6 @@ public class HintUserEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getBusinessOpCode() {
-        return businessOpCode;
-    }
-
-    public void setBusinessOpCode(Long businessOpCode) {
-        this.businessOpCode = businessOpCode;
     }
 
     public String getUser() {

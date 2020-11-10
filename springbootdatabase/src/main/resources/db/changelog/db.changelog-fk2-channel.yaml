@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id:  144
+      author:  villagedevelop
+      changes:
+        -  dropForeignKeyConstraint:
+             baseTableCatalogName:  hints
+             baseTableName:  hint_channel
+             baseTableSchemaName:  public
+             constraintName:  fk_to_hint_id
+  - changeSet:
+      id: 145
+      author: villagedevelop
+      changes:
+        - addColumn:
+            tableName: hint_hint
+            columns:
+              - column:
+                  name: channel_id
+                  type: BIGINT
+  - changeSet:
+      id: 146
+      author: villagedevelop
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: channel_id
+            baseTableName: hint_hint
+            constraintName: fk_to_channel_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: hint_channel
+            validate: true
+  - changeSet:
+      id:  147
+      author:  villagedevelop
+      changes:
+        - dropColumn:
+            catalogName:  hints
+            schemaName: public
+            tableName: hint_channel
+            columns:
+              - column:
+                  name: hint_id
+                  type: BIGINT

@@ -14,11 +14,12 @@ public class HintChannelEntity extends HintBaseEntity{
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToMany(mappedBy = "refHintChannelEntity")
-    private List<HintBusinessOpEntity> refHintBusinessOpEntities;
+    @ManyToOne
+    @JoinColumn(name = "business_op_id", referencedColumnName = "id")
+    private HintBusinessOpEntity refHintBusinessOpEntities;
 
-    @OneToOne(mappedBy = "refHintChannelEntity")
-    private HintHintEntity refHintHintEntities;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "refHintChannelEntity")
+    private List<HintHintEntity> refHintHintEntities;
 
     public HintChannelEntity() {
     }
@@ -31,19 +32,19 @@ public class HintChannelEntity extends HintBaseEntity{
         this.modifiedDate = modifiedDate;
     }
 
-    public List<HintBusinessOpEntity> getRefHintBusinessOpEntities() {
+    public HintBusinessOpEntity getRefHintBusinessOpEntities() {
         return refHintBusinessOpEntities;
     }
 
-    public void setRefHintBusinessOpEntities(List<HintBusinessOpEntity> refHintBusinessOpEntities) {
+    public void setRefHintBusinessOpEntities(HintBusinessOpEntity refHintBusinessOpEntities) {
         this.refHintBusinessOpEntities = refHintBusinessOpEntities;
     }
 
-    public HintHintEntity getRefHintHintEntities() {
+    public List<HintHintEntity> getRefHintHintEntities() {
         return refHintHintEntities;
     }
 
-    public void setRefHintHintEntities(HintHintEntity refHintHintEntities) {
+    public void setRefHintHintEntities(List<HintHintEntity> refHintHintEntities) {
         this.refHintHintEntities = refHintHintEntities;
     }
 
