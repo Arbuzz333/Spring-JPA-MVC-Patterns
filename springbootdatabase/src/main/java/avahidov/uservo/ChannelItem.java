@@ -3,7 +3,8 @@ package avahidov.uservo;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ChannelItem{
+
+public class ChannelItem {
 
 	@JsonProperty("code")
 	private String code;
@@ -32,4 +33,21 @@ public class ChannelItem{
 	public String getTitle(){
 		return title;
 	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setHint(List<HintItem> hint) {
+		this.hint = hint;
+	}
+
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 }

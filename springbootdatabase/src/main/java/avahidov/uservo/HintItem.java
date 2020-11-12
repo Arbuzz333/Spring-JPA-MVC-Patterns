@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-public class HintItem{
+public class HintItem {
 
 	@JsonProperty("code")
 	private String code;
@@ -46,5 +46,29 @@ public class HintItem{
 
 	public String getStatus(){
 		return status;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setPilot(boolean pilot) {
+		this.pilot = pilot;
+	}
+
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

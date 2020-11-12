@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-public class StepItem{
+public class StepItem {
 
 	@JsonProperty("code")
 	private String code;
@@ -32,5 +32,21 @@ public class StepItem{
 
 	public String getTitle(){
 		return title;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
+	}
+
+	public void setBusinessCode(String businessCode) {
+		this.businessCode = businessCode;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

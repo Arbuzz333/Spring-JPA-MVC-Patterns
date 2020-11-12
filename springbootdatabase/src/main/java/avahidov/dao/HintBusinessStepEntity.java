@@ -11,6 +11,10 @@ import java.sql.Date;
 public class HintBusinessStepEntity extends HintBaseEntity {
 
     @Basic
+    @Column(name = "business_op_id", insertable = false, updatable = false)
+    private Long businessOpId;
+
+    @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
@@ -57,6 +61,14 @@ public class HintBusinessStepEntity extends HintBaseEntity {
     @Override
     public int hashCode() {
         return 27;
+    }
+
+    public Long getBusinessOpId() {
+        return businessOpId;
+    }
+
+    public void setBusinessOpId(Long businessOpId) {
+        this.businessOpId = businessOpId;
     }
 }
 

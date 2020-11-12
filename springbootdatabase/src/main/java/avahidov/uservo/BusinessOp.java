@@ -3,6 +3,7 @@ package avahidov.uservo;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 public class BusinessOp{
 
 	@JsonProperty("code")
@@ -38,5 +39,25 @@ public class BusinessOp{
 
 	public String getTitle(){
 		return title;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setChannel(List<ChannelItem> channel) {
+		this.channel = channel;
+	}
+
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
+	}
+
+	public void setStep(List<StepItem> step) {
+		this.step = step;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

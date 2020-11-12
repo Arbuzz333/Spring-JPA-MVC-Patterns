@@ -12,16 +12,21 @@ import java.util.List;
 public class HintBusinessOpEntity extends HintBaseEntity {
 
     @Basic
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Long userId;
+
+    @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "business_op_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntities")
     private List<HintChannelEntity> refHintChannelEntity;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntity")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "businessOpId")
     private List<HintBusinessStepEntity> refHintBusinessStepEntities;
 
-    @OneToOne(mappedBy = "refHintBusinessOpEntity")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private HintUserEntity refHintUserEntities;
     
     public HintBusinessOpEntity() {
@@ -57,6 +62,14 @@ public class HintBusinessOpEntity extends HintBaseEntity {
 
     public void setRefHintUserEntities(HintUserEntity refHintUserEntities) {
         this.refHintUserEntities = refHintUserEntities;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String toString() {

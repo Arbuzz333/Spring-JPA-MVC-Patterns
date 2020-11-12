@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-public class User{
+public class User {
 
 	@JsonProperty("user")
 	private String user;
@@ -32,5 +32,21 @@ public class User{
 
 	public String getCreateDate(){
 		return createDate;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public void setBusinessOp(BusinessOp businessOp) {
+		this.businessOp = businessOp;
+	}
+
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 }

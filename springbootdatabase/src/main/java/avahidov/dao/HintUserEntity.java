@@ -10,6 +10,7 @@ import java.sql.Date;
 @Table(name = "hint_user", schema = "public", catalog = "hints")
 public class HintUserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -25,8 +26,7 @@ public class HintUserEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(referencedColumnName = "user_id")
+    @OneToOne(mappedBy = "refHintUserEntities", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintUserEntity() {
