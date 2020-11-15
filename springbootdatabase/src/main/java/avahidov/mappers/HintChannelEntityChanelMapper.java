@@ -1,11 +1,11 @@
 package avahidov.mappers;
 
 
-import avahidov.dao.HintBusinessOpEntity;
-import avahidov.dao.HintBusinessStepEntity;
-import avahidov.dao.HintChannelEntity;
-import avahidov.dao.HintHintEntity;
-import avahidov.dao.HintUserEntity;
+import avahidov.entities.HintBusinessOpEntity;
+import avahidov.entities.HintBusinessStepEntity;
+import avahidov.entities.HintChannelEntity;
+import avahidov.entities.HintHintEntity;
+import avahidov.entities.HintUserEntity;
 import avahidov.uservo.BusinessOp;
 import avahidov.uservo.ChannelItem;
 import avahidov.uservo.StepItem;

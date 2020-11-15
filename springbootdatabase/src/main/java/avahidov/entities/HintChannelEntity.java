@@ -1,4 +1,4 @@
-package avahidov.dao;
+package avahidov.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
