@@ -14,14 +14,14 @@
         "mod_date": "29-10-2020",
           "hint": [
             {
-            "code": "hint_consent",
+            "code": "hint_consent_pif",
             "text": "Consent for pif",
             "type": "MB",
             "status": "unsigned",
             "pilot": true,
             "mod_date": "29-10-2020"
             },{
-            "code": "hint_consent",
+            "code": "hint_consent_shares",
             "text": "Consent for shares",
             "type": "MB",
             "status": "unsigned",
@@ -35,14 +35,14 @@
         "mod_date": "29-10-2020",
           "hint": [
             {
-              "code": "hint_consent",
+              "code": "hint_consent_mortgage",
               "text": "Consent for mortgage",
               "type": "WEB",
               "status": "signed",
               "pilot": true,
               "mod_date": "29-10-2020"
             },{
-              "code": "hint_consent",
+              "code": "hint_consent_leasing",
               "text": "Consent for leasing",
               "type": "WEB",
               "status": "signed",
@@ -56,14 +56,14 @@
         "mod_date": "29-10-2020",
           "hint": [
             {
-              "code": "hint_consent",
+              "code": "hint_consent_rent",
               "text": "Consent for rent",
               "type": "WEB",
               "status": "signed",
               "pilot": true,
               "mod_date": "29-10-2020"
             },{
-              "code": "hint_consent",
+              "code": "hint_consent_sale",
               "text": "Consent for sale",
               "type": "WEB",
               "status": "unsigned",
