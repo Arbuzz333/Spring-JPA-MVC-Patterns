@@ -1,5 +1,6 @@
 package avahidov.mappers;
 
+import avahidov.AbstractTest;
 import avahidov.entities.HintBusinessOpEntity;
 import avahidov.entities.HintBusinessStepEntity;
 import avahidov.entities.HintChannelEntity;
@@ -10,14 +11,10 @@ import avahidov.uservo.ChannelItem;
 import avahidov.uservo.HintItem;
 import avahidov.uservo.StepItem;
 import avahidov.uservo.User;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,17 +43,8 @@ class HintChannelEntityChanelMapperTest {
 
     @Test
     void userToUserEntityJsonTest() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+        User user = AbstractTest.readTestData();
 
-        File file = new File("src/test/resources/test_data_1.json");
-
-        User user = new User();
-        try {
-            user = objectMapper.readValue(file, User.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         String createDate = user.getCreateDate();
         BusinessOp businessOp = user.getBusinessOp();
         List<StepItem> stepItemList = businessOp.getStep();
@@ -87,16 +75,7 @@ class HintChannelEntityChanelMapperTest {
 
     @Test
     void userToUserEntityMapperTest() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
-
-        File file = new File("src/test/resources/test_data_1.json");
-        User user = new User();
-        try {
-            user = objectMapper.readValue(file, User.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        User user = AbstractTest.readTestData();
 
         HintUserEntity hintUserEntity = mapper.hintUserEntityToUserItem(user);
         assertNotNull(hintUserEntity);
