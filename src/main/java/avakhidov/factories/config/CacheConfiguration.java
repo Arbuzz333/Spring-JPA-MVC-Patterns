@@ -59,7 +59,7 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     }
 
     private String getStoragePath() {
-        String location = "E:" + File.separator + "temptwo" + File.separator + "ehcache";
+        String location = "C:" + File.separator + "temptwo" + File.separator + "ehcache";
         return location;
     }
 }

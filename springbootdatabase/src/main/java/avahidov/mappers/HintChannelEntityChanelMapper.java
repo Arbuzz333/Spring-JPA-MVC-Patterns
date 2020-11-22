@@ -26,7 +26,8 @@ public interface HintChannelEntityChanelMapper {
             @Mapping(target="modifiedDate", source="channel.modDate"),
             @Mapping(target="refHintHintEntities", source="channel.hint"),
             @Mapping(target = "id", ignore = true),
-            @Mapping(target = "refHintBusinessOpEntities", ignore = true)
+            @Mapping(target = "refHintBusinessOpEntities", ignore = true),
+            @Mapping(target = "businessOpId", ignore = true)
     })
     HintChannelEntity channelToHintChannelEntity(ChannelItem channel);
 
@@ -41,7 +42,8 @@ public interface HintChannelEntityChanelMapper {
             @Mapping(target = "hintType", source = "hint.type"),
             @Mapping(target = "modifiedDate", source = "hint.modDate"),
             @Mapping(target = "id", ignore = true),
-            @Mapping(target = "refHintChannelEntity", ignore = true),
+            @Mapping(target = "channelId", ignore = true),
+            @Mapping(target = "refHintChannelEntity", ignore = true)
     })
     HintHintEntity hintToHintHintEntity(HintItem hint);
 

@@ -8,7 +8,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "hint_channel", schema = "public", catalog = "hints")
-public class HintChannelEntity extends HintBaseEntity{
+public class HintChannelEntity extends HintBaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "channel_id_seq")
+    @SequenceGenerator(name = "channel_id_seq", sequenceName = "hint_chennal_id_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    private Long id;
+
+    @Basic
+    @Column(name = "business_op_id", insertable = false, updatable = false)
+    private Long businessOpId;
 
     @Basic
     @Column(name = "modified_date", nullable = false)
@@ -70,5 +80,20 @@ public class HintChannelEntity extends HintBaseEntity{
                         ")";
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getBusinessOpId() {
+        return businessOpId;
+    }
+
+    public void setBusinessOpId(Long businessOpId) {
+        this.businessOpId = businessOpId;
+    }
 }
 

@@ -10,12 +10,13 @@ import java.sql.Date;
 @Table(name = "hint_user", schema = "public", catalog = "hints")
 public class HintUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+    @SequenceGenerator(name="user_id_seq", sequenceName="seq_hint")
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Basic
-    @Column(name = "user", nullable = false)
+    @Column(name = "\"user\"", nullable = false)
     private String user;
 
     @Basic
@@ -26,7 +27,7 @@ public class HintUserEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToOne(mappedBy = "refHintUserEntities", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, optional = false, mappedBy = "refHintUserEntities")
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintUserEntity() {

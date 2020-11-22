@@ -10,6 +10,12 @@ import java.sql.Date;
 @Table(name = "hint_business_step", schema = "public", catalog = "hints")
 public class HintBusinessStepEntity extends HintBaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "step_id_seq")
+    @SequenceGenerator(name = "step_id_seq", sequenceName = "hint_business_step_id_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Basic
     @Column(name = "business_op_id", insertable = false, updatable = false)
     private Long businessOpId;
@@ -69,6 +75,14 @@ public class HintBusinessStepEntity extends HintBaseEntity {
 
     public void setBusinessOpId(Long businessOpId) {
         this.businessOpId = businessOpId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

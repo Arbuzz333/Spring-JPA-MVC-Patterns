@@ -26,7 +26,7 @@ public class KitchenFreezerBeanPostProcessor implements BeanPostProcessor {
             KitchenFreezer kitchenFreezer = (KitchenFreezer) bean;
             kitchenFreezer.fillTheFreezeIsEmpty();
         } else if (bean.getClass().equals(OvenToGrill.class)) {
-            logger.info("Bean OvenToGrill is created");
+            logger.info("Bean KitchenFreezer is created");
         }
         return bean;
     }

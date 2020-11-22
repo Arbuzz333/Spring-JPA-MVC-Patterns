@@ -11,6 +11,12 @@ import java.util.List;
 @Table(name = "hint_business_op", schema = "public", catalog = "hints")
 public class HintBusinessOpEntity extends HintBaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "op_id_seq")
+    @SequenceGenerator(name = "op_id_seq", sequenceName = "hint_business_op_id_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Basic
     @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
@@ -22,11 +28,11 @@ public class HintBusinessOpEntity extends HintBaseEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntities")
     private List<HintChannelEntity> refHintChannelEntity;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "businessOpId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntity")
     private List<HintBusinessStepEntity> refHintBusinessStepEntities;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "user_id", unique = true, nullable = false, updatable = false)
     private HintUserEntity refHintUserEntities;
     
     public HintBusinessOpEntity() {
@@ -71,6 +77,15 @@ public class HintBusinessOpEntity extends HintBaseEntity {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public String toString() {
         return

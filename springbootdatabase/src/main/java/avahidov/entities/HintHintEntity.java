@@ -9,8 +9,14 @@ import java.sql.Date;
 @Table(name = "hint_hint", schema = "public", catalog = "hints")
 public class HintHintEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hint_id_seq")
+    @SequenceGenerator(name="hint_id_seq", sequenceName="hint_hint_id_seq", allocationSize=1)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Basic
+    @Column(name = "channel_id", insertable = false, updatable = false)
+    private Long channelId;
 
     @Basic
     @Column(name = "code", nullable = false)
@@ -130,6 +136,14 @@ public class HintHintEntity {
     @Override
     public int hashCode() {
         return 15;
+    }
+
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
     }
 }
 
