@@ -11,7 +11,7 @@ import java.sql.Date;
 public class HintUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
-    @SequenceGenerator(name="user_id_seq", sequenceName="seq_hint")
+    @SequenceGenerator(name="user_id_seq", sequenceName="seq_hint", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 

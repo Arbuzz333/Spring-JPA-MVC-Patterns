@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
-class HintChannelEntityChanelMapperTest {
+class HintEntityMapperTest {
 
     @Autowired
     HintChannelEntityChanelMapper mapper;

@@ -1,0 +1,11 @@
+databaseChangeLog:
+ - changeSet:
+     id: 149
+     author: villagedevelop
+     changes:
+       - dropUniqueConstraint:
+           catalogName: hints
+           constraintName: hint_user_user_key
+           schemaName: public
+           tableName: hint_user
+           uniqueColumns: user

@@ -1,18 +1,12 @@
 package avahidov.services;
 
 import avahidov.AbstractTest;
-import avahidov.entities.HintBusinessOpEntity;
-import avahidov.entities.HintBusinessStepEntity;
-import avahidov.entities.HintChannelEntity;
-import avahidov.entities.HintHintEntity;
 import avahidov.entities.HintUserEntity;
 import avahidov.uservo.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Date;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,42 +22,25 @@ class HintUserServiceTest {
 
     @Test
     void saveCustomUser() {
-        HintUserEntity userEntity = new HintUserEntity();
-        userEntity.setCreateDate(new Date(5557777888L));
-        userEntity.setModifiedDate(new Date(5557777888L));
-        userEntity.setUser("user" + new java.util.Date());
+        HintUserEntity userEntity = AbstractTest.getCustomTimeUserEntity();
 
-        HintBusinessOpEntity businessOpEntity = new HintBusinessOpEntity();
-        businessOpEntity.setModifiedDate(new Date(5557777888L));
-        businessOpEntity.setCode("code_HintBusinessOpEntity" + new java.util.Date());
-        businessOpEntity.setRefHintUserEntities(userEntity);
-        userEntity.setRefHintBusinessOpEntity(businessOpEntity);
+        HintUserEntity userSaved = hintUserService.saveToDataBase(userEntity);
 
-        HintBusinessStepEntity stepEntity = new HintBusinessStepEntity();
-        stepEntity.setCode("code_step_" + new java.util.Date());
-        stepEntity.setModifiedDate(new Date(5557777888L));
-        stepEntity.setRefHintBusinessOpEntity(businessOpEntity);
-        businessOpEntity.setRefHintBusinessStepEntities(Collections.singletonList(stepEntity));
+        assertNotNull(userSaved);
+        assertNotNull(userSaved.getRefHintBusinessOpEntity().getId());
 
-        HintChannelEntity channelEntity = new HintChannelEntity();
-        channelEntity.setCode("code_channel_" + new java.util.Date());
-        channelEntity.setModifiedDate(new Date(5557777888L));
-        channelEntity.setRefHintBusinessOpEntities(businessOpEntity);
-        channelEntity.setTitle("Title_" + new java.util.Date());
-        businessOpEntity.setRefHintChannelEntity(Collections.singletonList(channelEntity));
+        userSaved.getRefHintBusinessOpEntity().getRefHintBusinessStepEntities()
+                .forEach(step ->
+                        assertNotNull(step.getId()));
 
-        HintHintEntity hintEntity = new HintHintEntity();
-        hintEntity.setCode("code_hint_" + new java.util.Date());
-        hintEntity.setHintText("text_hint_" + new java.util.Date());
-        hintEntity.setModifiedDate(new Date(new java.util.Date().getTime()));
-        hintEntity.setPilot(false);
-        hintEntity.setStatus("test");
-        hintEntity.setrefHintChannelEntity(channelEntity);
-        channelEntity.setRefHintHintEntities(Collections.singletonList(hintEntity));
+        userSaved.getRefHintBusinessOpEntity().getRefHintChannelEntity()
+                .forEach(channel ->
+                        assertNotNull(channel.getId()));
 
-        HintUserEntity hintUserEntitySaved = hintUserService.saveToDataBase(userEntity);
-
-        assertNotNull(hintUserEntitySaved);
+        userSaved.getRefHintBusinessOpEntity().getRefHintChannelEntity()
+                .forEach(channel -> channel.getRefHintHintEntities().forEach(hint ->
+                        assertNotNull(hint.getId()))
+                );
     }
 
     @Test
