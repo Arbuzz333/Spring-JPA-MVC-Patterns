@@ -1,4 +1,4 @@
-package avahidov.dao;
+package avahidov.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,33 +11,31 @@ import java.util.List;
 @Table(name = "hint_business_op", schema = "public", catalog = "hints")
 public class HintBusinessOpEntity extends HintBaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "op_id_seq")
+    @SequenceGenerator(name = "op_id_seq", sequenceName = "hint_business_op_id_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Basic
-    @Column(name = "channel_code", nullable = false, insertable = false, updatable = false)
-    private Long channelCode;
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Long userId;
 
     @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_code", referencedColumnName = "id")
-    private HintChannelEntity refHintChannelEntity;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntities")
+    private List<HintChannelEntity> refHintChannelEntity;
 
-    @OneToMany(mappedBy = "refHintBusinessOpEntity")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "refHintBusinessOpEntity")
     private List<HintBusinessStepEntity> refHintBusinessStepEntities;
 
-    @OneToMany(mappedBy = "refHintBusinessOpEntity")
-    private List<HintUserEntity> refHintUserEntities;
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "user_id", unique = true, nullable = false, updatable = false)
+    private HintUserEntity refHintUserEntities;
     
     public HintBusinessOpEntity() {
-    }
-
-    public Long getchannelCode() {
-        return channelCode;
-    }
-
-    public void setchannelCode(Long channelCode) {
-        this.channelCode = channelCode;
     }
 
     public Date getModifiedDate() {
@@ -48,11 +46,11 @@ public class HintBusinessOpEntity extends HintBaseEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public HintChannelEntity getRefHintChannelEntity() {
+    public List<HintChannelEntity> getRefHintChannelEntity() {
         return refHintChannelEntity;
     }
 
-    public void setRefHintChannelEntity(HintChannelEntity refHintChannelEntity) {
+    public void setRefHintChannelEntity(List<HintChannelEntity> refHintChannelEntity) {
         this.refHintChannelEntity = refHintChannelEntity;
     }
 
@@ -64,13 +62,30 @@ public class HintBusinessOpEntity extends HintBaseEntity {
         this.refHintBusinessStepEntities = refHintBusinessStepEntities;
     }
 
-    public List<HintUserEntity> getRefHintUserEntities() {
+    public HintUserEntity getRefHintUserEntities() {
         return refHintUserEntities;
     }
 
-    public void setRefHintUserEntities(List<HintUserEntity> refHintUserEntities) {
+    public void setRefHintUserEntities(HintUserEntity refHintUserEntities) {
         this.refHintUserEntities = refHintUserEntities;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public String toString() {
         return

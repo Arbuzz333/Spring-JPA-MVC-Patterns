@@ -1,4 +1,4 @@
-package avahidov.dao;
+package avahidov.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,12 +9,14 @@ import java.sql.Date;
 @Table(name = "hint_hint", schema = "public", catalog = "hints")
 public class HintHintEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hint_id_seq")
+    @SequenceGenerator(name="hint_id_seq", sequenceName="hint_hint_id_seq", allocationSize=1)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Basic
-    @Column(name = "channel_code", nullable = false, insertable = false, updatable = false)
-    private Long channelCode;
+    @Column(name = "channel_id", insertable = false, updatable = false)
+    private Long channelId;
 
     @Basic
     @Column(name = "code", nullable = false)
@@ -40,8 +42,8 @@ public class HintHintEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_code", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "channel_id", referencedColumnName = "id")
     private HintChannelEntity refHintChannelEntity;
 
     public HintHintEntity() {
@@ -50,7 +52,6 @@ public class HintHintEntity {
     public String toString() {
         return
                 "id = " + id +
-                "channelCode = " + channelCode +
                 "code = " + code +
                 "hintText = " + hintText +
                 "hintType = " + hintType +
@@ -66,14 +67,6 @@ public class HintHintEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getchannelCode() {
-        return channelCode;
-    }
-
-    public void setchannelCode(Long channelCode) {
-        this.channelCode = channelCode;
     }
 
     public String getCode() {
@@ -143,6 +136,14 @@ public class HintHintEntity {
     @Override
     public int hashCode() {
         return 15;
+    }
+
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
     }
 }
 

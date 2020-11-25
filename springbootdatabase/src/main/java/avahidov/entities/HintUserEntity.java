@@ -1,4 +1,4 @@
-package avahidov.dao;
+package avahidov.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -10,15 +10,13 @@ import java.sql.Date;
 @Table(name = "hint_user", schema = "public", catalog = "hints")
 public class HintUserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+    @SequenceGenerator(name="user_id_seq", sequenceName="seq_hint", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Basic
-    @Column(name = "business_op_code", nullable = false, insertable = false, updatable = false)
-    private Long businessOpCode;
-
-    @Basic
-    @Column(name = "user", nullable = false)
+    @Column(name = "\"user\"", nullable = false)
     private String user;
 
     @Basic
@@ -29,8 +27,7 @@ public class HintUserEntity {
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_op_code", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, optional = false, mappedBy = "refHintUserEntities")
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintUserEntity() {
@@ -39,7 +36,6 @@ public class HintUserEntity {
     public String toString() {
         return
                 "id = " + id +
-                        "businessOpCode = " + businessOpCode +
                         "user = " + user +
                         "createDate = " + createDate +
                         "modifiedDate = " + modifiedDate +
@@ -52,14 +48,6 @@ public class HintUserEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getBusinessOpCode() {
-        return businessOpCode;
-    }
-
-    public void setBusinessOpCode(Long businessOpCode) {
-        this.businessOpCode = businessOpCode;
     }
 
     public String getUser() {

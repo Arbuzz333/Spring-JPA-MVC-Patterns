@@ -44,6 +44,9 @@ public class BunLiteFactoryTest {
     private BunLiteFactory factory;
 
     @Autowired
+    private BunLiteFactory factorySecond;
+
+    @Autowired
     private FlourCounterServiceAspect flourCounterServiceAspect;
 
     List<Ingredient> ingredientListFirst;
@@ -130,6 +133,7 @@ public class BunLiteFactoryTest {
     public void factoryTest() {
 
         BunLite bunLite1 = factory.getBunLite(new Date(), ingredientListFirst, product);
+        BunLite bunLiteSecond = factorySecond.getBunLite(new Date(), ingredientListFirst, product);
         BunLite bunLite2 = factory.getBunLite(new Date(), ingredientListFirstRevers, productClone);
         BunLite bunLite3 = factory.getBunLite(new Date(), ingredientListFirst, productCorn);
         BunLite bunLite4 = factory.getBunLite(new Date(), ingredientListNut, product);
@@ -139,6 +143,7 @@ public class BunLiteFactoryTest {
         assertEquals(factory.getCountProductList(), 3);
 
         assertEquals(bunLite1.getProduct(), bunLite2.getProduct());
+        assertEquals(bunLite1.getProduct(), bunLiteSecond.getProduct());
         assertEquals(bunLite1.getProduct(), bunLite4.getProduct());
         assertEquals(bunLite1.getAdditionalIngredient(), bunLite3.getAdditionalIngredient());
         assertEquals(bunLite4.getAdditionalIngredient(), bunLite5.getAdditionalIngredient());

@@ -1,78 +1,101 @@
 {
-  "channel": {
-    "code": "MB",
-    "title": "consent",
-    "mod_date": "29-10-2020",
-    "hint":{
-      "code": "hint_consent",
-      "text": "Consent for pif and shares",
-      "type": "string",
-      "status": "unsigned",
-      "pilot": true,
-      "mod_date": "29-10-2020"
-    },
-    "business_op": [
-      {
-        "code": "pif",
-        "title": "pif_consent",
+  "user": {
+    "user": "first",
+    "mod_date": "30-10-2020",
+    "create_date": "29-10-2020",
+    "business_op": {
+      "code": "investment",
+      "title": "investment_consent",
+      "mod_date": "29-10-2020",
+      "channel": [
+        {
+        "code": "MB",
+        "title": "consent",
         "mod_date": "29-10-2020",
-        "step": [
-          {
-            "code": "create",
-            "title": "create_consent",
-            "business_code": "pif_create",
+          "hint": [
+            {
+            "code": "hint_consent_pif",
+            "text": "Consent for pif",
+            "type": "MB",
+            "status": "unsigned",
+            "pilot": true,
             "mod_date": "29-10-2020"
-          },{
-            "code": "initialization",
-            "title": "initialization_consent",
-            "business_code": "pif_initialization",
+            },{
+            "code": "hint_consent_shares",
+            "text": "Consent for shares",
+            "type": "MB",
+            "status": "unsigned",
+            "pilot": true,
             "mod_date": "29-10-2020"
-          }
-        ],
-        "user": [
-          {
-            "business_code": "pif_create",
-            "user": "first",
-            "mod_date": "30-10-2020",
-            "create_date": "29-10-2020"
-          },{
-            "business_code": "pif_initialization",
-            "user": "second",
-            "mod_date": "30-10-2020",
-            "create_date": "29-10-2020"
-          }
-        ]
-      },{
-        "code": "shares",
-        "title": "shares_consent",
+            }
+          ]
+        },{
+        "code": "WEB",
+        "title": "consent",
         "mod_date": "29-10-2020",
-        "step": [
-          {
-            "code": "prolongation",
-            "title": "prolongation_consent",
-            "business_code": "shares_prolongation",
-            "mod_date": "29-10-2020"
-          },{
-            "code": "close",
-            "title": "close_consent",
-            "business_code": "shares_close",
-            "mod_date": "29-10-2020"
-          }
-        ],
-        "user": [
-          {
-            "business_code": "shares_prolongation",
-            "user": "third",
-            "mod_date": "30-10-2020",
-            "create_date": "29-10-2020"
-          },{
-            "business_code": "shares_close",
-            "user": "fourth",
-            "mod_date": "30-10-2020",
-            "create_date": "29-10-2020"
-          }
-        ]
-      }
-    ]
+          "hint": [
+            {
+              "code": "hint_consent_mortgage",
+              "text": "Consent for mortgage",
+              "type": "WEB",
+              "status": "signed",
+              "pilot": true,
+              "mod_date": "29-10-2020"
+            },{
+              "code": "hint_consent_leasing",
+              "text": "Consent for leasing",
+              "type": "WEB",
+              "status": "signed",
+              "pilot": true,
+              "mod_date": "29-10-2020"
+            }
+          ]
+        },{
+        "code": "FILE",
+        "title": "consent",
+        "mod_date": "29-10-2020",
+          "hint": [
+            {
+              "code": "hint_consent_rent",
+              "text": "Consent for rent",
+              "type": "WEB",
+              "status": "signed",
+              "pilot": true,
+              "mod_date": "29-10-2020"
+            },{
+              "code": "hint_consent_sale",
+              "text": "Consent for sale",
+              "type": "WEB",
+              "status": "unsigned",
+              "pilot": true,
+              "mod_date": "29-10-2020"
+            }
+          ]
+        }
+      ],
+      "step": [
+        {
+          "code": "create",
+          "title": "create_consent",
+          "business_code": "pif_create",
+          "mod_date": "29-10-2020"
+        },{
+          "code": "initialization",
+          "title": "initialization_consent",
+          "business_code": "pif_initialization",
+          "mod_date": "29-10-2020"
+        },{
+          "code": "prolongation",
+          "title": "prolongation_consent",
+          "business_code": "shares_prolongation",
+          "mod_date": "29-10-2020"
+        },{
+          "code": "close",
+          "title": "close_consent",
+          "business_code": "shares_close",
+          "mod_date": "29-10-2020"
+        }
+      ]
+    }
   }
 }

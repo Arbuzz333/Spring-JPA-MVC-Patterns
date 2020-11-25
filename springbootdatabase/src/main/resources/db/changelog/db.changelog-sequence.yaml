@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+     id:  148
+     author:  villagedevelop
+     changes:
+       -  createSequence:
+           cacheSize:  10
+           catalogName:  hints
+           cycle:  true
+           dataType:  BIGINT
+           incrementBy:  1
+           schemaName:  public
+           sequenceName:  seq_hint
+           startValue:  1

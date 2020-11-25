@@ -9,7 +9,7 @@ import java.util.List;
 
 public class IngredientDequeCircle {
 
-    private Deque<SupplementIngredient> deque;
+    private final Deque<SupplementIngredient> deque;
 
     public IngredientDequeCircle(
             List<SupplementIngredient> ingredientList) {

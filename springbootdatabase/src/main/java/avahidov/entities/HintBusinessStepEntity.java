@@ -1,4 +1,4 @@
-package avahidov.dao;
+package avahidov.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -10,27 +10,25 @@ import java.sql.Date;
 @Table(name = "hint_business_step", schema = "public", catalog = "hints")
 public class HintBusinessStepEntity extends HintBaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "step_id_seq")
+    @SequenceGenerator(name = "step_id_seq", sequenceName = "hint_business_step_id_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Basic
-    @Column(name = "business_op_code", nullable = false, insertable = false, updatable = false)
-    private Long businessOpCode;
+    @Column(name = "business_op_id", insertable = false, updatable = false)
+    private Long businessOpId;
 
     @Basic
     @Column(name = "modified_date", nullable = false)
     private Date modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_op_code", referencedColumnName = "id")
+    @JoinColumn(name = "business_op_id", referencedColumnName = "id")
     private HintBusinessOpEntity refHintBusinessOpEntity;
 
     public HintBusinessStepEntity() {
-    }
-
-    public Long getBusinessOpCode() {
-        return businessOpCode;
-    }
-
-    public void setBusinessOpCode(Long businessOpCode) {
-        this.businessOpCode = businessOpCode;
     }
 
     public Date getModifiedDate() {
@@ -54,7 +52,6 @@ public class HintBusinessStepEntity extends HintBaseEntity {
                 "id =" + getId() +
                 "code = " + getCode() +
                 "title = " + getTitle() +
-                "businessOpCode = " + businessOpCode +
                 "modifiedDate = " + modifiedDate +
                 ")";
     }
@@ -70,6 +67,22 @@ public class HintBusinessStepEntity extends HintBaseEntity {
     @Override
     public int hashCode() {
         return 27;
+    }
+
+    public Long getBusinessOpId() {
+        return businessOpId;
+    }
+
+    public void setBusinessOpId(Long businessOpId) {
+        this.businessOpId = businessOpId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 
