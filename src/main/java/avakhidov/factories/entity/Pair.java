@@ -2,9 +2,9 @@ package avakhidov.factories.entity;
 
 public class Pair<T, E> {
 
-    private T key;
+    private final T key;
 
-    private E value;
+    private final E value;
 
     public Pair(T key, E value) {
         this.key = key;

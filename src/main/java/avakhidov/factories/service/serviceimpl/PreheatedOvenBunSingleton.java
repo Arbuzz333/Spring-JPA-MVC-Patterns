@@ -4,20 +4,11 @@ import avakhidov.factories.entity.bun.Bun;
 
 public final class PreheatedOvenBunSingleton {
 
-    private static PreheatedOven<Bun> instance;
-
-    private PreheatedOvenBunSingleton() {
-        if (instance == null) {
-            instance = new PreheatedOven<>();
-        } else {
-            throw new IllegalStateException("PreheatedOvenBunSingleton already initialized.");
-        }
+    private static class SingletonHolder {
+        private static final PreheatedOven<Bun> HOLDER_INSTANCE = new PreheatedOven<>();
     }
 
-    public static synchronized PreheatedOven<Bun> getInstance() {
-        if (instance == null) {
-            instance = new PreheatedOven<>();
-        }
-        return instance;
+    public static PreheatedOven<Bun> getInstance() {
+        return SingletonHolder.HOLDER_INSTANCE;
     }
 }

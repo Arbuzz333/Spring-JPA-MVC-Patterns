@@ -130,12 +130,12 @@ public class HintHintEntity {
         if (this == o) return true;
         if (!(o instanceof HintHintEntity)) return false;
         HintHintEntity that = (HintHintEntity) o;
-        return  getId() !=null && getId().equals(that.getId());
+        return  getCode().equals(that.getCode());
     }
 
     @Override
     public int hashCode() {
-        return 15;
+        return getCode().hashCode();
     }
 
     public Long getChannelId() {

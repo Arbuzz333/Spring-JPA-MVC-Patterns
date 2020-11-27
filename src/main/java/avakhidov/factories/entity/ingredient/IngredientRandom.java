@@ -13,7 +13,7 @@ import static avakhidov.factories.utility.MainUtility.randomInt;
 @Scope(CustomScope.PERIODICAL)
 public class IngredientRandom {
 
-    private SupplementIngredient ingredient;
+    private final SupplementIngredient ingredient;
 
     public IngredientRandom(
             List<SupplementIngredient> ingredient) {

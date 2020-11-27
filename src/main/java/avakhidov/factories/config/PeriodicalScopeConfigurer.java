@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class PeriodicalScopeConfigurer implements Scope {
 
-    private Map<String, Pair<LocalTime, Object>> map = new HashMap<>();
+    private final Map<String, Pair<LocalTime, Object>> map = new HashMap<>();
 
     @Override
     public Object get(String name, ObjectFactory<?> objectFactory) {
