@@ -8,12 +8,7 @@ import avakhidov.factories.enums.dough.KindDough;
 
 public class BuckwheatBun extends Bun {
 
-    public BuckwheatBun(ParameterPrepareDough<BuckwheatFlour> parameterDough, boolean recipeReady, double weight) {
-        super(parameterDough, recipeReady, weight);
-    }
-
     private BuckwheatBun() {
-//        setKindDough();
     }
 
     @Override

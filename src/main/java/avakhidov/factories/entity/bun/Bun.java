@@ -11,7 +11,7 @@ import avakhidov.factories.event.EventManager;
 
 public abstract class Bun extends Product<ParameterPrepareDough> {
 
-    private EventManager events;
+    private final EventManager events;
     {
         this.events = new EventManager(EventManager.EventTypeEnum.FINISHED_TYPE);
     }

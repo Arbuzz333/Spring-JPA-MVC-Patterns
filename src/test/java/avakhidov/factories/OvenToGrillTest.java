@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 public class OvenToGrillTest {
 
     @Autowired
-    OvenToGrill<Cutlet> ovenToGrill;
+    OvenToGrill<Cutlet<?>> ovenToGrill;
 
     @Autowired
     VealCutletRecipe vealCutletRecipe;

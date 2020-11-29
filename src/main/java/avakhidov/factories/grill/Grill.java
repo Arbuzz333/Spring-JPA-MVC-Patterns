@@ -6,7 +6,7 @@ import avakhidov.factories.service.Oven;
 
 public interface Grill {
 
-    <T extends Product> Product barbecue(T roast);
+    <T extends Product<?>> Product<?> barbecue(T roast);
 
     Energy getEnergy();
 
