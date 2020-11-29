@@ -10,7 +10,7 @@
 * BuilderPorkCutlet and BuilderBuckwheatDough - inner extended builder
 * OuterBuilderPorkCutlet outer extended builder
 * HyperMarket - Компоновщик
-* SupplementIngredientDecorator - Decorator
+* BuckwheatBunDecorator - Decorator
 * BunLiteFactory - Flyweight
 * KitchenFreezer - Заместитель
 * AbstractDoughUtil - Цепочка обязанностей
