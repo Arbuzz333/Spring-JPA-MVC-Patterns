@@ -15,7 +15,7 @@ public class GrillCharCoal implements Grill {
     }
 
     @Override
-    public <T extends Product> Product barbecue(T roast) {
+    public <T extends Product<?>> Product<?> barbecue(T roast) {
         return roast.setFinished(Finished.FINISHED);
     }
 

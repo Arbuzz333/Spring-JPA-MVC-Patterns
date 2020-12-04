@@ -22,9 +22,9 @@ public interface Oven<T> {
         MIN_PARTY_CORN(KindFlour.CORN, 0.80, 30),
         MIN_PARTY_BUCKWHEAT(KindFlour.BUCKWHEAT, 0.85, 25);
 
-        private KindFlour flour;
-        private double coefficientFlour;
-        private Integer minPartyBun;
+        private final KindFlour flour;
+        private final double coefficientFlour;
+        private final Integer minPartyBun;
 
         private MinPartyBun(KindFlour flour, double coefficientFlour, Integer minPartyBun) {
             this.flour = flour;

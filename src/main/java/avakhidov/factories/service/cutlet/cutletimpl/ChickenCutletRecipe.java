@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChickenCutletRecipe implements Recipe<Cutlet<ChickenMeat>> {
 
-    final
-    private MeatServiceImpl meatService;
+    final private MeatServiceImpl meatService;
 
     public ChickenCutletRecipe(MeatServiceImpl meatService) {
         this.meatService = meatService;

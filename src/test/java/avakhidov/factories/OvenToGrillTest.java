@@ -29,7 +29,8 @@ import static org.junit.Assert.assertEquals;
 public class OvenToGrillTest {
 
     @Autowired
-    OvenToGrill<Cutlet<? extends Meat>> ovenToGrill;
+
+    OvenToGrill<Cutlet<?>> ovenToGrill;
 
     @Autowired
     VealCutletRecipe vealCutletRecipe;

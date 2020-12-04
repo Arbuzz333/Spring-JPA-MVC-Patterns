@@ -5,17 +5,18 @@ import avakhidov.factories.enums.Finished;
 import avakhidov.factories.grill.Grill;
 import avakhidov.factories.grill.energy.Energy;
 import avakhidov.factories.grill.energy.energyimpl.DieselFuel;
-import avakhidov.factories.grill.energy.energyimpl.Gas;
+
+
 
 public class GrillDiesel implements Grill {
 
-    private DieselFuel energy;
+    private final DieselFuel energy;
 
     public GrillDiesel(DieselFuel energy) {
         this.energy = energy;
     }
 
-    public <T extends Product> Product barbecue(T roast) {
+    public <T extends Product<?>> Product<?> barbecue(T roast) {
         return roast.setFinished(Finished.FINISHED);
     }
 

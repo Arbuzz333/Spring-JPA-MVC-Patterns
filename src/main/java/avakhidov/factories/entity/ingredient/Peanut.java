@@ -2,6 +2,7 @@ package avakhidov.factories.entity.ingredient;
 
 import java.util.Objects;
 
+
 public class Peanut extends Ingredient {
 
     private String peanut;

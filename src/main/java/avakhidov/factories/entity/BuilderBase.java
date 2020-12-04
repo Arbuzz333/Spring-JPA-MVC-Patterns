@@ -5,7 +5,7 @@ import avakhidov.factories.service.MainIngredient;
 
 public class BuilderBase<P, R, T extends MainIngredient> {
 
-    private P nested;
+    private final P nested;
     private R returnBuilder;
 
     protected BuilderBase(P child) {

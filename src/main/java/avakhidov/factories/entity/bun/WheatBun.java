@@ -15,7 +15,7 @@ public class WheatBun extends Bun {
 
     private LocalTime localTime;
 
-    private List<Ingredient> additionalIngredient;
+    private final List<Ingredient> additionalIngredient;
 
     public WheatBun(ParameterPrepareDough<WheatFlour> prepareDough, boolean recipeReady, double weight) {
         super(prepareDough, recipeReady, weight);

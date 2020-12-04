@@ -4,14 +4,21 @@ package avakhidov.factories.entity.bun;
 import avakhidov.factories.entity.Product;
 import avakhidov.factories.entity.dough.ParameterPrepareDough;
 import avakhidov.factories.entity.flour.Flour;
+import avakhidov.factories.entity.ingredient.Ingredient;
+import avakhidov.factories.entity.ingredient.Raisins;
 import avakhidov.factories.enums.Finished;
 import avakhidov.factories.event.EventListenerBun;
 import avakhidov.factories.event.EventManager;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Bun extends Product<ParameterPrepareDough> {
 
-    private EventManager events;
+public abstract class Bun extends Product<ParameterPrepareDough> implements BunDecorator {
+
+    protected final List<Ingredient> ingredientList = new ArrayList<>();
+
+    private final EventManager events;
     {
         this.events = new EventManager(EventManager.EventTypeEnum.FINISHED_TYPE);
     }
@@ -27,6 +34,12 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
     public abstract void setKindDough();
 
     @Override
+    public Bun addIngredient(String characteristic) {
+        ingredientList.add(new Raisins(characteristic));
+        return this;
+    }
+
+    @Override
     public Bun setFinished(Finished finished) {
         super.setFinished(finished);
         if (finished.equals(Finished.FINISHED)) {
@@ -34,6 +47,11 @@ public abstract class Bun extends Product<ParameterPrepareDough> {
         }
         return this;
     }
+
+    public List<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
 
     public boolean getRecipeReady() {
         return recipeReady;
