@@ -1,4 +1,4 @@
-rootProject.name = 'Patterns'
+rootProject.name = 'spring-jpa-mvc'
 include 'factoryone'
 include 'springpatterns'
 include 'springbootdatabase'

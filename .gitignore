@@ -17,6 +17,7 @@ gradle/
 *.iml
 *.ipr
 *.class
+*.jar
 
 ### NetBeans ###
 /nbproject/private/
