@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
-class HintUserServiceTest {
+class HintUserServiceTest extends AbstractTest{
 
     @Autowired
     HintUserService hintUserService;
 
     @Test
     void saveCustomUser() {
-        HintUserEntity userEntity = AbstractTest.getCustomTimeUserEntity();
+        HintUserEntity userEntity = generateCustomTimeUserEntity();
 
         HintUserEntity userSaved = hintUserService.saveToDataBase(userEntity);
 
