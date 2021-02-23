@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Mapper(componentModel = "spring", uses = DateMapper.class)
-public interface HintChannelEntityChanelMapper {
+public interface HintEntityItemMapper {
 
     @Mappings({
             @Mapping(target="modifiedDate", source="channel.modDate"),

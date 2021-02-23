@@ -17,7 +17,7 @@ import java.util.List;
 public class EntityMapperImpl implements EntityMapper {
 
     @Autowired
-    private HintChannelEntityChanelMapper mapper;
+    private HintEntityItemMapper mapper;
 
     @Override
     public HintUserEntity userToEntity(User user) {
