@@ -1,3 +1,19 @@
+# Здесь находятся примеры технологий на Java.
+
+* skype: mango777555@hotmail.com
+
+# Aleksandr Vahidov
+
+## 2. Модуль springbootdatabase
+
+  Это Spring-boot MVC приложение основано на JPA Hibernate and RestController.
+
+  1. Контроллер принимает List-json  
+  2. используется многопоточный маппинг
+  3. сохранение объектов происходит через JPA
+  4. swagger доступен по http://localhost:8090/avahidov/swagger-ui.html#/
+
+
 # Patterns
 * BakeryHouseFSM - конечный автомат
 * BakeryConditionBun - компонент + BakeryHouseFSM

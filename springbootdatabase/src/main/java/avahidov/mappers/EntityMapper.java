@@ -8,4 +8,6 @@ import avahidov.uservo.User;
 public interface EntityMapper {
 
     HintUserEntity userToEntity(User user);
+
+    User entityToUserLite(HintUserEntity entity);
 }

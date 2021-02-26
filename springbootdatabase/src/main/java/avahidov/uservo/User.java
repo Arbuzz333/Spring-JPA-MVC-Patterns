@@ -1,14 +1,15 @@
 package avahidov.uservo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 
 
 @JsonRootName(value = "user")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
-	@JsonProperty("user")
 	private String user;
 
 	@JsonProperty("business_op")

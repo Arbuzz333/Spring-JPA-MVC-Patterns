@@ -1,12 +1,14 @@
 package avahidov.uservo;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BusinessOp{
 
-	@JsonProperty("code")
 	private String code;
 
 	@JsonProperty("channel")
