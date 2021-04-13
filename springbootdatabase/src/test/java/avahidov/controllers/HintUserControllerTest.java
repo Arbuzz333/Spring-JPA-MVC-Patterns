@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -46,7 +45,6 @@ class HintUserControllerTest extends AbstractTest {
                 httpEntity,
                 new ParameterizedTypeReference<List< User >>(){});
 
-
         assertNotNull(responseEntity.getBody());
 
         List<User> entityBodyList = responseEntity.getBody();
@@ -55,7 +53,6 @@ class HintUserControllerTest extends AbstractTest {
 
     @Test
     void createFileTestData() {
-
         var count = 0;
         var userList = new ArrayList<>();
         do {
@@ -64,17 +61,14 @@ class HintUserControllerTest extends AbstractTest {
             count++;
         } while (count < 5);
 
-        var generateTestData = new File("Stub");
+        var generatedTestData = new File("Stub");
         try {
-            var tstFile = new File(Objects.requireNonNull(HintUserControllerTest.class.getClassLoader().getResource("generate_user_list.json")).getFile());
-
-            generateTestData = new File("C:\\myprojects\\Patterns\\springbootdatabase\\src\\test\\resources\\generate_user_list.json");
-            mapper.writeValue(generateTestData, userList );
-
+            generatedTestData = new File("src/test/resources/generate_user_list.json");
+            mapper.writeValue(generatedTestData, userList );
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        assertNotNull(generateTestData);
+        assertNotNull(generatedTestData);
+        assertEquals("generate_user_list.json", generatedTestData.getName());
     }
 }

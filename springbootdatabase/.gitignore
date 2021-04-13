@@ -31,3 +31,5 @@ gradle/
 gradlew
 gradlew.bat
 /build/
+
+src/test/resources/*.json

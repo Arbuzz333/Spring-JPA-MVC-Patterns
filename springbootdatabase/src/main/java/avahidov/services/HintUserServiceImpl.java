@@ -6,8 +6,8 @@ import avahidov.repositories.HintUserRepository;
 import avahidov.uservo.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -28,13 +28,27 @@ public class HintUserServiceImpl implements HintUserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(HintUserServiceImpl.class);
 
-    @Autowired
-    private EntityMapper entityMapper;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private HintUserRepository userRepository;
+    private final HintUserRepository userRepository;
 
+    public HintUserServiceImpl(
+            EntityMapper entityMapper,
+            HintUserRepository userRepository) {
+        this.entityMapper = entityMapper;
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = NullPointerException.class)
     public List<User> createUserList(List<User> userList) {
+        var mappedEntityList =  mapUserEntity(userList);
+        List<HintUserEntity> savedUserEntityList = saveToDataBaseList(mappedEntityList);
+        List<User> users = mappingFuture(savedUserEntityList);
+        return users;
+    }
+
+    private List<HintUserEntity> mapUserEntity(List<User> userList) {
         ExecutorService executor = Executors.newFixedThreadPool(4);
         List<HintUserEntity> mappedEntityList = new CopyOnWriteArrayList<>();
 
@@ -53,11 +67,7 @@ public class HintUserServiceImpl implements HintUserService {
         LOG.info("Have all user hints been mapped for try: {}", done);
         LOG.info("Have all user hints been mapped? {}", done);
         LOG.info("Mapped list has size {}.", mappedEntityList.size());
-
-        List<HintUserEntity> savedUserEntityList = saveToDataBaseList(mappedEntityList);
-
-        List<User> users = mappingFuture(savedUserEntityList);
-        return users;
+        return mappedEntityList;
     }
 
     private List<User> mappingFuture(List<HintUserEntity> savedEntityList) {
@@ -72,6 +82,7 @@ public class HintUserServiceImpl implements HintUserService {
         try {
             futures = executor.invokeAll(callableList);
         } catch (InterruptedException e) {
+            LOG.error("Executor is shutdown: {}, is terminated: {}.", executor.isShutdown(), executor.isTerminated());
             e.printStackTrace();
         }
         futures.forEach(f -> {
@@ -79,6 +90,7 @@ public class HintUserServiceImpl implements HintUserService {
                 User user = f.get(1, TimeUnit.SECONDS);
                 savedList.add(user);
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                LOG.error("Future is done: {}, is canceled: {}.", f.isDone(), f.isCancelled());
                 e.printStackTrace();
             }
         });
@@ -86,7 +98,7 @@ public class HintUserServiceImpl implements HintUserService {
         return savedList;
     }
 
-    public List<HintUserEntity> saveToDataBaseList(List<HintUserEntity> userEntityList) {
+    private List<HintUserEntity> saveToDataBaseList(List<HintUserEntity> userEntityList) {
         List<HintUserEntity> hintUserEntityList = userRepository.saveAll(userEntityList);
         return hintUserEntityList;
     }
