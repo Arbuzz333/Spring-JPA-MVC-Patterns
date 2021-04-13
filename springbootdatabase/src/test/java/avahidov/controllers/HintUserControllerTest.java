@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -65,6 +66,8 @@ class HintUserControllerTest extends AbstractTest {
 
         var generateTestData = new File("Stub");
         try {
+            var tstFile = new File(Objects.requireNonNull(HintUserControllerTest.class.getClassLoader().getResource("generate_user_list.json")).getFile());
+
             generateTestData = new File("C:\\myprojects\\Patterns\\springbootdatabase\\src\\test\\resources\\generate_user_list.json");
             mapper.writeValue(generateTestData, userList );
 
